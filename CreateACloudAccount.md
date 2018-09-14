@@ -1,4 +1,11 @@
 # Create a Cloud Account
+
+**End Point**
+
+```
+/cloud-account
+```
+
 The first thing we will do is create a cloud account. Before we can do this we need values for a few of the parameters. The required parameters for creating a cloud account are:
 
 - The domain name that will be attached to this service
