@@ -25,7 +25,7 @@ Here is a sample payload
 - `cloud_id` is the Nexcess id for the cloud (datacenter) you want to spin up your new account within.  See 'Listing Clouds' to get a list of available `cloud_id` values. This is a required field and the value must be a valid cloud id.
 - `install_app` tells the system whether or not to actually install the application you requested or just prepare the server for it's install. This is an optional field. If it is not present, then "off" is assumed. If it is present and the value specified is "on" then the application will be installed.
 
-> You can use curl to make this call using the following statement. Note that this is an HTTP POST. (`-x POST`). If you  leave off the POST and instead issue a GET, the data will be ignored and the call will return a payload listing all existing Cloud Accounts for the account that owns the key. This is, of course, not the response we are interested in when trying to create a cloud account.
+> Note that this is an HTTP POST. (`-x POST`). If you  leave off the POST and instead issue a GET, the data will be ignored and the call will return a payload listing all existing Cloud Accounts for the account that owns the key. This is, of course, not the response we are interested in when trying to create a cloud account.
 
 ```shell
 curl -v -X POST '__URL__/cloud-account' \
