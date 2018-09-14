@@ -45,7 +45,7 @@ This will return to you a very large payload that will give you the details of *
 
 ```json
 {
-  "id": SERVICE_ID,
+  "id": "SERVICE_ID",
   "identity": "example.com - nc.large",
   "is_real": true,
   "meta": {
@@ -69,7 +69,7 @@ This will return to you a very large payload that will give you the details of *
   },
   "host": "cloudhost-45328.us-midwest-1.nxcli.net",
   "cloud_account": {
-    "account_id": CLOUD_ACCOUNT_ID,
+    "account_id": "CLOUD_ACCOUNT_ID",
     "host_id": 672,
     "domain": "example.com",
     "status": "used",
@@ -153,7 +153,7 @@ This will return to you a very large payload that will give you the details of *
     "country": "US"
   },
   "order": {
-    "id": xxxxx,
+    "id": "xxxxx",
     "identity": "(xxxxx) Nexcess Client",
     "is_real": true,
     "meta": {
