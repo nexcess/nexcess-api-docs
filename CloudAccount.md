@@ -14,23 +14,23 @@
 
 To retrieve a list of the cloud accounts associated with an account make a call to `/cloud-account` with your API key.
 
+__Example 1__
 ```shell
 curl -v '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOU_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 ```
-__Example 1__
 
 This will return a very verbose JSON payload that describes each cloud account associated with your account.
 
 To retrieve the details of a specific cloud account, you and append the `cloud_id`  to this endpoint. In the payload returned in the above command, cloud_id is found in each cloud account object in `cloud_account->account_id`.
 
+__Example 2__
 ```shell
 curl -v '__URL__/cloud-account/CLOUD_ID' \
   -H 'Authorization: Bearer YOU_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 ```
-__Example 2__
 
 This will return a similar payload to the first GET but it will be limited to a single cloud_account. This is how you check the state of a cloud account onces you have issued the POST described below. See [__Payload 2__](#payload2) for an example output of this command.
 
@@ -46,6 +46,7 @@ Before we can issue a POST command, we need values for a few of the parameters. 
 
 Here is a sample payload
 
+__Payload 1__
 ```json
 {
   "domain": "example.com",
@@ -55,7 +56,6 @@ Here is a sample payload
   "install_app": "on"
 }
 ```
-__Payload 1__
 
 
 - `domain` is the domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.
@@ -64,6 +64,7 @@ __Payload 1__
 - `cloud_id` is the Nexcess id for the cloud (data center) you want to spin up your new account within.  See 'Listing Clouds' to get a list of available `cloud_id` values. This is a required field and the value must be a valid cloud id.
 - `install_app` tells the system whether or not to actually install the application you requested or just prepare the server for it's install. This is an optional field. If it is not present, then "off" is assumed. If it is present and the value specified is "on" then the application will be installed.
 
+__Example 3__
 
 ```shell
 curl -v -X POST '__URL__/cloud-account' \
@@ -78,11 +79,10 @@ curl -v -X POST '__URL__/cloud-account' \
   "install_app": "on"
 }'
 ```
-__Example 3__
 
 This will return to you a very large payload that will give you the details of **what is being created**. It is important to note that the API queues the job to be done, it does not wait until the job is complete.
 
-<a name="payload2">Payload 2</a>
+<a name="payload2">__Payload 2__</a>
 ```json
 {
   "id": "SERVICE_ID",
