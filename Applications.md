@@ -2,7 +2,7 @@
 
 **End Point**
 ```
-/cloud-account
+/app
 ```
 
 To Be Written

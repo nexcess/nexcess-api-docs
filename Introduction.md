@@ -22,7 +22,6 @@ Before you begin making calls to the API, you will need to get an API key.
 This document describes the different API endpoints available and how to call them.
 
 - [Cloud Account](CloudAccount.md)
-- [Check the state of a cloud account](CheckStateOfCloudAccount.md)
-- [List Clouds](ListClouds.md)
-- List Packages
-- List Applications
+- [Packages](Packages.md)
+- [Applications](Applications.md)
+- [Clouds](Clouds.md)
