@@ -220,7 +220,7 @@ This will return to you a very large payload that will give you the details of *
   "child_cloud_accounts": []
 }
 ```
-[__Payload 2__](#payload2)
+[__Payload 2__](payload2)
 
 Creating a cloud account is an out-of-bandwidth command. Receiving a 200 OK for a POST only mens that the system has accepted your request. In the payload returned is the cloud account id that you can use as described above to check for the state of your cloud account.
 
