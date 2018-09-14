@@ -1,4 +1,4 @@
-# Create a Cloud Account
+# Cloud Account
 
 **End Point**
 
@@ -12,7 +12,7 @@
 
 ## GET
 
-To retrieve a list of the cloud accounts associated with an account make a call to `/cloud-account` with your API key.
+To retrieve a list of all the cloud accounts associated with an account make a call to `/cloud-account` with your API key.
 
 __Example 1__
 ```shell
