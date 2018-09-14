@@ -8,6 +8,12 @@ Example calls in this document all use `curl`. It is assumed that the user not o
 
 Throughout this document, payloads shown in JSON format. JSON is the payload format used in all the Nexcess API calls.
 
+In almost all situations, you will need to specify via a header that your application is expecting a JSON payload.
+
+```
+  -H 'Accept: application/json'
+```
+
 # First Things First
 Before you begin making calls to the API, you will need to get an API key.
 
@@ -15,8 +21,8 @@ Before you begin making calls to the API, you will need to get an API key.
 
 This document describes the different API endpoints available and how to call them.
 
-- [Creating a Cloud Account]()
-- [Get a Cloud Account details]()
+- [Cloud Account](CloudAccount.md)
+- [Check the state of a cloud account](CheckStateOfCloudAccount.md)
 - [List Clouds](ListClouds.md)
 - List Packages
 - List Applications

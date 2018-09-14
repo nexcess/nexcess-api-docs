@@ -6,7 +6,37 @@
 /cloud-account
 ```
 
-The first thing we will do is create a cloud account. Before we can do this we need values for a few of the parameters. The required parameters for creating a cloud account are:
+**Accepted Verbs**
+- GET
+- POST
+
+## GET
+
+To retrieve a list of the cloud accounts associated with an account make a call to `/cloud-account` with your API key.
+
+```shell
+curl -v '__URL__/cloud-account' \
+  -H 'Authorization: Bearer YOU_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Accept: application/json'
+```
+__Example 1__
+
+This will return a very verbose JSON payload that describes each cloud account associated with your account.
+
+To retrieve the details of a specific cloud account, you and append the `cloud_id`  to this endpoint. In the payload returned in the above command, cloud_id is found in each cloud account object in `cloud_account->account_id`.
+
+```shell
+curl -v '__URL__/cloud-account/CLOUD_ID' \
+  -H 'Authorization: Bearer YOU_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Accept: application/json'
+```
+__Example 2__
+
+This will return a similar payload to the first GET but it will be limited to a single cloud_account. This is how you check the state of a cloud account onces you have issued the POST described below. See [__Payload 2__](#payload2) for an example output of this command.
+
+## POST
+
+Before we can issue a POST command, we need values for a few of the parameters. The required parameters for creating a cloud account are:
 
 - The domain name that will be attached to this service
 - The application we want to install
@@ -25,14 +55,15 @@ Here is a sample payload
   "install_app": "on"
 }
 ```
+__Payload 1__
 
-- `domain` is the domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including subdmains.
+
+- `domain` is the domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.
 - `app_id` is the Nexcess id for the application you want to install See 'Listing Applications' to get a list of the available `app_id` values. This is a required filed and the value must be a valid application id.
 - `package_id` is the Nexcess id for the server package you want to spin up. See 'Listing Packages' to get a list of available `package_id` values. This is a required field and the value must be a valid package id.
-- `cloud_id` is the Nexcess id for the cloud (datacenter) you want to spin up your new account within.  See 'Listing Clouds' to get a list of available `cloud_id` values. This is a required field and the value must be a valid cloud id.
+- `cloud_id` is the Nexcess id for the cloud (data center) you want to spin up your new account within.  See 'Listing Clouds' to get a list of available `cloud_id` values. This is a required field and the value must be a valid cloud id.
 - `install_app` tells the system whether or not to actually install the application you requested or just prepare the server for it's install. This is an optional field. If it is not present, then "off" is assumed. If it is present and the value specified is "on" then the application will be installed.
 
-> Note that this is an HTTP POST. (`-x POST`). If you  leave off the POST and instead issue a GET, the data will be ignored and the call will return a payload listing all existing Cloud Accounts for the account that owns the key. This is, of course, not the response we are interested in when trying to create a cloud account.
 
 ```shell
 curl -v -X POST '__URL__/cloud-account' \
@@ -47,6 +78,7 @@ curl -v -X POST '__URL__/cloud-account' \
   "install_app": "on"
 }'
 ```
+__Example 3__
 
 This will return to you a very large payload that will give you the details of **what is being created**. It is important to note that the API queues the job to be done, it does not wait until the job is complete.
 
@@ -188,36 +220,19 @@ This will return to you a very large payload that will give you the details of *
   "child_cloud_accounts": []
 }
 ```
+[__Payload 2__](#payload2)
 
-# Checking the status of a Cloud Account
+Creating a cloud account is an out-of-bandwidth command. Receiving a 200 OK for a POST only mens that the system has accepted your request. In the payload returned is the cloud account id that you can use as described above to check for the state of your cloud account.
 
-Once you have issued the Create Cloud Account command above, you can query the API periodically to check it's status. In the payload above you will notice a value CLOUD_ACCOUNT_ID. This will be an integer for the cloud account that you have just created. Use this id to check the status of your cloud account.
+There are 5 possible states your cloud can be in.
 
-```shell
-curl -v '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
-  -H 'Authorization: Bearer YOU_VERY_LONG_API_KEY_GOES_HERE' \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
-```
-
-This will return you a JSON payload that resembles the one above. In this case we are looking for one important field in the payload, `STATE`.
+- **creating** This is the initial state. The cloud account will stay in this state until the initial creation of the clopud account has completed.
+- **destroying** This is the state of a machine that has been required to be destroyed and approved. It is in htis state until the destroy process is complete. After this is complete the API will return 404 on all future calls to `/cloud-host/cloud_id`
+- **failure** If for some reason the creating process did. not complete successfully, the cloud account will be assigned the state of failure.
+- **installing** Once creating is complete, if you have requested that an application be installed, the cloud account will be put in the installing state. It will remain in this state until the application is successfully installed.
+- **stable** The final state of the cloud account is stable. This is your signal that everything truly is 200 OK.
 
 
-```
-  "state": "stable",
-```
-
-State can have one of five different states.
-
-- creating
-- destroying
-- failure
-- installing
-- stable
-
-While they are all self explanatory, in most cases, the one you are looking for is "stable". In the rare case that something went wrong in either creating your cloud account or installing the application requested, you will see the state of 'failure'. This is a fatal state that cannot be recovered from. If a cloud account fails, support will be in contact with you to discuss what went wrong.
-
-Once your VM has reached the status of "stable", you are ready to begin working with it.
 
 # Wrap Up
-This page has described the commands necessary and the payloads returned when creating a Nexcess Cloud Account. Since the create cloud account process is an out-of-bandwidth process, this document also describes how to query for the current state of a cloud account and how to interpret those states.
+This page has described the commands available for the cloud-account API endpoint.
