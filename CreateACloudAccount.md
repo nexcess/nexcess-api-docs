@@ -183,7 +183,8 @@ This will return to you a very large payload that will give you the details of *
 ```
 
 # Checking the status of a Cloud Account
-Once you have issued the Create Cloud Account command above, you can query the API periodically to check it's status. In the payload above you will notice a value `CLOUD_ACCOUNT_ID`. This will be an integer for the cloud account that you have just created. Use this id to check the status of your cloud account.
+
+Once you have issued the Create Cloud Account command above, you can query the API periodically to check it's status. In the payload above you will notice a value CLOUD_ACCOUNT_ID. This will be an integer for the cloud account that you have just created. Use this id to check the status of your cloud account.
 
 ```shell
 curl -v '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
@@ -212,4 +213,4 @@ While they are all self explanatory, in most cases, the one you are looking for 
 Once your VM has reached the status of "stable", you are ready to begin working with it.
 
 # Wrap Up
-This page has described the commands necessary and the payloads returned when creating a Nexcess Cloud Account.
+This page has described the commands necessary and the payloads returned when creating a Nexcess Cloud Account. Since the create cloud account process is an out-of-bandwidth process, this document also describes how to query for the current state of a cloud account and how to interpret those states.
