@@ -201,11 +201,11 @@ This will return you a JSON payload that resembles the one above. In this case w
 
 State can have one of five different states.
 
-# creating
-# destroying
-# failure
-# installing
-# stable
+- creating
+- destroying
+- failure
+- installing
+- stable
 
 While they are all self explanatory, in most cases, the one you are looking for is "stable". In the rare case that something went wrong in either creating your cloud account or installing the application requested, you will see the state of 'failure'. This is a fatal state that cannot be recovered from. If a cloud account fails, support will be in contact with you to discuss what went wrong.
 
