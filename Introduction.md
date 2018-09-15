@@ -1,6 +1,6 @@
 # Introduction
 
-The Nexcess API allows users, with proper authentication, to manage most aspects of their account and services directly from the API. Nexcess also provides a PHP SDK for those who do not want to script the calls manually, as well as a command line too that makes these calls for you.
+The Nexcess API allows users, with proper authentication, to manage most aspects of their account and services directly from the API. Nexcess also provides a [PHP SDK]() for those who do not want to script the calls manually, as well as a [command line tool]() that makes these calls for you.
 
 This documentation is for those who wish to make the calls directly to the REST API.
 
@@ -10,12 +10,15 @@ Throughout this document, payloads shown in JSON format. JSON is the payload for
 
 In almost all situations, you will need to specify via a header that your application is expecting a JSON payload.
 
+__Example Header__
 ```
   -H 'Accept: application/json'
 ```
 
 # First Things First
-Before you begin making calls to the API, you will need to get an API key.
+
+Before you begin making calls to the API, you will need to [get an API key](Authorization.md).
+
 
 # Endpoints
 

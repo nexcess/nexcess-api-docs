@@ -21,7 +21,7 @@ curl -v '__URL__/cloud-account' \
   -H 'Accept: application/json'
 ```
 
-This will return a very verbose JSON payload that describes each cloud account associated with your account.
+This will return a very verbose JSON payload that will list the details of all of the cloud accounts associated with your account.
 
 To retrieve the details of a specific cloud account, you and append the `cloud_id`  to this endpoint. In the payload returned in the above command, cloud_id is found in each cloud account object in `cloud_account->account_id`.
 
