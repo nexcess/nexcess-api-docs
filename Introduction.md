@@ -1,6 +1,6 @@
 # Introduction
 
-The Nexcess API allows users, with proper authentication, to manage most aspects of their account and services directly from the API. Nexcess also provides a [PHP SDK]() for those who do not want to script the calls manually, as well as a [command line tool]() that makes these calls for you.
+The Nexcess API allows users, with proper authentication, to manage most aspects of their account and services directly from the API. Nexcess also provides a [PHP SDK](https://github.com/nexcess/nexcess-php-sdk) for those who do not want to script the calls manually, as well as a [command line tool](https://github.com/nexcess/nexcess-cli) that makes these calls for you.
 
 This documentation is for those who wish to make the calls directly to the REST API.
 
@@ -17,7 +17,10 @@ __Example Header__
 
 # First Things First
 
-Before you begin making calls to the API, you will need to [get an API key](Authorization.md).
+Before you begin making calls to the API, you will need to get an API key. You also need to review the possible types of errors we return.
+
+- [Authorization](Authorization.md)
+- [Errors](Errors.md)
 
 
 # Endpoints

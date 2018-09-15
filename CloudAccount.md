@@ -80,7 +80,7 @@ curl -v -X POST '__URL__/cloud-account' \
 }'
 ```
 
-This will return to you a very large payload that will give you the details of **what is being created**. It is important to note that the API queues the job to be done, it does not wait until the job is complete.
+This will return to you a very large payload that will give you details about both the cloud account that is being created, and the service that it belongs to. It is important to note that the API queues the job to be done, it does not wait until the job is complete.
 
 <a name="payload2">__Payload 2__</a>
 ```json
@@ -222,7 +222,7 @@ This will return to you a very large payload that will give you the details of *
 }
 ```
 
-Creating a cloud account is an out-of-bandwidth command. Receiving a 200 OK for a POST only mens that the system has accepted your request. In the payload returned is the cloud account id that you can use as described above to check for the state of your cloud account.
+Creating a cloud account is an out-of-bandwidth command. Receiving a 200 OK for a POST only means that the system has accepted your request. In the payload returned is the cloud account id that you can use as described above to check for the state of your cloud account.
 
 There are 5 possible states your cloud can be in.
 
@@ -233,6 +233,5 @@ There are 5 possible states your cloud can be in.
 - **stable** The final state of the cloud account is stable. This is your signal that everything truly is 200 OK.
 
 
-
 # Wrap Up
-This page has described the commands available for the cloud-account API endpoint.
+This page has described the options available for the `/cloud-account` API endpoint. It has described the inputs as well as the outputs.
