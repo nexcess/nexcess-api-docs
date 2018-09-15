@@ -62,7 +62,7 @@ __Payload 1__
 - `app_id` is the Nexcess id for the application you want to install See [Applications](Applications.md) to get a list of the available `app_id` values. This is a required filed and the value must be a valid application id.
 - `package_id` is the Nexcess id for the server package you want to spin up. See 'Listing Packages' to get a list of available `package_id` values. This is a required field and the value must be a valid package id.
 - `cloud_id` is the Nexcess id for the cloud (data center) you want to spin up your new account within.  See 'Listing Clouds' to get a list of available `cloud_id` values. This is a required field and the value must be a valid cloud id.
-- `install_app` tells the system whether or not to actually install the application you requested or just prepare the server for it's install. This is an optional field. If it is not present, then "off" is assumed. If it is present and the value specified is "on" then the application will be installed.
+- `install_app` tells the system whether or not to actually install the application you requested or to only prepare the server environment for you to install the application later. This is an optional field. If it is not present, then "off" is assumed. If it is present and the value specified is "on" then the application will be installed.
 
 __Example 3__
 
