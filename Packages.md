@@ -75,4 +75,4 @@ __Payload 1__
 ]
 ```
 
-The above payload is one of the entries returned.  The `package_id` is the number you will use in `package_id` when making calls to [cloud-account](CloudAccount.md).
+The above payload is one of the entries returned.  The `package_id` is the value you will use pass in as `package_id` when making calls to [cloud-account](CloudAccount.md).

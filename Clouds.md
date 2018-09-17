@@ -38,5 +38,5 @@ __Payload 1__
 ]
 ```
 
-The above payload is one of the entries returned.  The `id` is the number you will use in `cloud_id` when making calls to [cloud-account](CloudAccount.md).
+The above payload is one of the entries returned.  The `id` is the value you will pass in as `cloud_id` when making calls to [cloud-account](CloudAccount.md).
 
