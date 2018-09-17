@@ -13,11 +13,11 @@
 This endpoint lists the applications that can be installed on cloud accounts. There are two required parameters to make a call to this endpoint.
 
 - `type=virt-guest-cloud` `virt-guest-cloud` is an internal token specifying a type of package. Currently it is the only type that is publicly exposed.
-- `environment_type=production` There are two different environment types supported by the API. For now, only use production. As the other is readied for public consumption, this documentation will be updated to describe it and it's differences.
+- `environment_type=production` There are two different environment types supported by the API, "production" and "development". Use production for a list of the packages that can be use when creating any normal cloud account. Use development for a list of the packages that can be used when creating development accounts.
 
 __Example 1__
 ```shell
-curl -v '__URL__/package?type=virt-guest-cloud&production' \
+curl -v '__URL__/package?type=virt-guest-cloud&environment_type=production' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 
