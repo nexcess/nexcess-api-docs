@@ -34,7 +34,10 @@ curl -v '__URL__/cloud-account/CLOUD_ID' \
 
 This will return a similar payload to the first GET but it will be limited to a single cloud_account. This is how you check the state of a cloud account onces you have issued the POST described below. See [__Payload 2__](#payload2) for an example output of this command.
 
+
 ## POST
+
+### Creating a Cloud Account
 
 Before we can issue a POST command, we need values for a few of the parameters. The required parameters for creating a cloud account are:
 
@@ -232,6 +235,51 @@ There are 5 possible states your cloud can be in.
 - **installing** Once creating is complete, if you have requested that an application be installed, the cloud account will be put in the installing state. It will remain in this state until the application is successfully installed.
 - **stable** The final state of the cloud account is stable. This is your signal that everything truly is 200 OK.
 
+### Creating a Development Account
+
+ Development accounts are a special type of account tied to a cloud account. As the name implies, they are for development purposes and not to be used for production. Development accounts are clones of production accounts. They are created in a very similar call for creating the production cloud account.
+
+ __Payload 3__
+
+```json
+{
+  "domain": "development.demo2.example.com",
+  "copy_account": "1",
+  "scrub_account": "1",
+  "package_id": "713",
+  "ref_service_id": "58692",
+  "ref_type": "development"
+}
+```
+
+
+- `domain` is domain passed in has to be a subdomain of the production cloud account's domain. This is a required parameter.
+- `package_id` This is the package to create and install the development environment within. This is a required parameter.
+- `ref_service_id` This is the service_id associated with the parent cloud account. This is a required parameter.
+- `ref_type` is the type of account being created. When creating a development account, specify **development**. This is a required parameter.
+- `copy_account` is a boolean flag. If set to true then the environment of the production cloud account will be copied into the development environment. This is an optional parameter. If not present, false is assumed.
+- `scrub_account` is a boolean flag. If set to true then data in the database will be anonymized. This is an optional parameter. If not present, false is assumed.
+
+__Example 3__
+
+```shell
+curl -v -X POST '__URL__/extranet/cloud-account' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{
+    "domain": "development.demo2.example.com",
+    "copy_account": true,
+    "scrub_account": true,
+    "package_id": "713",
+    "ref_service_id" : "SERVICE_ID",
+    "ref_type" : "development"
+  }'
+```
+
+The payload returned from the command above is the same as [Payload 2](#payload2).
+
 
 # Wrap Up
-This page has described the options available for the `/cloud-account` API endpoint. It has described the inputs as well as the outputs.
+This page has described the options available for the `/cloud-account` API endpoint. It has described the inputs as well as the outputs. It has described crating both a cloud account and a development environment.
+
