@@ -14,4 +14,4 @@ The next screen will show you the token. You can click the token to copy it to y
 
 Once you have your token safely stored, click the "Close" button.
 
-Congratulations, you are done, you now have a Nexcess API token. Throughout all our examples, you replace YOU_VERY_LONG_API_KEY_GOES_HERE with the token you just generated so that it will be passed in to the call.
+Congratulations, you are done, you now have a Nexcess API token. Throughout all our examples, you replace YOUR_VERY_LONG_API_KEY_GOES_HERE with the token you just generated so that it will be passed in to the call.

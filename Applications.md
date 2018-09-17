@@ -15,7 +15,7 @@ This endpoint lists the applications that can be installed on cloud accounts. Th
 __Example 1__
 ```shell
 curl -v '__URL__/app' \
-  -H 'Authorization: Bearer YOU_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 
 ```

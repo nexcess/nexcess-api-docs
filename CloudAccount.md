@@ -17,7 +17,7 @@ To retrieve a list of all the cloud accounts associated with an account make a c
 __Example 1__
 ```shell
 curl -v '__URL__/cloud-account' \
-  -H 'Authorization: Bearer YOU_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 ```
 
@@ -28,7 +28,7 @@ To retrieve the details of a specific cloud account, you and append the `cloud_i
 __Example 2__
 ```shell
 curl -v '__URL__/cloud-account/CLOUD_ID' \
-  -H 'Authorization: Bearer YOU_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 ```
 
@@ -68,7 +68,7 @@ __Example 3__
 
 ```shell
 curl -v -X POST '__URL__/cloud-account' \
-  -H 'Authorization: Bearer YOU_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   --data-binary '{
