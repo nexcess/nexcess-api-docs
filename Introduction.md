@@ -26,7 +26,11 @@ __Example Header__
 
 ## \_\_URL\_\_
 
-In all examples, the base URL has been replaced with \_\_URL\_\_. Replace this actual URL given to you for use with the API.
+In all examples, the base URL has been replaced with \_\_URL\_\_.
+
+- If you are a Nexcess.net customer, the URL is https://portal.nexcess.net
+- If you are a Thermo.io customer, the URL is https://core.thermo.io
+
 
 ## API Key
 
