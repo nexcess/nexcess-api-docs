@@ -1,5 +1,7 @@
 # Cloud Account
 
+The cloud-account endpoint is use to both create and manage cloud accounts and many of the options of a cloud account and related service.
+
 **End Point**
 
 ```
@@ -8,10 +10,16 @@
 
 **Accepted Verbs**
 - GET
+  - [Retrieve list of cloud accounts]()
+  - [Retrieve list of cloud accountsRetrieve information on a specific cloud account and related service]()
 - POST
+  - [Creating a Cloud Account]()
+  - [Creating a Development Account]()
+  - [Clear Nginx Cache](#clear-nginx-cache)
 
 ## GET
 
+### Retrieve list of cloud accounts
 To retrieve a list of all the cloud accounts associated with an account make a call to `/cloud-account` with your API key.
 
 __Example 1__
@@ -22,6 +30,8 @@ curl -v '__URL__/cloud-account' \
 ```
 
 This will return a very verbose JSON payload that will list the details of all of the cloud accounts associated with your account.
+
+### Retrieve information on a specific cloud account and related service
 
 To retrieve the details of a specific cloud account, you and append the `cloud_id`  to this endpoint. In the payload returned in the above command, cloud_id is found in each cloud account object in `cloud_account->account_id`.
 
@@ -60,15 +70,14 @@ __Payload 1__
 }
 ```
 
-
 - `domain` is the domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.
 - `app_id` is the Nexcess id for the application you want to install See [Applications](Applications.md) to get a list of the available `app_id` values. This is a required filed and the value must be a valid application id.
 - `package_id` is the Nexcess id for the server package you want to spin up. See 'Listing Packages' to get a list of available `package_id` values. This is a required field and the value must be a valid package id.
 - `cloud_id` is the Nexcess id for the cloud (data center) you want to spin up your new account within.  See 'Listing Clouds' to get a list of available `cloud_id` values. This is a required field and the value must be a valid cloud id.
 - `install_app` tells the system whether or not to actually install the application you requested or to only prepare the server environment for you to install the application later. This is an optional field. If it is not present, then "off" is assumed. If it is present and the value specified is "on" then the application will be installed.
 
-__Example 3__
 
+__Example 3__
 ```shell
 curl -v -X POST '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -235,12 +244,12 @@ There are 5 possible states your cloud can be in.
 - **installing** Once creating is complete, if you have requested that an application be installed, the cloud account will be put in the installing state. It will remain in this state until the application is successfully installed.
 - **stable** The final state of the cloud account is stable. This is your signal that everything truly is 200 OK.
 
+
 ### Creating a Development Account
 
  Development accounts are a special type of account tied to a cloud account. As the name implies, they are for development purposes and not to be used for production. Development accounts are clones of production accounts. They are created in a very similar call for creating the production cloud account.
 
  __Payload 3__
-
 ```json
 {
   "domain": "development.demo2.example.com",
@@ -252,7 +261,6 @@ There are 5 possible states your cloud can be in.
 }
 ```
 
-
 - `domain` is domain passed in has to be a subdomain of the production cloud account's domain. This is a required parameter.
 - `package_id` This is the package to create and install the development environment within. This is a required parameter.
 - `ref_service_id` This is the service_id associated with the parent cloud account. This is a required parameter.
@@ -261,7 +269,6 @@ There are 5 possible states your cloud can be in.
 - `scrub_account` is a boolean flag. If set to true then data in the database will be anonymized. This is an optional parameter. If not present, false is assumed.
 
 __Example 3__
-
 ```shell
 curl -v -X POST '__URL__/extranet/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -279,6 +286,27 @@ curl -v -X POST '__URL__/extranet/cloud-account' \
 
 The payload returned from the command above is the same as [Payload 2](#payload2).
 
+
+### Clear Nginx Cache
+
+The `cloud-account` endpoint can be used to clear the Nginx cache on a given related service.
+
+__Example 4__
+```shell
+curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
+   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+   -H 'Content-Type: application/json' \
+   -H 'Accept: application/json' \
+   --data-binary '{"_action": "purge-cache"}'
+```
+
+There is only one required parameter needed to clear the Nginx Cache.
+
+- `_action` takes a single value of **purge-cache**.
+
+The payload returned from the command above is the same as [Payload 2](#payload2).
+
+The clearing of the cache is an out-of-bandwidth process. a 200 OK return indicates that the switch has been set but it can take a few minutes for the process to complete.
 
 # Wrap Up
 This page has described the options available for the `/cloud-account` API endpoint. It has described the inputs as well as the outputs. It has described crating both a cloud account and a development environment.
