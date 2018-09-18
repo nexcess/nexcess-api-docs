@@ -10,10 +10,15 @@
 
 ## GET
 
-This endpoint lists the applications that can be installed on cloud accounts. There are two required parameters to make a call to this endpoint.
+This endpoint lists the applications that can be installed on cloud accounts.
 
-- `type=virt-guest-cloud` `virt-guest-cloud` is an internal token specifying a type of package. Currently it is the only type that is publicly exposed.
-- `environment_type=production` There are two different environment types supported by the API, **production** and **development**. Use **production** for a list of the packages that can be use when creating any normal cloud account. Use **development** for a list of the packages that can be used when creating development accounts.
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `type=virt-guest-cloud` | an internal token specifying a type of package. Currently it is the only type that is publicly exposed. | YES |
+| `environment_type=production` | There are two different environment types supported by the API, **production** and **development**. Use **production** for a list of the packages that can be use when creating any normal cloud account. Use **development** for a list of the packages that can be used when creating development accounts. | YES |
+
 
 __Example 1__
 ```shell

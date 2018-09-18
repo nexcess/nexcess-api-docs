@@ -49,5 +49,5 @@ __Payload 1__
 
 The above payload is one of the entries returned.  The `app_id` is the value you will pass in as `app_id` when making calls to [cloud-account](CloudAccount.md).
 
-> In [cloud-account](CloudAccount.md) you have the option to specify the option `install_app`. This option is only relevant for Applications where `is_installable` is set to true. If `is_installable` is set to false, `install_app` will be silently ignored.
+In [cloud-account](CloudAccount.md) you have the option to specify the option `install_app`. This option is only relevant for Applications where `is_installable` is set to true. If `is_installable` is set to false, `install_app` will be silently ignored.
 
