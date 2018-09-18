@@ -10,11 +10,11 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
 
 **Accepted Verbs**
 - GET
-  - [Retrieve list of cloud accounts]()
-  - [Retrieve list of cloud accountsRetrieve information on a specific cloud account and related service]()
+  - [Retrieve list of cloud accounts](#retrieve-list-of-cloud-accounts)
+  - [Retrieve information on a specific cloud account and related service](#retrieve-information-on-a-specific-cloud-account-and-related-service)
 - POST
-  - [Creating a Cloud Account]()
-  - [Creating a Development Account]()
+  - [Creating a Cloud Account](#creating-a-cloud-account)
+  - [Creating a Development Account](#creating-a-development-account)
   - [Clear Nginx Cache](#clear-nginx-cache)
 
 ## GET
