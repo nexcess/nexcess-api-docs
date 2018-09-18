@@ -34,7 +34,7 @@ In all examples in this documentation, the base URL has been replaced with \_\_U
 
 ## YOUR_VERY_LONG_API_KEY_GOES_HERE
 
-In all the examples given in this documentation **YOUR_VERY_LONG_API_KEY_GOES_HERE** is place of your API key. Once you get your API key, you can replace these with your actual API key.
+In all the examples given in this documentation **YOUR_VERY_LONG_API_KEY_GOES_HERE** is in place of your API key. Once you [get your API key](Authorization.md), you can replace these with your actual key.
 
 
 # Endpoints
