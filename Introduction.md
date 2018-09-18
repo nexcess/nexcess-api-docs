@@ -6,21 +6,31 @@ This documentation is for those who wish to make the calls directly to the REST 
 
 Example calls in this document all use `curl`. It is assumed that the user not only has `curl` installed on their computer but understands how it is used.
 
-Throughout this document, payloads shown in JSON format. JSON is the payload format used in all the Nexcess API calls.
-
-In almost all situations, you will need to specify via a header that your application is expecting a JSON payload.
-
-__Example Header__
-```
-  -H 'Accept: application/json'
-```
-
 # First Things First
 
 Before you begin making calls to the API, you will need to get an API key. You also need to review the possible types of errors we return.
 
 - [Authorization](Authorization.md)
 - [Errors](Errors.md)
+
+# Conventions
+
+## JSON
+
+Throughout this documentation, payloads shown in JSON format. JSON is the payload format used in all the Nexcess API calls. In almost all situations, you will need to specify via a header that your application is expecting a JSON payload.
+
+__Example Header__
+```
+  -H 'Accept: application/json'
+```
+
+## \_\_URL\_\_
+
+In all examples, the base URL has been replaced with \_\_URL\_\_. Replace this actual URL given to you for use with the API.
+
+## API Key
+
+In all the examples given in this documentation **YOUR_VERY_LONG_API_KEY_GOES_HERE** is place of your API key. Once you get your API key, you can replace these with your actual API key.
 
 
 # Endpoints
