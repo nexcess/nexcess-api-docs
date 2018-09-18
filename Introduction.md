@@ -26,13 +26,13 @@ __Example Header__
 
 ## \_\_URL\_\_
 
-In all examples, the base URL has been replaced with \_\_URL\_\_.
+In all examples in this documentation, the base URL has been replaced with \_\_URL\_\_.
 
 - If you are a Nexcess.net customer, the URL is https://portal.nexcess.net
 - If you are a Thermo.io customer, the URL is https://core.thermo.io
 
 
-## API Key
+## YOUR_VERY_LONG_API_KEY_GOES_HERE
 
 In all the examples given in this documentation **YOUR_VERY_LONG_API_KEY_GOES_HERE** is place of your API key. Once you get your API key, you can replace these with your actual API key.
 
