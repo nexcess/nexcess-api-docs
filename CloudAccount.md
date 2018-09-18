@@ -116,6 +116,16 @@ __Payload 2__
 }
 ```
 
+__Parameters__
+| Name | Description | Required |
+|:---|:---|:---:|
+|`domain`| The domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.| YES |
+|`app_id`|the Nexcess id for the application you want to install See [Applications](Applications.md) to get a list of the available `app_id` values. | YES |
+| `package_id` | the Nexcess id for the server package you want to spin up. See 'Listing Packages' to get a list of available `package_id` values. | YES |
+| `cloud_id` | he Nexcess id for the cloud (data center) you want to spin up your new account within.  See 'Listing Clouds' to get a list of available `cloud_id` values. | YES |
+| `install_app` | tells the system whether or not to actually install the application you requested or to only prepare the server environment for you to install the application later. | NO |
+
+
 - `domain` is the domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.
 - `app_id` is the Nexcess id for the application you want to install See [Applications](Applications.md) to get a list of the available `app_id` values. This is a required filed and the value must be a valid application id.
 - `package_id` is the Nexcess id for the server package you want to spin up. See 'Listing Packages' to get a list of available `package_id` values. This is a required field and the value must be a valid package id.
@@ -414,5 +424,5 @@ DELETing a backup will not return any payload. It will however return a 200 OK u
 
 
 # Wrap Up
-This page has described the options available for the `/cloud-account` API endpoint. It has described the inputs as well as the outputs. It has described crating both a cloud account and a development environment.
+This page has described the actions available for the `/cloud-account` API endpoint.
 
