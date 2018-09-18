@@ -118,7 +118,7 @@ __Payload 2__
 
 __Parameters__
 | Name | Description | Required |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 |`domain`| The domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.| YES |
 |`app_id`|the Nexcess id for the application you want to install See [Applications](Applications.md) to get a list of the available `app_id` values. | YES |
 | `package_id` | the Nexcess id for the server package you want to spin up. See 'Listing Packages' to get a list of available `package_id` values. | YES |
