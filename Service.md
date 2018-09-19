@@ -344,9 +344,11 @@ curl -v '__URL__/service/SERVICE_ID' \
   --data-binary '{"_action": "set-php-version", "php_version": "7.2"}'
 ```
 
-Currently the only parameter you can pass into the `/service` endpoint is:
+__Parameters__
 
-- `set-php-version` The value can either be "7.1 or 7.2"
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `set-php-version` | Can either be "7.1 or 7.2" | YES |
 
 This end point may take some time to return. Once it does, it will return the complete service object as seen on [Payload 1](#payload1). Examining the `environment->software->php->version` property will show you the newly changed version.
 
