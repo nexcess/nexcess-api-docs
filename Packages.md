@@ -2,7 +2,7 @@
 
 ***Endpoint***
 ```
-/package?type=virt-guest-cloud&production
+/package?type=virt-guest-cloud&environment_type=production
 ```
 
 **Accepted Verbs**
