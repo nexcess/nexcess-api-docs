@@ -191,7 +191,7 @@ This will return to you a very large payload that will give you details about bo
     "ip": "xxx.xxx.xxx.xxx",
     "ipv4": "xxx.xxx.xxx.xxx",
     "is_dev_account": false,
-    "temp_domain": "0e372454ad.nxcli.net",
+    "temp_domain": "xxxxxxxxx.nxcli.net",
     "cloudhost_hostname": "cloudhost-xxxxxx.cloud-name.nxcli.net",
     "unix_username": "xxxxxxxxx",
     "app": {
