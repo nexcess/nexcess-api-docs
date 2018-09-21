@@ -122,7 +122,7 @@ __Parameters__
 | :--- | :--- | :---: |
 |`domain`| The domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.| YES |
 |`app_id`|the Nexcess id for the application you want to install See [Applications](Applications.md) to get a list of the available `app_id` values. | YES |
-| `package_id` | the Nexcess id for the server package you want to spin up. See 'Listing Packages' to get a list of available `package_id` values. | YES |
+| `package_id` | the Nexcess id for the server package you want to spin up. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
 | `cloud_id` | he Nexcess id for the cloud (data center) you want to spin up your new account within.  See 'Listing Clouds' to get a list of available `cloud_id` values. | YES |
 | `install_app` | tells the system whether or not to actually install the application you requested or to only prepare the server environment for you to install the application later. | NO |
 
