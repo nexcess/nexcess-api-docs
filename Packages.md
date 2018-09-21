@@ -31,7 +31,6 @@ curl -v '__URL__/package?type=virt-guest-cloud&environment_type=production' \
 __Payload 1__
 ```json
 [
-[
   {
     "package_id": 707,
     "name": "nc.xsmall",
