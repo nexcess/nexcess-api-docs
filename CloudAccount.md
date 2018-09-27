@@ -16,7 +16,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Get available versions of PHP](#get-the-list-of-php-versions)
   - [Get remote user name](#get-remote-user-name)
   - [Get usage metrics](#get-usage-metrics)
-  - [List Pointer Domains](#list-pointer-domains)*
+  - [List Pointer Domains](#list-pointer-domains)
 
 - POST
   - [Creating a Cloud Account](#creating-a-cloud-account)
