@@ -558,7 +558,7 @@ curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
 
 The payload returned from the command above is the same as [Payload 3](#payload3).
 
-The clearing of the cache is an out-of-bandwidth process. a 200 OK return indicates that the switch has been set but it can take a few minutes for the process to complete.
+The clearing of the cache is an out-of-bandwidth process. A 200 OK return indicates that the switch has been set but it can take a few minutes for the process to complete.
 
 ### Create a Backup
 
@@ -659,7 +659,6 @@ curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
 ```
 
 The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that the package_id will reflect the new package.
-
 
 
 ### Toggle AutoScale
