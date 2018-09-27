@@ -133,7 +133,7 @@ Each cloud account is assigned 'remote user name'. This is the user for ssh and 
 
 __Example XXX__
 ```shell
-curl -v '__URL__/extranet/cloud-account/1538/get-remote-username' \
+curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-remote-username' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -163,14 +163,14 @@ __Payload XXX__
     },
     "type": "ssh-password",
     "uuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "share_date": 1538058763,
-    "expiration_date": 1538404363,
+    "share_date": CLOUD_ACCOUNT_ID058763,
+    "expiration_date": CLOUD_ACCOUNT_ID404363,
     "uses": 0,
     "max_uses": 1,
     "owner": "virt-guest-cloudaccount",
-    "owner_id": 1538,
+    "owner_id": CLOUD_ACCOUNT_ID,
     "owner_object": {
-      "id": 1538,
+      "id": CLOUD_ACCOUNT_ID,
       "identity": "demo.example.com",
       "is_real": true,
       "meta": {
@@ -220,17 +220,17 @@ If the password has already been viewed but was not recorded, it cannot be retri
 
 ### Get usage metrics
 
-This endpoint can be used to retrieve the storage and bandwidth metrics associated with a given cloud account.
+This endpoint is used to retrieve the storage and bandwidth metrics associated with a given cloud account.
 
 __Example XXX__
 ```shell
-curl -v '__URL__/extranet/cloud-account/1546/get-usage-metrics' \
+curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-usage-metrics' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
 ```
 
-The payload that returns will look like this.
+The payload that returns from this call will look like this.
 
 __Payload XXX__
 ```json
@@ -244,6 +244,50 @@ __Payload XXX__
 }
 ```
 
+### List Pointer Domains
+
+This endpoint can be used to retrieve the storage and bandwidth metrics associated with a given cloud account.
+
+__Example XXX__
+```shell
+curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+The payload returned contains all of the pointer domains for the given cloud account. After the pointer domains is a list of the types of pointer domains that can be set in Nocworx. The types are important when you are ready to [add a pointer domain](#add-pointer-domain).
+
+__Payload XXX__
+```json
+{
+  "pointers": [
+    {
+      "domain": "bob.example.com",
+      "points_to": "1538072470.example.com",
+      "type": "LG_SERVER_ALIAS",
+      "mail_alias": "Yes"
+    },
+    {
+      "domain": "alice.example.com",
+      "points_to": "http://1538072470.example.com",
+      "type": "redirect (302)",
+      "mail_alias": "Yes"
+    },
+    {
+      "domain": "ted.example.com",
+      "points_to": "http://1538072470.example.com",
+      "type": "redirect (301)",
+      "mail_alias": "Yes"
+    }
+  ],
+  "types": {
+    "redir_type_301": "redirect_301",
+    "redir_type_302": "redirect_302",
+    "redir_type_alias": "server_alias"
+  }
+}
+```
 
 
 
