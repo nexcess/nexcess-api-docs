@@ -541,6 +541,12 @@ The payload returned from the command above is the same as [Payload 3](#payload3
 
 The `cloud-account` endpoint can be used to clear the Nginx cache on a given related service.
 
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `_action` | `purge-cache` | YES |
+
 __Example 6__
 ```shell
 curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
@@ -549,10 +555,6 @@ curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
    -H 'Accept: application/json' \
    --data-binary '{"_action": "purge-cache"}'
 ```
-
-There is only one required parameter needed to clear the Nginx Cache.
-
-- `_action` takes a single value of **purge-cache**.
 
 The payload returned from the command above is the same as [Payload 3](#payload3).
 
