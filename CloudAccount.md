@@ -13,7 +13,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Retrieve a list of cloud accounts](#retrieve-list-of-cloud-accounts)
   - [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service)
   - [List All Backups](#list-all-backups)
-  - [Get available versions of PHP](#get-php-versions)*
+  - [Get available versions of PHP](#get-the-list-of-php-versions)
   - [Get remote user name](#get-remote-username)*
   - [Get autoscale metrics](#get-autoscale-metrics)*
   - [Get usage metrics](#get-usage-metrics)*
@@ -101,6 +101,30 @@ __Payload 1__
     "complete": true,
     "download_url": "https://69.160.55.105:2443/siteworx/index?action=sso&sid=7e1f3cf779227f86a0f3857d48cb8eab&uri=L3NpdGV3b3J4L2Rvd25sb2FkP2FjdGlvbj1iYWNrdXAmZmlsZT1kZW1vMi5leGFtcGxlLmNvbSUyQmZ1bGwtc2luZ2xlLVNlcC4xOC4yMDE4LTE2LjE1LjAxLnRneiZkb21haW49ZGVtbzIuZXhhbXBsZS5jb20%3D"
   }
+]
+```
+
+### Get the List of PHP Versions
+
+In the POST section there is an endpoint that will allow for the changing of the version of PHP installed on a given cloud account. Not all versions of PHP are supported. In most cases, the last four or five minor versions are available. The actual version installed will be the latest patch level released for the version chosen. (e.g. if 7.1 is chosen then 7.1.22 will be installed.)
+
+__Example XXX__
+```shell
+curl -v '__URL/extranet/cloud-account/1521/get-php-versions' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+The payload returned is an array of version numbers to choose from. These are the only versions available for install.
+
+__Payload XXX__
+```json
+[
+  "5.6",
+  "7.0",
+  "7.1",
+  "7.2"
 ]
 ```
 
