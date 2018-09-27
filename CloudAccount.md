@@ -605,26 +605,33 @@ The end point [get-php-versions](#get-the-list-of-php-versions) is used to retri
 
 __Example XX__
 ```shell
-curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
-   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-   -H 'Content-Type: application/json' \
-   -H 'Accept: application/json'
+curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json' \
+     --data-binary '{"_action": "set-php-version", "php_version": "PHP_VERSION"}'
 ```
 
-No parameters are available for this endpoint, however you do have to put the cloud account's ID in the URI.
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `_action` | Always set-php-version | YES |
+| `php_version` | One of the valid PHP versions listed by the [Get available versions of PHP](#get-the-list-of-php-versions) endpoint. | YES |
+
+
+The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that in the environment section, the requested version of PHP will be listed.
 
 __Payload XX__
-```json
-{
-  "filepath": "/home/a6fb203a/demo2.example.com/iworx-backup/demo2.example.com+full-single-Sep.18.2018-16.15.01.tgz",
-  "filename": "demo2.example.com+full-single-Sep.18.2018-16.15.01.tgz",
-  "filesize": "431.60 KB",
-  "filesize_bytes": 442009,
-  "type": "Full Backup",
-  "domain_options": "single-domain",
-  "filedate": 1537301704,
-  "complete": true
-}
+```
+"environment": {
+  "software": {
+    "php": {
+      "version": "7.2",
+      "path": "/opt/remi/php72",
+      "cli": "/opt/remi/php72/root/usr/bin/php"
+    },
+
 ```
 
 ### Resize
@@ -647,7 +654,7 @@ curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
      --data-binary '{"_action": "resize", "package_id": "NEW_PACKAGE_ID"}'
 ```
 
-The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that the package
+The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that the package_id will reflect the new package.
 
 
 # DELETE
