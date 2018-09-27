@@ -24,7 +24,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Clear Nginx Cache](#clear-nginx-cache)
   - [Create a Backup](#create-a-backup)
   - [Change PHP Version](#change-php-version)
-  - [Resize](#resize)*
+  - [Resize a cloud account](#resize)
   - [Toggle AutoScale](#toggle-autoscale)*
   - [Toggle Varnish Caching](#toggle-varnish-caching)*
   - [Create Remote User password](#create-remote-user-password)*
@@ -59,7 +59,7 @@ curl -v '__URL__/cloud-account/CLOUD_ID' \
   -H 'Accept: application/json'
 ```
 
-This will return a similar payload to the first GET but it will be limited to a single cloud_account. This is how you check the state of a cloud account onces you have issued the POST described below. See [__Payload 2__](#payload3) for an example output of this command.
+This will return a similar payload to the first GET but it will be limited to a single cloud_account. This is how you check the state of a cloud account onces you have issued the POST described below. See [__Payload 3__](#payload3) for an example output of this command.
 
 ### List All Backups
 
@@ -627,6 +627,27 @@ __Payload XX__
 }
 ```
 
+### Resize
+
+A cloud account can be resized both up and down. If the cloud account is a shared account, the resizing will take place in the background and a switch will be made once its state is "stable". This results in almost zero downtime. If the cloud account is a dedicated account then it will be taken off-line and resized.
+
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `package_id` | the Nexcess id for the server package you want to size to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
+
+
+__Example XX__
+```shell
+curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json' \
+     --data-binary '{"_action": "resize", "package_id": "NEW_PACKAGE_ID"}'
+```
+
+The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that the package
 
 
 # DELETE
