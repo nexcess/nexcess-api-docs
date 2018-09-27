@@ -25,7 +25,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Create a Backup](#create-a-backup)
   - [Change PHP Version](#change-php-version)
   - [Resize a cloud account](#resize)
-  - [Toggle AutoScale](#toggle-autoscale)*
+  - [Toggle AutoScale](#toggle-autoscale)
   - [Toggle Varnish Caching](#toggle-varnish-caching)*
   - [Create Remote User password](#create-remote-user-password)*
   - [Add Pointer Domain](#add-pointer-domain)*
@@ -603,6 +603,14 @@ Once your backup is complete, you can use the URL provided in `download_url` to 
 This endpoint is used to change the version of PHP installed in the specified cloud account.
 The end point [get-php-versions](#get-the-list-of-php-versions) is used to retrieve a list of the valid versions of PHP that can be installed on a cloud account. This endpoint allows for the actual switching of the versions.
 
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `_action` | `set-php-version` | YES |
+| `php_version` | One of the valid PHP versions listed by the [Get available versions of PHP](#get-the-list-of-php-versions) endpoint. | YES |
+
+
 __Example XX__
 ```shell
 curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
@@ -611,13 +619,6 @@ curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
      -H 'Accept: application/json' \
      --data-binary '{"_action": "set-php-version", "php_version": "PHP_VERSION"}'
 ```
-
-__Parameters__
-
-| Name | Description | Required |
-| :--- | :--- | :---: |
-| `_action` | Always set-php-version | YES |
-| `php_version` | One of the valid PHP versions listed by the [Get available versions of PHP](#get-the-list-of-php-versions) endpoint. | YES |
 
 
 The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that in the environment section, the requested version of PHP will be listed.
@@ -642,6 +643,7 @@ __Parameters__
 
 | Name | Description | Required |
 | :--- | :--- | :---: |
+| `_action` | `resize` | YES |
 | `package_id` | the Nexcess id for the server package you want to size to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
 
 
@@ -655,6 +657,40 @@ curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
 ```
 
 The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that the package_id will reflect the new package.
+
+
+
+### Toggle AutoScale
+
+Autoscale is a feature whereby a cloud account can be automatically moved up to the next package size if it exceeds it's max allocated concurrent users. This prevents a maxed out cloud account from dropping users during peak times. If off, when a cloud account exceeeds it's max allocated concurrent users, additional users will be disconnected until others drop off. Autoscale can be turned on or off via this endpoint.
+
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `_action` | `set-autoscale` | YES |
+| `autoscale` | `true` or `false` | YES |
+
+```shell
+curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json' \
+     --data-binary '{"_action": "set-autoscale", "autoscale": false}'
+```
+
+The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that in the options section of the payload, `autoscale_enabled` will reflect the change you requested.
+
+
+```
+"options": {
+  "nxcache_nocache": false,
+  "nxcache_varnish": false,
+  "nxcache_varnish_static": false,
+  "nxcache_varnish_ttl": 120,
+  "autoscale_enabled": false
+},
+```
 
 
 # DELETE
