@@ -10,14 +10,28 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
 
 **Accepted Verbs**
 - GET
-  - [Retrieve list of cloud accounts](#retrieve-list-of-cloud-accounts)
-  - [Retrieve information on a specific cloud account and related service](#retrieve-information-on-a-specific-cloud-account-and-related-service)
-  -[List All Backups](#list-all-backups)
+  - [Retrieve a list of cloud accounts](#retrieve-list-of-cloud-accounts)
+  - [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service)
+  - [List All Backups](#list-all-backups)
+  - [Get available versions of PHP](#get-php-versions)*
+  - [Get remote user name](#get-remote-username)*
+  - [Get autoscale metrics](#get-autoscale-metrics)*
+  - [Get usage metrics](#get-usage-metrics)*
+  - [List Pointer Domains](#list-pointer-domains)*
+
 - POST
   - [Creating a Cloud Account](#creating-a-cloud-account)
   - [Creating a Development Account](#creating-a-development-account)
   - [Clear Nginx Cache](#clear-nginx-cache)
   - [Create a Backup](#create-a-backup)
+  - [Change PHP Version](#change-php-version)*
+  - [Resize](#resize)*
+  - [Toggle AutoScale](#toggle-autoscale)*
+  - [Toggle Varnish Caching](#toggle-varnish-caching)*
+  - [Change SSH password](#toggle-varnish-caching)*
+  - [Add Pinter Domain](#add-pointer-domain)*
+  - [Remove Pointer Domain](#remove-pointer-domain)*
+
 - DELETE
   - [Delete a Backup](#delete-a-backup)
 
