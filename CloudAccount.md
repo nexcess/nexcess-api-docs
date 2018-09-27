@@ -23,7 +23,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Creating a Development Account](#creating-a-development-account)
   - [Clear Nginx Cache](#clear-nginx-cache)
   - [Create a Backup](#create-a-backup)
-  - [Change PHP Version](#change-php-version)*
+  - [Change PHP Version](#change-php-version)
   - [Resize](#resize)*
   - [Toggle AutoScale](#toggle-autoscale)*
   - [Toggle Varnish Caching](#toggle-varnish-caching)*
