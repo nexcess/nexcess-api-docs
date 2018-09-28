@@ -739,6 +739,41 @@ The payload that returns is identical to the payload returned for [Get remote us
 },
 ```
 
+### Add Pointer Domain
+
+This endpoint is used to add "Server Aliases", "301 Redirects" and "302 Redirects" to a cloud account.
+
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `_action` | `pointer-domain` | YES |
+| `type` | One of three possible values:
+- redir_type_301
+- redir_type_302
+- redir_type_alias
+ | YES |
+| `domain` | Any valid domain name  | YES |
+
+
+
+```shell
+# Add Pointer Domain
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "add-pointer-domain","type": "redir_type_alias","domain":"pointerdomain.example.com"}'
+```
+
+The payload that returned is the name of the domain pointer added.
+
+
+```
+{
+  "domain": "pointerdomain.example.com"
+}
+```
 
 
 
