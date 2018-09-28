@@ -12,27 +12,27 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
 - GET
   - [Retrieve a list of cloud accounts](#retrieve-list-of-cloud-accounts)
   - [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service)
-  - [List All Backups](#list-all-backups)
+  - [List all backups](#list-all-backups)
   - [Get available versions of PHP](#get-the-list-of-php-versions)
   - [Get remote user name](#get-remote-user-name)
   - [Get usage metrics](#get-usage-metrics)
-  - [List Pointer Domains](#list-pointer-domains)
+  - [List pointer domains](#list-pointer-domains)
 
 - POST
-  - [Creating a Cloud Account](#creating-a-cloud-account)
-  - [Creating a Development Account](#creating-a-development-account)
-  - [Clear Nginx Cache](#clear-nginx-cache)
-  - [Create a Backup](#create-a-backup)
-  - [Change PHP Version](#change-php-version)
+  - [Create a cloud account](#create-a-cloud-account)
+  - [Creating a development account](#creating-a-development-account)
+  - [Clear Nginx cache](#clear-nginx-cache)
+  - [Create a backup](#create-a-backup)
+  - [Change PHP version](#change-php-version)
   - [Resize a cloud account](#resize)
-  - [Toggle AutoScale](#toggle-autoscale)
+  - [Toggle autoscale](#toggle-autoscale)
   - [Toggle Varnish Caching](#toggle-varnish-caching)
-  - [Create Remote User password](#create-remote-user-password)
-  - [Add Pointer Domain](#add-pointer-domain)
-  - [Remove Pointer Domain](#remove-pointer-domain)*
+  - [Create remote user password](#create-remote-user-password)
+  - [Add pointer domain](#add-pointer-domain)
+  - [Remove pointer domain](#remove-pointer-domain)*
 
 - DELETE
-  - [Delete a Backup](#delete-a-backup)
+  - [Delete a backup](#delete-a-backup)
 
 ## GET
 
@@ -62,7 +62,7 @@ curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
 
 This will return a similar payload to [__Payload 3__](#payload3).
 
-### List All Backups
+### List all backups
 
 The `cloud-account` endpoint can be used to list all the backups for a given cloud account whether they were created with the APU or the UI.
 
@@ -245,7 +245,7 @@ __Payload XXX__
 }
 ```
 
-### List Pointer Domains
+### List pointer domains
 
 This endpoint can be used to retrieve the storage and bandwidth metrics associated with a given cloud account.
 
@@ -294,7 +294,7 @@ __Payload XXX__
 
 ## POST
 
-### Creating a Cloud Account
+### Create a Cloud Account
 
 Before creating a cloud account, the values of several of the parameters will have to be fetched. The required parameters for creating a cloud account are:
 
@@ -480,7 +480,7 @@ There are 5 possible states a cloud account can be in.
 | **creating** | The final state of the cloud account is stable. This is the signal that everything truly is 200 OK. |
 
 
-### Creating a Development Account
+### Creating a development account
 
  Development accounts are a special type of account tied to a cloud account. As the name implies, they are for development purposes and not to be used for production. Development accounts are clones of production accounts. They are created in a very similar call for creating the production cloud account.
 
@@ -515,7 +515,7 @@ curl '__URL__/extranet/cloud-account' \
 The payload returned from the command above is the same as [Payload 3](#payload3).
 
 
-### Clear Nginx Cache
+### Clear Nginx cache
 
 The `cloud-account` endpoint can be used to clear the Nginx cache on a given related service.
 
@@ -538,7 +538,7 @@ The payload returned from the command above is the same as [Payload 3](#payload3
 
 The clearing of the cache is an out-of-bandwidth process. A 200 OK return indicates that the switch has been set but it can take a few minutes for the process to complete.
 
-### Create a Backup
+### Create a backup
 
 The `cloud-account` endpoint can be used to create an account backup.
 
@@ -578,7 +578,7 @@ In most cases, `complete` will come back as **false**. To check the status of a 
 Once the backup is complete, the URL provided in `download_url` can be used to fetch the download.
 
 
-### Change PHP Version
+### Change PHP version
 
 This endpoint is used to change the version of PHP installed in the specified cloud account.
 The end point [get-php-versions](#get-the-list-of-php-versions) is used to retrieve a list of the valid versions of PHP that can be installed on a cloud account. This endpoint allows for the actual switching of the versions.
@@ -639,7 +639,7 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
 The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that the package_id will reflect the new package.
 
 
-### Toggle AutoScale
+### Toggle autoscale
 
 Autoscale is a feature whereby a cloud account can be automatically moved up to the next package size if it exceeds it's max allocated concurrent users. This prevents a maxed out cloud account from dropping users during peak times. If off, when a cloud account exceeeds it's max allocated concurrent users, additional users will be disconnected until others drop off. Autoscale can be turned on or off via this endpoint.
 
@@ -671,7 +671,7 @@ The payload that returns is identical to [__Payload 3__](#payload3). The differe
 },
 ```
 
-### Toggle Varnish Caching
+### Toggle Varnish caching
 
 All cloud accounts come with [Varnish](https://varnish-cache.org) installed. By default, Varnish caching is disabled. This endpoint allows for Varnish to be toggled on and off.
 
@@ -705,7 +705,7 @@ The payload that returns is identical to [__Payload 3__](#payload3). The differe
 ```
 
 
-# Create Remote User password
+### Create remote user password
 
 Cloud accounts can be accessed by users using either sftp or ssh. The endpoint [Get remote user name](#get-remote-user-name) can be used to retrieve the username assigned to the account for this purpose. Passwords are stored in encrypted datashares. They can only be accessed a single time. If a password has been forgotten then the only recourse is to generate a new password datahare. This endpoint will accomplish that. The password itself however, cannot be viewed via the API. Users will have to log into their account to retrieve the new password.
 
@@ -739,7 +739,7 @@ The payload that returns is identical to the payload returned for [Get remote us
 },
 ```
 
-### Add Pointer Domain
+### Add pointer domain
 
 This endpoint is used to add "Server Aliases", "301 Redirects" and "302 Redirects" to a cloud account.
 
@@ -767,7 +767,6 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
 ```
 
 The payload that returned is the name of the domain pointer added.
-
 
 ```
 {
