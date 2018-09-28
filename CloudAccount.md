@@ -28,7 +28,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Toggle AutoScale](#toggle-autoscale)
   - [Toggle Varnish Caching](#toggle-varnish-caching)
   - [Create Remote User password](#create-remote-user-password)
-  - [Add Pointer Domain](#add-pointer-domain)*
+  - [Add Pointer Domain](#add-pointer-domain)
   - [Remove Pointer Domain](#remove-pointer-domain)*
 
 - DELETE
@@ -718,7 +718,7 @@ __Parameters__
 
 
 ```shell
-curl '__URL__/extranet/cloud-account/1546' \
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -726,7 +726,7 @@ curl '__URL__/extranet/cloud-account/1546' \
 
 ```
 
-The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that in the options section of the payload, `nxcache_varnish` will reflect the change requested.
+The payload that returns is identical to the payload returned for [Get remote user name](#get-remote-user-name) when a password share is set.
 
 
 ```
@@ -738,6 +738,9 @@ The payload that returns is identical to [__Payload 3__](#payload3). The differe
   "autoscale_enabled": false
 },
 ```
+
+
+
 
 # DELETE
 
