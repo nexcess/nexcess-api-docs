@@ -41,7 +41,7 @@ To retrieve a list of all the cloud accounts associated with an account make a c
 
 __Example 1__
 ```shell
-curl -v '__URL__/cloud-account' \
+curl '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 ```
@@ -55,7 +55,7 @@ This endpoint allows for the retrieval of the details about a specified cloud ac
 
 __Example 2__
 ```shell
-curl -v '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 ```
@@ -68,7 +68,7 @@ The `cloud-account` endpoint can be used to list all the backups for a given clo
 
 __Example 3__
 ```shell
-curl -v '__URL__/cloud-account/CLOUD_ID/backup' \
+curl '__URL__/cloud-account/CLOUD_ID/backup' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
@@ -110,7 +110,7 @@ In the POST section there is an endpoint that will allow for the changing of the
 
 __Example XXX__
 ```shell
-curl -v '__URL/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
+curl '__URL/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -134,7 +134,7 @@ Each cloud account is assigned 'remote user name'. This is the user for ssh and 
 
 __Example XXX__
 ```shell
-curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-remote-username' \
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-remote-username' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -225,7 +225,7 @@ This endpoint is used to retrieve the storage and bandwidth metrics associated w
 
 __Example XXX__
 ```shell
-curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-usage-metrics' \
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-usage-metrics' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -251,7 +251,7 @@ This endpoint can be used to retrieve the storage and bandwidth metrics associat
 
 __Example XXX__
 ```shell
-curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -311,7 +311,7 @@ __Parameters__
 
 __Example 4__
 ```shell
-curl -v -X POST '__URL__/cloud-account' \
+curl '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -498,7 +498,7 @@ __Parameters__
 
 __Example 5__
 ```shell
-curl -v -X POST '__URL__/extranet/cloud-account' \
+curl '__URL__/extranet/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -528,10 +528,10 @@ __Parameters__
 __Example 6__
 ```shell
 curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
-   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-   -H 'Content-Type: application/json' \
-   -H 'Accept: application/json' \
-   --data-binary '{"_action": "purge-cache"}'
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "purge-cache"}'
 ```
 
 The payload returned from the command above is the same as [Payload 3](#payload3).
@@ -545,9 +545,9 @@ The `cloud-account` endpoint can be used to create an account backup.
 __Example 7__
 ```shell
 curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
-   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-   -H 'Content-Type: application/json' \
-   -H 'Accept: application/json'
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
 ```
 
 No parameters are available for this endpoint.
@@ -593,11 +593,11 @@ __Parameters__
 
 __Example XX__
 ```shell
-curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
-     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-     -H 'Content-Type: application/json' \
-     -H 'Accept: application/json' \
-     --data-binary '{"_action": "set-php-version", "php_version": "PHP_VERSION"}'
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "set-php-version", "php_version": "PHP_VERSION"}'
 ```
 
 
@@ -629,11 +629,11 @@ __Parameters__
 
 __Example XX__
 ```shell
-curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
-     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-     -H 'Content-Type: application/json' \
-     -H 'Accept: application/json' \
-     --data-binary '{"_action": "resize", "package_id": "NEW_PACKAGE_ID"}'
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "resize", "package_id": "NEW_PACKAGE_ID"}'
 ```
 
 The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that the package_id will reflect the new package.
@@ -651,11 +651,11 @@ __Parameters__
 | `autoscale` | `true` or `false` | YES |
 
 ```shell
-curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
-     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-     -H 'Content-Type: application/json' \
-     -H 'Accept: application/json' \
-     --data-binary '{"_action": "set-autoscale", "autoscale": false}'
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "set-autoscale", "autoscale": false}'
 ```
 
 The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that in the options section of the payload, `autoscale_enabled` will reflect the change requested.
@@ -683,11 +683,11 @@ __Parameters__
 | `enabled` | `true` or `false` | YES |
 
 ```shell
-curl -v -X POST '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
-     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-     -H 'Content-Type: application/json' \
-     -H 'Accept: application/json' \
-     --data-binary '{"_action": "set-varnish","enabled": true}'
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "set-varnish","enabled": true}'
 
 ```
 
@@ -718,11 +718,11 @@ __Parameters__
 
 
 ```shell
-curl -v -X POST '__URL__/extranet/cloud-account/1546' \
-     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-     -H 'Content-Type: application/json' \
-     -H 'Accept: application/json' \
-     --data-binary '{"_action": "set-remote-password"}'
+curl '__URL__/extranet/cloud-account/1546' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "set-remote-password"}'
 
 ```
 
@@ -748,9 +748,9 @@ The `cloud-account` endpoint can be used to delete backups created either via th
 __Example 8__
 ```shell
 curl -X DELETE '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup/URL_ENCODED_BACKUP_FILENAME' \
-   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-   -H 'Content-Type: application/json' \
-   -H 'Accept: application/json'
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
 ```
 
 Each entity returned in the [List All Backups](#list-all-backups) payload each has a `file_name` property. This is a URL Encoded version of the file name and is safe to use as it is in the DELETE call. Append the file name to the backup URL and then call with the DELETE verb.
