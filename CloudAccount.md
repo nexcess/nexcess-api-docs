@@ -27,7 +27,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Resize a cloud account](#resize)
   - [Toggle AutoScale](#toggle-autoscale)
   - [Toggle Varnish Caching](#toggle-varnish-caching)
-  - [Create Remote User password](#create-remote-user-password)*
+  - [Create Remote User password](#create-remote-user-password)
   - [Add Pointer Domain](#add-pointer-domain)*
   - [Remove Pointer Domain](#remove-pointer-domain)*
 
@@ -704,6 +704,40 @@ The payload that returns is identical to [__Payload 3__](#payload3). The differe
 },
 ```
 
+
+# Create Remote User password
+
+Cloud accounts can be accessed by users using either sftp or ssh. The endpoint [Get remote user name](#get-remote-user-name) can be used to retrieve the username assigned to the account for this purpose. Passwords are stored in encrypted datashares. They can only be accessed a single time. If a password has been forgotten then the only recourse is to generate a new password datahare. This endpoint will accomplish that. The password itself however, cannot be viewed via the API. Users will have to log into their account to retrieve the new password.
+
+**WARNING**: Calling this endpoint and creating a new password will  immediately invalidate the previous password.
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `_action` | `set-set-remote-password` | YES |
+
+
+```shell
+curl -v -X POST '__URL__/extranet/cloud-account/1546' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json' \
+     --data-binary '{"_action": "set-remote-password"}'
+
+```
+
+The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that in the options section of the payload, `nxcache_varnish` will reflect the change requested.
+
+
+```
+"options": {
+  "nxcache_nocache": false,
+  "nxcache_varnish": false,
+  "nxcache_varnish_static": false,
+  "nxcache_varnish_ttl": 120,
+  "autoscale_enabled": false
+},
+```
 
 # DELETE
 
