@@ -799,7 +799,7 @@ The payload that returned is the name of the domain pointer removed.
 }
 ```
 
-If a domain is specified that does not eist as a pointer on the given cloud account a 422 Invalid Domain will be returned.
+If a domain is specified that does not exist as a pointer on the given cloud account a **422 Invalid Domain** will be returned.
 
 # DELETE
 
