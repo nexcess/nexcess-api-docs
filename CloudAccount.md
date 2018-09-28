@@ -108,7 +108,7 @@ __Payload 1__
 
 In the POST section there is an endpoint that will allow for the changing of the version of PHP installed on a given cloud account. Not all versions of PHP are supported. In most cases, the last four or five minor versions are available. The actual version installed will be the latest patch level released for the version chosen. (e.g. if 7.1 is chosen then 7.1.22 will be installed.)
 
-__Example XXX__
+__Example 4__
 ```shell
 curl '__URL/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -132,7 +132,7 @@ __Payload XXX__
 
 Each cloud account is assigned 'remote user name'. This is the user for ssh and sftp. This endpoint allows for the retrieval of that user name.
 
-__Example XXX__
+__Example 5__
 ```shell
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-remote-username' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -223,7 +223,7 @@ If the password has already been viewed but was not recorded, it cannot be retri
 
 This endpoint is used to retrieve the storage and bandwidth metrics associated with a given cloud account.
 
-__Example XXX__
+__Example 6__
 ```shell
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-usage-metrics' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -249,7 +249,7 @@ __Payload XXX__
 
 This endpoint can be used to retrieve the storage and bandwidth metrics associated with a given cloud account.
 
-__Example XXX__
+__Example 7__
 ```shell
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -309,7 +309,7 @@ __Parameters__
 | `install_app` | "ON" or "OFF".<br >Tells the system whether or not to actually install the application requested or to only prepare the server environment.  | NO |
 
 
-__Example 4__
+__Example 8__
 ```shell
 curl '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -496,7 +496,7 @@ __Parameters__
 | `scrub_account` | `purge-cache` | YES |
 | `_action` | If set to true then data in the database will be anonymized. This is an optional parameter. | NO |
 
-__Example 5__
+__Example 9__
 ```shell
 curl '__URL__/extranet/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -525,7 +525,7 @@ __Parameters__
 | :--- | :--- | :---: |
 | `_action` | `purge-cache` | YES |
 
-__Example 6__
+__Example 10__
 ```shell
 curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -542,7 +542,7 @@ The clearing of the cache is an out-of-bandwidth process. A 200 OK return indica
 
 The `cloud-account` endpoint can be used to create an account backup.
 
-__Example 7__
+__Example 11__
 ```shell
 curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -591,7 +591,7 @@ __Parameters__
 | `php_version` | One of the valid PHP versions listed by the [Get available versions of PHP](#get-the-list-of-php-versions) endpoint. | YES |
 
 
-__Example XX__
+__Example 12__
 ```shell
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -627,7 +627,7 @@ __Parameters__
 | `package_id` | the Nexcess id for the new server package to size the cloud account to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
 
 
-__Example XX__
+__Example 13__
 ```shell
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -650,6 +650,8 @@ __Parameters__
 | `_action` | `set-autoscale` | YES |
 | `autoscale` | `true` or `false` | YES |
 
+
+__Example 14__
 ```shell
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -682,6 +684,8 @@ __Parameters__
 | `_action` | `set-varnish` | YES |
 | `enabled` | `true` or `false` | YES |
 
+
+__Example 15__
 ```shell
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -717,6 +721,7 @@ __Parameters__
 | `_action` | `set-set-remote-password` | YES |
 
 
+__Example 16__
 ```shell
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -752,7 +757,7 @@ __Parameters__
 | `domain` | Any valid domain name  | YES |
 
 
-
+__Example 17__
 ```shell
 # Add Pointer Domain
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
@@ -781,7 +786,7 @@ __Parameters__
 | `_action` | `remove-pointer-domain` | YES |
 | `domain` | The domain to be removed  | YES |
 
-
+__Example 18__
 ```shell
 # Add Pointer Domain
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
@@ -807,7 +812,7 @@ If a domain is specified that does not exist as a pointer on the given cloud acc
 
 The `cloud-account` endpoint can be used to delete backups created either via the API or the UI.
 
-__Example 8__
+__Example 19__
 ```shell
 curl -X DELETE '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup/URL_ENCODED_BACKUP_FILENAME' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
