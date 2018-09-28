@@ -37,7 +37,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
 ## GET
 
 ### Retrieve list of cloud accounts
-To retrieve a list of all the cloud accounts associated with an account make a call to `/cloud-account` with your API key.
+To retrieve a list of all the cloud accounts associated with an account make a call to `/cloud-account` with an API key.
 
 __Example 1__
 ```shell
@@ -46,20 +46,21 @@ curl -v '__URL__/cloud-account' \
   -H 'Accept: application/json'
 ```
 
-This will return a very verbose JSON payload that will list the details of all of the cloud accounts associated with your account.
+This will return a very verbose JSON payload that will list the details of all of the cloud accounts associated with the the account.
 
 ### Retrieve information on a specific cloud account and related service
 
-To retrieve the details of a specific cloud account, you and append the `cloud_id`  to this endpoint. In the payload returned in the above command, cloud_id is found in each cloud account object in `cloud_account->account_id`.
+This endpoint allows for the retrieval of the details about a specified cloud account. The value passed in for `CLOUD_ACCOUNT_ID` should match one of the `account_id` values returned from   - [Retrieve a list of cloud accounts](#retrieve-list-of-cloud-accounts).
+
 
 __Example 2__
 ```shell
-curl -v '__URL__/cloud-account/CLOUD_ID' \
+curl -v '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 ```
 
-This will return a similar payload to the first GET but it will be limited to a single cloud_account. This is how you check the state of a cloud account onces you have issued the POST described below. See [__Payload 3__](#payload3) for an example output of this command.
+This will return a similar payload to [__Payload 3__](#payload3).
 
 ### List All Backups
 
@@ -109,7 +110,7 @@ In the POST section there is an endpoint that will allow for the changing of the
 
 __Example XXX__
 ```shell
-curl -v '__URL/extranet/cloud-account/1521/get-php-versions' \
+curl -v '__URL/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -256,7 +257,7 @@ curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
      -H 'Accept: application/json'
 ```
 
-The payload returned contains all of the pointer domains for the given cloud account. After the pointer domains is a list of the types of pointer domains that can be set in Nocworx. The types are important when you are ready to [add a pointer domain](#add-pointer-domain).
+The payload returned contains all of the pointer domains for the given cloud account. After the pointer domains is a list of the types of pointer domains that can be set in Nocworx. These types play a role when [adding a pointer domain](#add-pointer-domain).
 
 __Payload XXX__
 ```json
@@ -302,10 +303,10 @@ __Parameters__
 | Name | Description | Required |
 | :--- | :--- | :---: |
 |`domain`| The domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.| YES |
-|`app_id`|the Nexcess id for the application you want to install See [Applications](Applications.md) to get a list of the available `app_id` values. | YES |
-| `package_id` | the Nexcess id for the server package you want to spin up. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
-| `cloud_id` | The Nexcess id for the cloud (data center) you want to spin up your new account within.  See '[Listing Clouds](Clouds.md)' to get a list of available `cloud_id` values. | YES |
-| `install_app` | tells the system whether or not to actually install the application you requested or to only prepare the server environment for you to install the application later. | NO |
+|`app_id`|the Nexcess id for the application to be install See [Applications](Applications.md) to get a list of the available `app_id` values. | YES |
+| `package_id` | the Nexcess id for the server package to be spun up. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
+| `cloud_id` | The Nexcess id for the cloud (data center) to spin up the new account in.  See '[Listing Clouds](Clouds.md)' to get a list of available `cloud_id` values. | YES |
+| `install_app` | tells the system whether or not to actually install the application requested or to only prepare the server environment.  | NO |
 
 
 __Example 4__
@@ -323,7 +324,7 @@ curl -v -X POST '__URL__/cloud-account' \
 }'
 ```
 
-This will return to you a very large payload that will give details about both the cloud account that is being created, and the service that it belongs to. It is important to note that the API queues the job to be done, it does not wait until the job is complete. Use the value returned in in the `account_id` [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service) endpoint to poll for updates. As soon as `state` returns as **stable**, the cloud account is ready to use.
+This will return a very large payload that will give details about both the cloud account that is being created, and the service that it belongs to. It is important to note that the API queues the job to be done, it does not wait until the job is complete. Use the value returned in in the `account_id` [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service) endpoint to poll for updates. As soon as `state` returns as **stable**, the cloud account is ready to use.
 
 
 <a name="payload3">__Payload 3__</a>
@@ -466,17 +467,17 @@ This will return to you a very large payload that will give details about both t
 }
 ```
 
-Creating a cloud account is an out-of-bandwidth command. Receiving a 200 OK for a POST only means that the system has accepted your request. In the payload returned is the cloud account id that you can use as described above to check for the state of your cloud account.
+Creating a cloud account is an out-of-bandwidth command. Receiving a 200 OK for a POST only means that the system has accepted the request. In the payload returned is the cloud account id that can be used as described above to check for the state of the cloud account.
 
-There are 5 possible states your cloud can be in.
+There are 5 possible states a cloud account can be in.
 
 | State | Description |
 | :--- | :--- |
 | **creating** | The initial state. The cloud account will stay in this state until the initial creation of the cloud account has completed. |
 | **destroying** | The state of a machine that has been required to be destroyed and approved. It is in this state until the destroy process is complete. After this is complete the API will return 404 on all future calls to `/cloud-host/cloud_id` |
 | **failure** | If for some reason the creating process did not complete successfully, the cloud account will be assigned the state of failure. |
-| **installing** | Once creating is complete, if you have requested that an application be installed, the cloud account will be put in the installing state. It will remain in this state until the application is successfully installed. |
-| **creating** | The final state of the cloud account is stable. This is your signal that everything truly is 200 OK. |
+| **installing** | Once creating is complete, if `install_app` was set to `on`, the application be installed. The cloud account will be put in the **installing** state. It will remain in this state until the application is successfully installed. |
+| **creating** | The final state of the cloud account is stable. This is the signal that everything truly is 200 OK. |
 
 
 ### Creating a Development Account
@@ -549,7 +550,7 @@ curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
    -H 'Accept: application/json'
 ```
 
-No parameters are available for this endpoint, however you do have to put the cloud account's ID in the URL.
+No parameters are available for this endpoint.
 
 __Payload 5__
 ```json
@@ -565,16 +566,16 @@ __Payload 5__
 }
 ```
 
-The payload returned in most cases describes the backup that will be created. Backups are an out-of-bandwidth process in almost all cases. In a very few cases, the backup will complete before the API returns. In these cases - very small sites or no files/DB ot be backed up - you will see that `complete` comes back as **true**.
+The payload returned in most cases describes the backup that will be created. Backups are an out-of-bandwidth process in almost all cases. In a very few cases, the backup will complete before the API returns. In these cases - very small sites or no files/DB to be backed up - `complete` will be returned as **true**.
 
-In most cases, `complete` will come back as **false**. To check the status of your backup:
+In most cases, `complete` will come back as **false**. To check the status of a backup:
 
 - Save off the file name
 - Call [List All Backups](#list-all-backups)
-- Iterate over the list of backups to find the one with your filename
+- Iterate over the list of backups to find the one with the filename
 - Check the status of `complete`
 
-Once your backup is complete, you can use the URL provided in `download_url` to fetch the download.
+Once the backup is complete, the URL provided in `download_url` can be used to fetch the download.
 
 
 ### Change PHP Version
@@ -623,7 +624,7 @@ __Parameters__
 | Name | Description | Required |
 | :--- | :--- | :---: |
 | `_action` | `resize` | YES |
-| `package_id` | the Nexcess id for the server package you want to size to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
+| `package_id` | the Nexcess id for the new server package to size the cloud account to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
 
 
 __Example XX__
@@ -718,7 +719,7 @@ curl -X DELETE '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup/URL_ENCODED_BACKUP
    -H 'Accept: application/json'
 ```
 
-When you [List All Backups](#list-all-backups) each backup entry has a `file_name` property. This is a URL Encoded version of the file name and is safe to use as it is in the DELETE call. You need to append the file name to the backup URL and then call with the DELETE verb.
+Each entity returned in the [List All Backups](#list-all-backups) payload each has a `file_name` property. This is a URL Encoded version of the file name and is safe to use as it is in the DELETE call. Append the file name to the backup URL and then call with the DELETE verb.
 
 DELETing a backup will not return any payload. It will however return a 200 OK upon success.
 
