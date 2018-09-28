@@ -748,10 +748,7 @@ __Parameters__
 | Name | Description | Required |
 | :--- | :--- | :---: |
 | `_action` | `pointer-domain` | YES |
-| `type` | One of three possible values:
-- redir_type_301
-- redir_type_302
-- redir_type_alias
+| `type` | One of three possible values: <br>- redir_type_301<br>- redir_type_302<br>- redir_type_alias
  | YES |
 | `domain` | Any valid domain name  | YES |
 
