@@ -60,7 +60,7 @@ curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Accept: application/json'
 ```
 
-This will return a similar payload to [__Payload 3__](#payload3).
+This will return a similar payload to [Payload 7](#payload7).
 
 ### List all backups
 
@@ -118,7 +118,7 @@ curl '__URL/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
 
 The payload returned is an array of version numbers to choose from. These are the only versions available for install.
 
-__Payload XXX__
+__Payload 2__
 ```json
 [
   "5.6",
@@ -142,7 +142,7 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-remote-username' \
 
 There are two possible payloads that can be returned from this endpoint. The difference between the two is whether or not the cloud account has an un-viewed password for the remote user. All passwords are stored as encrypted 'datashares'. In the case of the password for the remote user, it can only be viewed once. Once viewed, it is deleted. If the password for the remote user has already been viewed the this is the payload that will be returned.
 
-__Payload XXX__
+__Payload 3__
 ```json
 {
   "username": "xxxxxxxxxx"
@@ -151,7 +151,7 @@ __Payload XXX__
 
 If the remote user has an un-viewed password then the details of the password datashare - not including the password itself - are appended to the payload.
 
-__Payload XXX__
+__Payload 4__
 ```json
 {
   "username": "xxxxxxxxxx",
@@ -233,7 +233,7 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-usage-metrics' \
 
 The payload that returns from this call will look like this.
 
-__Payload XXX__
+__Payload 5__
 ```json
 {
   "storage_gb": 5,
@@ -259,7 +259,7 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
 
 The payload returned contains all of the pointer domains for the given cloud account. After the pointer domains is a list of the types of pointer domains that can be set. These types play a role when [adding a pointer domain](#add-pointer-domain).
 
-__Payload XXX__
+__Payload 6__
 ```json
 {
   "pointers": [
@@ -327,7 +327,7 @@ curl '__URL__/cloud-account' \
 This will return a payload that will give details about both the cloud account that is being created, and the service that it belongs to. It is important to note that the API queues the job to be done, it does not wait until the job is complete. Use the value returned in in the `account_id` [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service) endpoint to poll for updates. As soon as `state` returns as **stable**, the cloud account is ready to use.
 
 
-<a name="payload3">__Payload 3__</a>
+<a name="payload7">__Payload 7__</a>
 ```json
 {
   "id": "SERVICE_ID",
@@ -512,7 +512,7 @@ curl '__URL__/extranet/cloud-account' \
   }'
 ```
 
-The payload returned from the command above is the same as [Payload 3](#payload3).
+The payload returned from the command above is the same as [Payload 7](#payload7).
 
 
 ### Clear Nginx cache
@@ -534,7 +534,7 @@ curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   --data-binary '{"_action": "purge-cache"}'
 ```
 
-The payload returned from the command above is the same as [Payload 3](#payload3).
+The payload returned from the command above is the same as [Payload 7](#payload7).
 
 The clearing of the cache is an out-of-bandwidth process. A 200 OK return indicates that the switch has been set but it can take a few minutes for the process to complete.
 
@@ -552,7 +552,7 @@ curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
 
 No parameters are available for this endpoint.
 
-__Payload 5__
+__Payload 8__
 ```json
 {
   "filepath": "/home/a6fb203a/demo2.example.com/iworx-backup/demo2.example.com+full-single-Sep.18.2018-16.15.01.tgz",
@@ -601,9 +601,9 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
 ```
 
 
-The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that in the environment section, the requested version of PHP will be listed.
+The payload that returns is identical to [Payload 7](#payload7). The difference will be that in the environment section, the requested version of PHP will be listed.
 
-__Payload XX__
+__Payload 9__
 ```
 "environment": {
   "software": {
@@ -636,7 +636,7 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
   --data-binary '{"_action": "resize", "package_id": "NEW_PACKAGE_ID"}'
 ```
 
-The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that the package_id will reflect the new package.
+The payload that returns is identical to [Payload 7](#payload7). The difference will be that the package_id will reflect the new package.
 
 
 ### Toggle autoscale
@@ -660,9 +660,9 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
   --data-binary '{"_action": "set-autoscale", "autoscale": false}'
 ```
 
-The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that in the options section of the payload, `autoscale_enabled` will reflect the change requested.
+The payload that returns is identical to [Payload 7](#payload7). The difference will be that in the options section of the payload, `autoscale_enabled` will reflect the change requested.
 
-
+__Payload 10__
 ```
 "options": {
   "nxcache_nocache": false,
@@ -695,9 +695,9 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
 
 ```
 
-The payload that returns is identical to [__Payload 3__](#payload3). The difference will be that in the options section of the payload, `nxcache_varnish` will reflect the change requested.
+The payload that returns is identical to [Payload 7](#payload7). The difference will be that in the options section of the payload, `nxcache_varnish` will reflect the change requested.
 
-
+__Payload 11__
 ```
 "options": {
   "nxcache_nocache": false,
@@ -733,7 +733,7 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
 
 The payload that returns is identical to the payload returned for [Get remote user name](#get-remote-user-name) when a password share is set.
 
-
+__Payload 12__
 ```
 "options": {
   "nxcache_nocache": false,
@@ -769,6 +769,7 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
 
 The payload that returned is the name of the domain pointer added.
 
+__Payload 13__
 ```
 {
   "domain": "pointerdomain.example.com"
@@ -798,6 +799,7 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
 
 The payload that returned is the name of the domain pointer removed.
 
+__Payload 4__
 ```
 {
   "domain": "pointerdomain.example.com"
