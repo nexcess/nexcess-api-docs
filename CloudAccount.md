@@ -297,25 +297,6 @@ __Payload XXX__
 
 Before creating a cloud account, the values of several of the parameters will have to be fetched. The required parameters for creating a cloud account are:
 
-- The domain name that will be attached to this service
-- The application we want to install
-- The size of the server we want to install it on
-- The cloud you want your account on
-- Whether you want the system to auto-install the application for you.
-
-Here is a sample payload
-
-__Payload 2__
-```json
-{
-  "domain": "example.com",
-  "app_id": "33",
-  "package_id": "710",
-  "cloud_id": "1",
-  "install_app": "on"
-}
-```
-
 __Parameters__
 
 | Name | Description | Required |
@@ -342,7 +323,8 @@ curl -v -X POST '__URL__/cloud-account' \
 }'
 ```
 
-This will return to you a very large payload that will give you details about both the cloud account that is being created, and the service that it belongs to. It is important to note that the API queues the job to be done, it does not wait until the job is complete.
+This will return to you a very large payload that will give details about both the cloud account that is being created, and the service that it belongs to. It is important to note that the API queues the job to be done, it does not wait until the job is complete. Use the value returned in in the `account_id` [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service) endpoint to poll for updates. As soon as `state` returns as **stable**, the cloud account is ready to use.
+
 
 <a name="payload3">__Payload 3__</a>
 ```json
@@ -488,35 +470,30 @@ Creating a cloud account is an out-of-bandwidth command. Receiving a 200 OK for 
 
 There are 5 possible states your cloud can be in.
 
-- **creating** This is the initial state. The cloud account will stay in this state until the initial creation of the clopud account has completed.
-- **destroying** This is the state of a machine that has been required to be destroyed and approved. It is in htis state until the destroy process is complete. After this is complete the API will return 404 on all future calls to `/cloud-host/cloud_id`
-- **failure** If for some reason the creating process did. not complete successfully, the cloud account will be assigned the state of failure.
-- **installing** Once creating is complete, if you have requested that an application be installed, the cloud account will be put in the installing state. It will remain in this state until the application is successfully installed.
-- **stable** The final state of the cloud account is stable. This is your signal that everything truly is 200 OK.
+| State | Description |
+| :--- | :--- |
+| **creating** | The initial state. The cloud account will stay in this state until the initial creation of the cloud account has completed. |
+| **destroying** | The state of a machine that has been required to be destroyed and approved. It is in this state until the destroy process is complete. After this is complete the API will return 404 on all future calls to `/cloud-host/cloud_id` |
+| **failure** | If for some reason the creating process did not complete successfully, the cloud account will be assigned the state of failure. |
+| **installing** | Once creating is complete, if you have requested that an application be installed, the cloud account will be put in the installing state. It will remain in this state until the application is successfully installed. |
+| **creating** | The final state of the cloud account is stable. This is your signal that everything truly is 200 OK. |
 
 
 ### Creating a Development Account
 
  Development accounts are a special type of account tied to a cloud account. As the name implies, they are for development purposes and not to be used for production. Development accounts are clones of production accounts. They are created in a very similar call for creating the production cloud account.
 
-__Payload 4__
-```json
-{
-  "domain": "development.demo2.example.com",
-  "copy_account": "1",
-  "scrub_account": "1",
-  "package_id": "713",
-  "ref_service_id": "58692",
-  "ref_type": "development"
-}
-```
 
-- `domain` is domain passed in has to be a subdomain of the production cloud account's domain. This is a required parameter.
-- `package_id` This is the package to create and install the development environment within. This is a required parameter.
-- `ref_service_id` This is the service_id associated with the parent cloud account. This is a required parameter.
-- `ref_type` is the type of account being created. When creating a development account, specify **development**. This is a required parameter.
-- `copy_account` is a boolean flag. If set to true then the environment of the production cloud account will be copied into the development environment. This is an optional parameter. If not present, false is assumed.
-- `scrub_account` is a boolean flag. If set to true then data in the database will be anonymized. This is an optional parameter. If not present, false is assumed.
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `domain` | Has to be a subdomain of the production cloud account's domain. | YES |
+| `package_id` | The service_id associated with the parent cloud account. | YES |
+| `ref_type` | `development` | YES |
+| `copy_account` | If set to true then the environment of the production cloud account will be copied into the development environment. | NO |
+| `scrub_account` | `purge-cache` | YES |
+| `_action` | If set to true then data in the database will be anonymized. This is an optional parameter. | NO |
 
 __Example 5__
 ```shell
@@ -572,7 +549,7 @@ curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
    -H 'Accept: application/json'
 ```
 
-No parameters are available for this endpoint, however you do have to put the cloud account's ID in the URI.
+No parameters are available for this endpoint, however you do have to put the cloud account's ID in the URL.
 
 __Payload 5__
 ```json
