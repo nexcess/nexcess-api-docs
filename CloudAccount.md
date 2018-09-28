@@ -29,7 +29,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Toggle Varnish Caching](#toggle-varnish-caching)
   - [Create remote user password](#create-remote-user-password)
   - [Add pointer domain](#add-pointer-domain)
-  - [Remove pointer domain](#remove-pointer-domain)*
+  - [Remove pointer domain](#remove-pointer-domain)
 
 - DELETE
   - [Delete a backup](#delete-a-backup)
@@ -774,7 +774,36 @@ The payload that returned is the name of the domain pointer added.
 }
 ```
 
+### Remove pointer domain
 
+This endpoint is used to remove pointer domain names from a cloud account.
+
+__Parameters__
+
+| Name | Description | Required |
+| :--- | :--- | :---: |
+| `_action` | `remove-pointer-domain` | YES |
+| `domain` | The domain to be removed  | YES |
+
+
+```shell
+# Add Pointer Domain
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "remove-pointer-domain", "domain":"pointerdomain.example.com"}'
+```
+
+The payload that returned is the name of the domain pointer removed.
+
+```
+{
+  "domain": "pointerdomain.example.com"
+}
+```
+
+If a domain is specified that does not eist as a pointer on the given cloud account a 422 Invalid Domain will be returned.
 
 # DELETE
 
