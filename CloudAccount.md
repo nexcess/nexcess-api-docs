@@ -164,8 +164,8 @@ __Payload 4__
     },
     "type": "ssh-password",
     "uuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "share_date": CLOUD_ACCOUNT_ID058763,
-    "expiration_date": CLOUD_ACCOUNT_ID404363,
+    "share_date": xxxxxxxxxxx,
+    "expiration_date": xxxxxxxxxx,
     "uses": 0,
     "max_uses": 1,
     "owner": "virt-guest-cloudaccount",
@@ -300,13 +300,13 @@ Before creating a cloud account, the values of several of the parameters will ha
 
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
-|`domain`| The domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.| YES |
-|`app_id`|the system id for the application to be install See [Applications](Applications.md) to get a list of the available `app_id` values. | YES |
-| `package_id` | the system id for the server package to be spun up. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
-| `cloud_id` | The system id for the cloud (data center) to spin up the new account in.  See '[Listing Clouds](Clouds.md)' to get a list of available `cloud_id` values. | YES |
-| `install_app` | "ON" or "OFF".<br >Tells the system whether or not to actually install the application requested or to only prepare the server environment.  | NO |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`domain`| The domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.| String | YES |
+|`app_id`|the system id for the application to be install See [Applications](Applications.md) to get a list of the available `app_id` values. | Integer | YES |
+| `package_id` | the system id for the server package to be spun up. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | Integer | YES |
+| `cloud_id` | The system id for the cloud (data center) to spin up the new account in.  See '[Listing Clouds](Clouds.md)' to get a list of available `cloud_id` values. | Integer | YES |
+| `install_app` | "ON" or "OFF" (TRUE or FALSE).<br >Tells the system whether or not to actually install the application requested or to only prepare the server environment.  | Boolean | NO |
 
 
 __Example 8__
@@ -477,7 +477,7 @@ There are 5 possible states a cloud account can be in.
 | **destroying** | The state of a machine that has been required to be destroyed and approved. It is in this state until the destroy process is complete. After this is complete the API will return 404 on all future calls to `/cloud-host/cloud_id` |
 | **failure** | If for some reason the creating process did not complete successfully, the cloud account will be assigned the state of failure. |
 | **installing** | Once creating is complete, if `install_app` was set to `on`, the application be installed. The cloud account will be put in the **installing** state. It will remain in this state until the application is successfully installed. |
-| **creating** | The final state of the cloud account is stable. This is the signal that everything truly is 200 OK. |
+| **stable** | The final state of the cloud account is stable. This is the signal that everything truly is 200 OK. |
 
 
 ### Creating a development account
@@ -487,14 +487,14 @@ There are 5 possible states a cloud account can be in.
 
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
-| `domain` | Has to be a sub-domain of the production cloud account's domain. | YES |
-| `package_id` | The service_id associated with the parent cloud account. | YES |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `domain` | Has to be a sub-domain of the production cloud account's domain. | String | YES |
+| `package_id` | The service_id associated with the parent cloud account. | Integer | YES |
 | `ref_type` | `development` | YES |
-| `copy_account` | If set to true then the environment of the production cloud account will be copied into the development environment. | NO |
-| `scrub_account` | `purge-cache` | YES |
-| `_action` | If set to true then data in the database will be anonymized. This is an optional parameter. | NO |
+| `copy_account` | If set to true then the environment of the production cloud account will be copied into the development environment. | Boolean | NO |
+| `scrub_account` | `purge-cache` | Boolean | YES |
+| `_action` | If set to true then data in the database will be anonymized. This is an optional parameter. | Boolean | NO |
 
 __Example 9__
 ```shell
@@ -521,9 +521,9 @@ The `cloud-account` endpoint can be used to clear the Nginx cache on a given rel
 
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
-| `_action` | `purge-cache` | YES |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `purge-cache` | String | YES |
 
 __Example 10__
 ```shell
@@ -570,9 +570,9 @@ The payload returned in most cases describes the backup that will be created. Ba
 
 In most cases, `complete` will come back as **false**. To check the status of a backup:
 
-- Save off the file name
+- Copy the file name
 - Call [List All Backups](#list-all-backups)
-- Iterate over the list of backups to find the one with the filename
+- Iterate over the list of backups to find the one with the filename captured above
 - Check the status of `complete`
 
 Once the backup is complete, the URL provided in `download_url` can be used to fetch the backup file.
@@ -585,10 +585,10 @@ The end point [get-php-versions](#get-the-list-of-php-versions) is used to retri
 
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
-| `_action` | `set-php-version` | YES |
-| `php_version` | One of the valid PHP versions listed by the [Get available versions of PHP](#get-the-list-of-php-versions) endpoint. | YES |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `set-php-version` | String | YES |
+| `php_version` | One of the valid PHP versions listed by the [Get available versions of PHP](#get-the-list-of-php-versions) endpoint. | String | YES |
 
 
 __Example 12__
@@ -621,10 +621,10 @@ A cloud account can be resized both up and down. If the cloud account is a share
 
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
 | `_action` | `resize` | YES |
-| `package_id` | the Nexcess id for the new server package to size the cloud account to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
+| `package_id` | the Nexcess id for the new server package to size the cloud account to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | Integer | YES |
 
 
 __Example 13__
@@ -645,10 +645,10 @@ Autoscale is a feature whereby a cloud account can be automatically moved up to 
 
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
-| `_action` | `set-autoscale` | YES |
-| `autoscale` | `true` or `false` | YES |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `set-autoscale` | String |YES |
+| `autoscale` | `true` or `false` | Boolean | YES |
 
 
 __Example 14__
@@ -679,10 +679,10 @@ All cloud accounts come with [Varnish](https://varnish-cache.org) installed. By 
 
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
-| `_action` | `set-varnish` | YES |
-| `enabled` | `true` or `false` | YES |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `set-varnish` | String | YES |
+| `enabled` | `true` or `false` | Boolean | YES |
 
 
 __Example 15__
@@ -716,9 +716,9 @@ Cloud accounts can be accessed by users using either sftp or ssh. The endpoint [
 **WARNING**: Calling this endpoint and creating a new password will  immediately invalidate the previous password.
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
-| `_action` | `set-set-remote-password` | YES |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `set-set-remote-password` | String | YES |
 
 
 __Example 16__
@@ -750,11 +750,11 @@ This endpoint is used to add "Server Aliases", "301 Redirects" and "302 Redirect
 
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
-| `_action` | `pointer-domain` | YES |
-| `type` | One of three possible values: <br>- redir_type_301<br>- redir_type_302<br>- redir_type_alias | YES |
-| `domain` | Any valid domain name  | YES |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `pointer-domain` | String | YES |
+| `type` | One of three possible values: <br>- redir_type_301<br>- redir_type_302<br>- redir_type_alias |  String | YES |
+| `domain` | Any valid domain name  | String | YES |
 
 
 __Example 17__
@@ -782,10 +782,10 @@ This endpoint is used to remove pointer domain names from a cloud account.
 
 __Parameters__
 
-| Name | Description | Required |
-| :--- | :--- | :---: |
-| `_action` | `remove-pointer-domain` | YES |
-| `domain` | The domain to be removed  | YES |
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `remove-pointer-domain` | String | YES |
+| `domain` | The domain to be removed  | String | YES |
 
 __Example 18__
 ```shell
