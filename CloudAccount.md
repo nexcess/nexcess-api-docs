@@ -491,7 +491,7 @@ __Parameters__
 | :--- | :--- | :---: | :---: |
 | `domain` | Has to be a sub-domain of the production cloud account's domain. | String | YES |
 | `package_id` | The service_id associated with the parent cloud account. | Integer | YES |
-| `ref_type` | `development` | YES |
+| `ref_type` | `development` | String | YES |
 | `copy_account` | If set to true then the environment of the production cloud account will be copied into the development environment. | Boolean | NO |
 | `scrub_account` | `purge-cache` | Boolean | YES |
 | `_action` | If set to true then data in the database will be anonymized. This is an optional parameter. | Boolean | NO |
@@ -714,6 +714,7 @@ __Payload 11__
 Cloud accounts can be accessed by users using either sftp or ssh. The endpoint [Get remote user name](#get-remote-user-name) can be used to retrieve the user name assigned to the account for this purpose. Passwords are stored in encrypted datashares. They can only be accessed a single time. If a password has been forgotten then the only recourse is to generate a new password datashare. This endpoint will accomplish that. The password itself however, cannot be viewed via the API. Users will have to log into their account to retrieve the new password.
 
 **WARNING**: Calling this endpoint and creating a new password will  immediately invalidate the previous password.
+
 __Parameters__
 
 | Name | Description | Type | Required |
