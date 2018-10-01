@@ -623,7 +623,7 @@ __Parameters__
 
 | Name | Description | Type | Required |
 | :--- | :--- | :---: | :---: |
-| `_action` | `resize` | YES |
+| `_action` | `resize` | String | YES |
 | `package_id` | the Nexcess id for the new server package to size the cloud account to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | Integer | YES |
 
 
