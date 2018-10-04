@@ -10,13 +10,157 @@ The `/service` endpoint allows you to query and modify some of the attributes of
 **Accepted Verbs**
 
 - GET
-  - [Import Certificate](#import-certificate)
+  - [List all Certificates](#list-all-certificates)
+  - [Retrieve a Certificate](#retrieve-a-certificate)
 - POST
+  - [Import Certificate](#import-certificate)
 - Delete
   - [Delete Certificate](#delete-certificate)
 
 ## GET
 
+### List all Certificates
+
+To retrieve all the information about all the certificates associated with an account, GET the `ssl-cert` endpoint without specifying a specific CERT_ID.
+
+```shell
+curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+This will return a payload contains all of the certificates associated with the account.
+
+```json
+[
+  {
+    "cert_id": XXX,
+    "common_name": "site1.example.com",
+    "client_id": XXXXX,
+    "broker_id": 1,
+    "valid_from_date": 0,
+    "valid_to_date": 0,
+    "chain_crts": "",
+    "approver_email": "postmaster@example.com",
+    "alt_domains": "",
+    "duns": "",
+    "incorporating_agency": "",
+    "id": 595,
+    "identity": "site1.example.com",
+    "is_real": true,
+    "meta": {
+      "scope": "ssl-cert"
+    },
+    "crt": "",
+    "domain_count": 1,
+    "is_multi_domain": false,
+    "is_wildcard": false,
+    "is_installable": false,
+    "is_expired": true,
+    "alt_names": [],
+    "service": {
+      "id": XXXXX,
+      "identity": "SSL Certificate - site1.example.com",
+      "is_real": true,
+      "meta": {
+        "scope": "service"
+      },
+      "type": "ssl",
+      "status": "enabled",
+      "description": "SSL Certificate - RVRepair.Directory",
+      "nickname": "",
+      "next_bill_date": 1569297600,
+      "package": {
+        "id": XXX,
+        "identity": "SSL Certificate",
+        "is_real": true,
+        "meta": {
+          "scope": "package"
+        },
+        "type": "ssl",
+        "status": "web-active"
+      }
+    }
+  },
+  {
+    "cert_id": XXX,
+    "common_name": "site2.example.com",
+    "client_id": XXXXX,
+    "broker_id": 0,
+    "valid_from_date": 1480291200,
+    "valid_to_date": 1574985599,
+    "chain_crts": "",
+    "approver_email": "",
+    "alt_domains": "site2.example.com.com,www.site2.example.com",
+    "duns": "",
+    "incorporating_agency": "",
+    "id": XXX,
+    "identity": "site2.example.com",
+    "is_real": true,
+    "meta": {
+      "scope": "ssl-cert"
+    },
+    "crt": "-----BEGIN CERTIFICATE-----\nMIIGbDCCBVSgAwIBAgIQfpsSGBm0aOWQUqAGPoxrizANBgkqhkiG9w0BAQsFADCB\n..Many more lines that look like this...\nBF0NmdzLYocu9erTF0vcqvRzDkwtgI5bnkBDBKA1M0MorbKDvhZz/6otapZU94qx\nK7Iorb/mh+2WFokKTzqVzTup+D3+BFKFHc3giy0zLKf0uzOzGtIoWB72vuJh04fM\ngInCCoyPSIRMKy1l84XmzgFV065g3kqxHCK8O0jpkFWgF2xbZBJCj0tWnNaWXPId\ndf6VNFF4+x1ub1x92UZ6ag==\n-----END CERTIFICATE-----",
+    "domain_count": 2,
+    "is_multi_domain": true,
+    "is_wildcard": false,
+    "is_installable": true,
+    "is_expired": false,
+    "alt_names": [
+      "site2.example.com",
+      "site2.example.com"
+    ]
+  }
+]
+```
+
+The payload returned is a JSON encoded array of certificates.
+
+### Retrieve a Certificate
+
+The API can return the data for a single certificate as well as [List all Certificates](#list-all-certificates). To retrieve a single certificate, append the `cert_id` to the end of the URL.
+
+```shell
+curl -v 'https://demo2.nocworx.com/extranet/ssl-cert/CERT_ID' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+The payload returned in a JSON encoded certificate object.
+
+```json
+{
+  "cert_id": XXX,
+  "common_name": "site2.example.com",
+  "client_id": XXXXX,
+  "broker_id": 0,
+  "valid_from_date": 1480291200,
+  "valid_to_date": 1574985599,
+  "chain_crts": "",
+  "approver_email": "",
+  "alt_domains": "site2.example.com.com,www.site2.example.com",
+  "duns": "",
+  "incorporating_agency": "",
+  "id": XXX,
+  "identity": "site2.example.com",
+  "is_real": true,
+  "meta": {
+    "scope": "ssl-cert"
+  },
+  "crt": "-----BEGIN CERTIFICATE-----\nMIIGbDCCBVSgAwIBAgIQfpsSGBm0aOWQUqAGPoxrizANBgkqhkiG9w0BAQsFADCB\n..Many more lines that look like this...\nBF0NmdzLYocu9erTF0vcqvRzDkwtgI5bnkBDBKA1M0MorbKDvhZz/6otapZU94qx\nK7Iorb/mh+2WFokKTzqVzTup+D3+BFKFHc3giy0zLKf0uzOzGtIoWB72vuJh04fM\ngInCCoyPSIRMKy1l84XmzgFV065g3kqxHCK8O0jpkFWgF2xbZBJCj0tWnNaWXPId\ndf6VNFF4+x1ub1x92UZ6ag==\n-----END CERTIFICATE-----",
+  "domain_count": 2,
+  "is_multi_domain": true,
+  "is_wildcard": false,
+  "is_installable": true,
+  "is_expired": false,
+  "alt_names": [
+    "site2.example.com",
+    "site2.example.com"
+  ]
+}
+```
 
 ## POST
 
