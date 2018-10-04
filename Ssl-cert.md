@@ -13,6 +13,7 @@ The `/service` endpoint allows you to query and modify some of the attributes of
   - [Import Certificate](#import-certificate)
 - POST
 - Delete
+  - [Delete Certificate](#delete-certificate)
 
 ## GET
 
@@ -78,7 +79,7 @@ curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
      --data-binary '{"chain_cert": '"$CHAIN"', "crt": '"$CRT"', "key": '"$KEY"'}'
 ```
 
-When properly encoded valid data is transmitted to the endpoint, the return payload will contain the newly created ssl certificate record ready to be attached to a cloud account.
+When properly encoded valid data is transmitted to the endpoint, the return payload will contain the newly created SSL certificate record ready to be attached to a cloud account.
 
 ```json
 
@@ -113,3 +114,19 @@ When properly encoded valid data is transmitted to the endpoint, the return payl
 }
 
 ```
+
+## Delete
+
+### Delete Certificate
+
+Accessing the endpoint using the DELETE verb and providing a certificate_id as returned in GET or POST will remove the certificate from the system.
+
+```shell
+curl -v 'https://demo2.nocworx.com/extranet/ssl-cert/CERT_ID' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+When properly executed, the API endpoint will return a 200 OK but no payload.
+
