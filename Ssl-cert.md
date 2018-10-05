@@ -5,7 +5,7 @@
 ```
 /ssl-cert
 ```
-The `/service` endpoint allows you to query and modify some of the attributes of a given service. When you create a cloud-account, a service is also created and associated with that cloud account. The service represents the actual server and application installed and contains all the technical parameters that can be see or modified.
+The `/ssl-cert` endpoint allows you to Install, retrieve and remove SSL certificates attached to the account holding the API key.
 
 **Accepted Verbs**
 
