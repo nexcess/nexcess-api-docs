@@ -23,6 +23,7 @@ The `/ssl-cert` endpoint allows you to Install, retrieve and remove SSL certific
 
 To retrieve all the information about all the certificates associated with an account, GET the `ssl-cert` endpoint without specifying a specific CERT_ID.
 
+__Example 1__
 ```shell
 curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -32,6 +33,7 @@ curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
 
 This will return a payload contains all of the certificates associated with the account.
 
+__Payload 1__
 ```json
 [
   {
@@ -121,6 +123,7 @@ The payload returned is a JSON encoded array of certificates.
 
 The API can return the data for a single certificate as well as [List all Certificates](#list-all-certificates). To retrieve a single certificate, append the `cert_id` to the end of the URL.
 
+__Example 2__
 ```shell
 curl -v 'https://demo2.nocworx.com/extranet/ssl-cert/CERT_ID' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -130,6 +133,7 @@ curl -v 'https://demo2.nocworx.com/extranet/ssl-cert/CERT_ID' \
 
 The payload returned in a JSON encoded certificate object.
 
+__Payload 2__
 ```json
 {
   "cert_id": XXX,
@@ -187,6 +191,7 @@ Below the definition of the variables is where they are individually JSON encode
 
 Finally, in the `--data-binary` section of the curl call, the three variables are assembled into the final JSON payload.
 
+__Example 3__
 ```shell
 #!/bin/bash
 CHAIN="-----BEGIN CERTIFICATE-----
@@ -223,6 +228,7 @@ curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
 
 When properly encoded valid data is transmitted to the endpoint, the return payload will contain the newly created SSL certificate record ready to be attached to a cloud account.
 
+__Payload 3__
 ```json
 
 {
@@ -263,6 +269,7 @@ When properly encoded valid data is transmitted to the endpoint, the return payl
 
 Accessing the endpoint using the DELETE verb and providing a certificate_id as returned in GET or POST will remove the certificate from the system.
 
+__Example 4__
 ```shell
 curl -v 'https://demo2.nocworx.com/extranet/ssl-cert/CERT_ID' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
