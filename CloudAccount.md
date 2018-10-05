@@ -10,51 +10,65 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
 
 **Accepted Verbs**
 - GET
-  - [Retrieve list of cloud accounts](#retrieve-list-of-cloud-accounts)
-  - [Retrieve information on a specific cloud account and related service](#retrieve-information-on-a-specific-cloud-account-and-related-service)
-  -[List All Backups](#list-all-backups)
+  - [Retrieve a list of cloud accounts](#retrieve-list-of-cloud-accounts)
+  - [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service)
+  - [List all backups](#list-all-backups)
+  - [Get available versions of PHP](#get-the-list-of-php-versions)
+  - [Get remote user name](#get-remote-user-name)
+  - [Get usage metrics](#get-usage-metrics)
+  - [List pointer domains](#list-pointer-domains)
+
 - POST
-  - [Creating a Cloud Account](#creating-a-cloud-account)
-  - [Creating a Development Account](#creating-a-development-account)
-  - [Clear Nginx Cache](#clear-nginx-cache)
-  - [Create a Backup](#create-a-backup)
+  - [Create a cloud account](#create-a-cloud-account)
+  - [Creating a development account](#creating-a-development-account)
+  - [Clear Nginx cache](#clear-nginx-cache)
+  - [Create a backup](#create-a-backup)
+  - [Change PHP version](#change-php-version)
+  - [Resize a cloud account](#resize)
+  - [Toggle autoscale](#toggle-autoscale)
+  - [Toggle Varnish Caching](#toggle-varnish-caching)
+  - [Create remote user password](#create-remote-user-password)
+  - [Add pointer domain](#add-pointer-domain)
+  - [Remove pointer domain](#remove-pointer-domain)
+
 - DELETE
-  - [Delete a Backup](#delete-a-backup)
+  - [Delete a backup](#delete-a-backup)
 
 ## GET
 
 ### Retrieve list of cloud accounts
-To retrieve a list of all the cloud accounts associated with an account make a call to `/cloud-account` with your API key.
+To retrieve a list of all the cloud accounts associated with an account make a call to `/cloud-account` with an API key.
 
 __Example 1__
 ```shell
-curl -v '__URL__/cloud-account' \
+curl '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 ```
 
-This will return a very verbose JSON payload that will list the details of all of the cloud accounts associated with your account.
+This will return a JSON payload that will list the details of all of the cloud accounts associated with the the account.
 
 ### Retrieve information on a specific cloud account and related service
 
-To retrieve the details of a specific cloud account, you and append the `cloud_id`  to this endpoint. In the payload returned in the above command, cloud_id is found in each cloud account object in `cloud_account->account_id`.
+This endpoint allows for the retrieval of the details about a specified cloud account. The value passed in for `CLOUD_ACCOUNT_ID` should match one of the `account_id` values returned from [Retrieve a list of cloud accounts](#retrieve-list-of-cloud-accounts).
+
 
 __Example 2__
 ```shell
-curl -v '__URL__/cloud-account/CLOUD_ID' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Accept: application/json'
 ```
 
-This will return a similar payload to the first GET but it will be limited to a single cloud_account. This is how you check the state of a cloud account onces you have issued the POST described below. See [__Payload 2__](#payload3) for an example output of this command.
+This will return a similar payload to [Payload 7](#payload7).
 
-### List All Backups
+### List all backups
 
 The `cloud-account` endpoint can be used to list all the backups for a given cloud account whether they were created with the APU or the UI.
 
 __Example 3__
 ```shell
-curl -v '__URL__/cloud-account/CLOUD_ID/backup' \
+curl '__URL__/cloud-account/CLOUD_ID/backup' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
@@ -90,46 +104,214 @@ __Payload 1__
 ]
 ```
 
+### Get the List of PHP Versions
 
-## POST
-
-### Creating a Cloud Account
-
-Before we can issue a POST command, we need values for a few of the parameters. The required parameters for creating a cloud account are:
-
-- The domain name that will be attached to this service
-- The application we want to install
-- The size of the server we want to install it on
-- The cloud you want your account on
-- Whether you want the system to auto-install the application for you.
-
-Here is a sample payload
-
-__Payload 2__
-```json
-{
-  "domain": "example.com",
-  "app_id": "33",
-  "package_id": "710",
-  "cloud_id": "1",
-  "install_app": "on"
-}
-```
-
-__Parameters__
-
-| Name | Description | Required |
-| :--- | :--- | :---: |
-|`domain`| The domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.| YES |
-|`app_id`|the Nexcess id for the application you want to install See [Applications](Applications.md) to get a list of the available `app_id` values. | YES |
-| `package_id` | the Nexcess id for the server package you want to spin up. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | YES |
-| `cloud_id` | The Nexcess id for the cloud (data center) you want to spin up your new account within.  See '[Listing Clouds](Clouds.md)' to get a list of available `cloud_id` values. | YES |
-| `install_app` | tells the system whether or not to actually install the application you requested or to only prepare the server environment for you to install the application later. | NO |
-
+In the POST section there is an endpoint that will allow for the changing of the version of PHP installed on a given cloud account. Not all versions of PHP are supported. In most cases, the last four or five minor versions are available. The actual version installed will be the latest patch level released for the version chosen. (e.g. if 7.1 is chosen then 7.1.22 will be installed.)
 
 __Example 4__
 ```shell
-curl -v -X POST '__URL__/cloud-account' \
+curl '__URL/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+The payload returned is an array of version numbers to choose from. These are the only versions available for install.
+
+__Payload 2__
+```json
+[
+  "5.6",
+  "7.0",
+  "7.1",
+  "7.2"
+]
+```
+
+### Get remote user name
+
+Each cloud account is assigned 'remote user name'. This is the user for ssh and sftp. This endpoint allows for the retrieval of that user name.
+
+__Example 5__
+```shell
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-remote-username' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+There are two possible payloads that can be returned from this endpoint. The difference between the two is whether or not the cloud account has an un-viewed password for the remote user. All passwords are stored as encrypted 'datashares'. In the case of the password for the remote user, it can only be viewed once. Once viewed, it is deleted. If the password for the remote user has already been viewed the this is the payload that will be returned.
+
+__Payload 3__
+```json
+{
+  "username": "xxxxxxxxxx"
+}
+```
+
+If the remote user has an un-viewed password then the details of the password datashare - not including the password itself - are appended to the payload.
+
+__Payload 4__
+```json
+{
+  "username": "xxxxxxxxxx",
+  "password_share": {
+    "id": 2238,
+    "identity": "",
+    "is_real": true,
+    "meta": {
+      "scope": "datashare"
+    },
+    "type": "ssh-password",
+    "uuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "share_date": xxxxxxxxxxx,
+    "expiration_date": xxxxxxxxxx,
+    "uses": 0,
+    "max_uses": 1,
+    "owner": "virt-guest-cloudaccount",
+    "owner_id": CLOUD_ACCOUNT_ID,
+    "owner_object": {
+      "id": CLOUD_ACCOUNT_ID,
+      "identity": "demo.example.com",
+      "is_real": true,
+      "meta": {
+        "scope": "virt-guest-cloudaccount"
+      },
+      "status": "used",
+      "ip": "xxx.xxx.xxx.xxx",
+      "ipv4": "xxx.xxx.xxx.xxx",
+      "domain": "demo.example.com",
+      "is_dev_account": false,
+      "temp_domain": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.nxcli.net",
+      "cloudhost_hostname": "xxxxxxxxxxxxxxx.us-midwest-1.nxcli.net",
+      "unix_username": "a6f9c6b6",
+      "app": {
+        "id": 33,
+        "identity": "Wordpress 4",
+        "is_real": true,
+        "meta": {
+          "scope": "app-app"
+        },
+        "type": "wordpress",
+        "status": "active",
+        "name": "Wordpress",
+        "version": "4",
+        "is_wordpress_based": true,
+        "is_installable": true
+      },
+      "state": "stable"
+    },
+    "expired": false,
+    "link_to": "user",
+    "link_to_id": 61417,
+    "link_to_object": {
+      "id": 61417,
+      "identity": "sample@example.com",
+      "is_real": true,
+      "meta": {
+        "scope": "user"
+      },
+      "prominent": false
+    }
+  }
+}
+```
+
+If the password has already been viewed but was not recorded, it cannot be retrieved. However, a new password can be generated by using [Create remote user password](#create-remote-user-password).
+
+### Get usage metrics
+
+This endpoint is used to retrieve the storage and bandwidth metrics associated with a given cloud account.
+
+__Example 6__
+```shell
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-usage-metrics' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+The payload that returns from this call will look like this.
+
+__Payload 5__
+```json
+{
+  "storage_gb": 5,
+  "storage_used_gb": 0.05,
+  "storage_used_pct": 0.07,
+  "bandwidth_gb": 100,
+  "bandwidth_used_gb": 0,
+  "bandwidth_used_pct": 0
+}
+```
+
+### List pointer domains
+
+This endpoint can be used to retrieve the storage and bandwidth metrics associated with a given cloud account.
+
+__Example 7__
+```shell
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+The payload returned contains all of the pointer domains for the given cloud account. After the pointer domains is a list of the types of pointer domains that can be set. These types play a role when [adding a pointer domain](#add-pointer-domain).
+
+__Payload 6__
+```json
+{
+  "pointers": [
+    {
+      "domain": "bob.example.com",
+      "points_to": "1538072470.example.com",
+      "type": "LG_SERVER_ALIAS",
+      "mail_alias": "Yes"
+    },
+    {
+      "domain": "alice.example.com",
+      "points_to": "http://1538072470.example.com",
+      "type": "redirect (302)",
+      "mail_alias": "Yes"
+    },
+    {
+      "domain": "ted.example.com",
+      "points_to": "http://1538072470.example.com",
+      "type": "redirect (301)",
+      "mail_alias": "Yes"
+    }
+  ],
+  "types": {
+    "redir_type_301": "redirect_301",
+    "redir_type_302": "redirect_302",
+    "redir_type_alias": "server_alias"
+  }
+}
+```
+
+
+
+## POST
+
+### Create a Cloud Account
+
+Before creating a cloud account, the values of several of the parameters will have to be fetched. The required parameters for creating a cloud account are:
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`domain`| The domain name for the cloud account we will create. This is a required field and takes any valid (looking) domain name including sub-domains.| String | YES |
+|`app_id`|the system id for the application to be install See [Applications](Applications.md) to get a list of the available `app_id` values. | Integer | YES |
+| `package_id` | the system id for the server package to be spun up. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | Integer | YES |
+| `cloud_id` | The system id for the cloud (data center) to spin up the new account in.  See '[Listing Clouds](Clouds.md)' to get a list of available `cloud_id` values. | Integer | YES |
+| `install_app` | "ON" or "OFF" (TRUE or FALSE).<br >Tells the system whether or not to actually install the application requested or to only prepare the server environment.  | Boolean | NO |
+
+
+__Example 8__
+```shell
+curl '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -142,9 +324,10 @@ curl -v -X POST '__URL__/cloud-account' \
 }'
 ```
 
-This will return to you a very large payload that will give you details about both the cloud account that is being created, and the service that it belongs to. It is important to note that the API queues the job to be done, it does not wait until the job is complete.
+This will return a payload that will give details about both the cloud account that is being created, and the service that it belongs to. It is important to note that the API queues the job to be done, it does not wait until the job is complete. Use the value returned in in the `account_id` [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service) endpoint to poll for updates. As soon as `state` returns as **stable**, the cloud account is ready to use.
 
-<a name="payload3">__Payload 3__</a>
+
+<a name="payload7">__Payload 7__</a>
 ```json
 {
   "id": "SERVICE_ID",
@@ -284,43 +467,38 @@ This will return to you a very large payload that will give you details about bo
 }
 ```
 
-Creating a cloud account is an out-of-bandwidth command. Receiving a 200 OK for a POST only means that the system has accepted your request. In the payload returned is the cloud account id that you can use as described above to check for the state of your cloud account.
+Creating a cloud account is an out-of-bandwidth command. Receiving a 200 OK for a POST only means that the system has accepted the request. In the payload returned is the cloud account id that can be used as described above to check for the state of the cloud account.
 
-There are 5 possible states your cloud can be in.
+There are 5 possible states a cloud account can be in.
 
-- **creating** This is the initial state. The cloud account will stay in this state until the initial creation of the clopud account has completed.
-- **destroying** This is the state of a machine that has been required to be destroyed and approved. It is in htis state until the destroy process is complete. After this is complete the API will return 404 on all future calls to `/cloud-host/cloud_id`
-- **failure** If for some reason the creating process did. not complete successfully, the cloud account will be assigned the state of failure.
-- **installing** Once creating is complete, if you have requested that an application be installed, the cloud account will be put in the installing state. It will remain in this state until the application is successfully installed.
-- **stable** The final state of the cloud account is stable. This is your signal that everything truly is 200 OK.
+| State | Description |
+| :--- | :--- |
+| **creating** | The initial state. The cloud account will stay in this state until the initial creation of the cloud account has completed. |
+| **destroying** | The state of a machine that has been required to be destroyed and approved. It is in this state until the destroy process is complete. After this is complete the API will return 404 on all future calls to `/cloud-host/cloud_id` |
+| **failure** | If for some reason the creating process did not complete successfully, the cloud account will be assigned the state of failure. |
+| **installing** | Once creating is complete, if `install_app` was set to `on`, the application be installed. The cloud account will be put in the **installing** state. It will remain in this state until the application is successfully installed. |
+| **stable** | The final state of the cloud account is stable. This is the signal that everything truly is 200 OK. |
 
 
-### Creating a Development Account
+### Creating a development account
 
  Development accounts are a special type of account tied to a cloud account. As the name implies, they are for development purposes and not to be used for production. Development accounts are clones of production accounts. They are created in a very similar call for creating the production cloud account.
 
-__Payload 4__
-```json
-{
-  "domain": "development.demo2.example.com",
-  "copy_account": "1",
-  "scrub_account": "1",
-  "package_id": "713",
-  "ref_service_id": "58692",
-  "ref_type": "development"
-}
-```
 
-- `domain` is domain passed in has to be a subdomain of the production cloud account's domain. This is a required parameter.
-- `package_id` This is the package to create and install the development environment within. This is a required parameter.
-- `ref_service_id` This is the service_id associated with the parent cloud account. This is a required parameter.
-- `ref_type` is the type of account being created. When creating a development account, specify **development**. This is a required parameter.
-- `copy_account` is a boolean flag. If set to true then the environment of the production cloud account will be copied into the development environment. This is an optional parameter. If not present, false is assumed.
-- `scrub_account` is a boolean flag. If set to true then data in the database will be anonymized. This is an optional parameter. If not present, false is assumed.
+__Parameters__
 
-__Example 5__
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `domain` | Has to be a sub-domain of the production cloud account's domain. | String | YES |
+| `package_id` | The service_id associated with the parent cloud account. | Integer | YES |
+| `ref_type` | `development` | String | YES |
+| `copy_account` | If set to true then the environment of the production cloud account will be copied into the development environment. | Boolean | NO |
+| `scrub_account` | `purge-cache` | Boolean | YES |
+| `_action` | If set to true then data in the database will be anonymized. This is an optional parameter. | Boolean | NO |
+
+__Example 9__
 ```shell
-curl -v -X POST '__URL__/extranet/cloud-account' \
+curl '__URL__/extranet/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -334,45 +512,47 @@ curl -v -X POST '__URL__/extranet/cloud-account' \
   }'
 ```
 
-The payload returned from the command above is the same as [Payload 3](#payload3).
+The payload returned from the command above is the same as [Payload 7](#payload7).
 
 
-### Clear Nginx Cache
+### Clear Nginx cache
 
 The `cloud-account` endpoint can be used to clear the Nginx cache on a given related service.
 
-__Example 6__
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `purge-cache` | String | YES |
+
+__Example 10__
 ```shell
 curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
-   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-   -H 'Content-Type: application/json' \
-   -H 'Accept: application/json' \
-   --data-binary '{"_action": "purge-cache"}'
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "purge-cache"}'
 ```
 
-There is only one required parameter needed to clear the Nginx Cache.
+The payload returned from the command above is the same as [Payload 7](#payload7).
 
-- `_action` takes a single value of **purge-cache**.
+The clearing of the cache is an out-of-bandwidth process. A 200 OK return indicates that the switch has been set but it can take a few minutes for the process to complete.
 
-The payload returned from the command above is the same as [Payload 3](#payload3).
-
-The clearing of the cache is an out-of-bandwidth process. a 200 OK return indicates that the switch has been set but it can take a few minutes for the process to complete.
-
-### Create a Backup
+### Create a backup
 
 The `cloud-account` endpoint can be used to create an account backup.
 
-__Example 7__
+__Example 11__
 ```shell
 curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
-   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-   -H 'Content-Type: application/json' \
-   -H 'Accept: application/json'
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
 ```
 
-No parameters are available for this endpoint, however you do have to put the cloud account's ID in the URI.
+No parameters are available for this endpoint.
 
-__Payload 5__
+__Payload 8__
 ```json
 {
   "filepath": "/home/a6fb203a/demo2.example.com/iworx-backup/demo2.example.com+full-single-Sep.18.2018-16.15.01.tgz",
@@ -386,17 +566,248 @@ __Payload 5__
 }
 ```
 
-The payload returned in most cases describes the backup that will be created. Backups are an out-of-bandwidth process in almost all cases. In a very few cases, the backup will complete before the API returns. In these cases - very small sites or no files/DB ot be backed up - you will see that `complete` comes back as **true**.
+The payload returned in most cases describes the backup that will be created. Backups are an out-of-bandwidth process in almost all cases. In a very few cases, the backup will complete before the API returns. In these cases - very small sites or no files/DB to be backed up - `complete` will be returned as **true**.
 
-In most cases, `complete` will come back as **false**. To check the status of your backup:
+In most cases, `complete` will come back as **false**. To check the status of a backup:
 
-- Save off the file name
+- Copy the file name
 - Call [List All Backups](#list-all-backups)
-- Iterate over the list of backups to find the one with your filename
+- Iterate over the list of backups to find the one with the filename captured above
 - Check the status of `complete`
 
-Once your backup is complete, you can use the URL provided in `download_url` to fetch the download.
+Once the backup is complete, the URL provided in `download_url` can be used to fetch the backup file.
 
+
+### Change PHP version
+
+This endpoint is used to change the version of PHP installed in the specified cloud account.
+The end point [get-php-versions](#get-the-list-of-php-versions) is used to retrieve a list of the valid versions of PHP that can be installed on a cloud account. This endpoint allows for the actual switching of the versions.
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `set-php-version` | String | YES |
+| `php_version` | One of the valid PHP versions listed by the [Get available versions of PHP](#get-the-list-of-php-versions) endpoint. | String | YES |
+
+
+__Example 12__
+```shell
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "set-php-version", "php_version": "PHP_VERSION"}'
+```
+
+
+The payload that returns is identical to [Payload 7](#payload7). The difference will be that in the environment section, the requested version of PHP will be listed.
+
+__Payload 9__
+```
+"environment": {
+  "software": {
+    "php": {
+      "version": "7.2",
+      "path": "/opt/remi/php72",
+      "cli": "/opt/remi/php72/root/usr/bin/php"
+    },
+
+```
+
+### Resize
+
+A cloud account can be resized both up and down. If the cloud account is a shared account, the resizing will take place in the background and a switch will be made once its state is "stable". This results in almost zero downtime. If the cloud account is a dedicated account then it will be taken off-line and resized.
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `resize` | String | YES |
+| `package_id` | the Nexcess id for the new server package to size the cloud account to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | Integer | YES |
+
+
+__Example 13__
+```shell
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "resize", "package_id": "NEW_PACKAGE_ID"}'
+```
+
+The payload that returns is identical to [Payload 7](#payload7). The difference will be that the package_id will reflect the new package.
+
+
+### Toggle autoscale
+
+Autoscale is a feature whereby a cloud account can be automatically moved up to the next package size if it exceeds it's max allocated concurrent users. This prevents a maxed out cloud account from dropping users during peak times. If off, when a cloud account exceeds it's max allocated concurrent users, additional users will be disconnected until others drop off. Autoscale can be turned on or off via this endpoint.
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `set-autoscale` | String |YES |
+| `autoscale` | `true` or `false` | Boolean | YES |
+
+
+__Example 14__
+```shell
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "set-autoscale", "autoscale": false}'
+```
+
+The payload that returns is identical to [Payload 7](#payload7). The difference will be that in the options section of the payload, `autoscale_enabled` will reflect the change requested.
+
+__Payload 10__
+```
+"options": {
+  "nxcache_nocache": false,
+  "nxcache_varnish": false,
+  "nxcache_varnish_static": false,
+  "nxcache_varnish_ttl": 120,
+  "autoscale_enabled": false
+},
+```
+
+### Toggle Varnish caching
+
+All cloud accounts come with [Varnish](https://varnish-cache.org) installed. By default, Varnish caching is disabled. This endpoint allows for Varnish to be toggled on and off.
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `set-varnish` | String | YES |
+| `enabled` | `true` or `false` | Boolean | YES |
+
+
+__Example 15__
+```shell
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "set-varnish","enabled": true}'
+
+```
+
+The payload that returns is identical to [Payload 7](#payload7). The difference will be that in the options section of the payload, `nxcache_varnish` will reflect the change requested.
+
+__Payload 11__
+```
+"options": {
+  "nxcache_nocache": false,
+  "nxcache_varnish": false,
+  "nxcache_varnish_static": false,
+  "nxcache_varnish_ttl": 120,
+  "autoscale_enabled": false
+},
+```
+
+
+### Create remote user password
+
+Cloud accounts can be accessed by users using either sftp or ssh. The endpoint [Get remote user name](#get-remote-user-name) can be used to retrieve the user name assigned to the account for this purpose. Passwords are stored in encrypted datashares. They can only be accessed a single time. If a password has been forgotten then the only recourse is to generate a new password datashare. This endpoint will accomplish that. The password itself however, cannot be viewed via the API. Users will have to log into their account to retrieve the new password.
+
+**WARNING**: Calling this endpoint and creating a new password will  immediately invalidate the previous password.
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `set-set-remote-password` | String | YES |
+
+
+__Example 16__
+```shell
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "set-remote-password"}'
+
+```
+
+The payload that returns is identical to the payload returned for [Get remote user name](#get-remote-user-name) when a password share is set.
+
+__Payload 12__
+```
+"options": {
+  "nxcache_nocache": false,
+  "nxcache_varnish": false,
+  "nxcache_varnish_static": false,
+  "nxcache_varnish_ttl": 120,
+  "autoscale_enabled": false
+},
+```
+
+### Add pointer domain
+
+This endpoint is used to add "Server Aliases", "301 Redirects" and "302 Redirects" to a cloud account.
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `pointer-domain` | String | YES |
+| `type` | One of three possible values: <br>- redir_type_301<br>- redir_type_302<br>- redir_type_alias |  String | YES |
+| `domain` | Any valid domain name  | String | YES |
+
+
+__Example 17__
+```shell
+# Add Pointer Domain
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "add-pointer-domain","type": "redir_type_alias","domain":"pointerdomain.example.com"}'
+```
+
+The payload that returned is the name of the domain pointer added.
+
+__Payload 13__
+```
+{
+  "domain": "pointerdomain.example.com"
+}
+```
+
+### Remove pointer domain
+
+This endpoint is used to remove pointer domain names from a cloud account.
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `remove-pointer-domain` | String | YES |
+| `domain` | The domain to be removed  | String | YES |
+
+__Example 18__
+```shell
+# Add Pointer Domain
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "remove-pointer-domain", "domain":"pointerdomain.example.com"}'
+```
+
+The payload that returned is the name of the domain pointer removed.
+
+__Payload 4__
+```
+{
+  "domain": "pointerdomain.example.com"
+}
+```
+
+If a domain is specified that does not exist as a pointer on the given cloud account a **422 Invalid Domain** will be returned.
 
 # DELETE
 
@@ -404,19 +815,17 @@ Once your backup is complete, you can use the URL provided in `download_url` to 
 
 The `cloud-account` endpoint can be used to delete backups created either via the API or the UI.
 
-__Example 8__
+__Example 19__
 ```shell
 curl -X DELETE '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup/URL_ENCODED_BACKUP_FILENAME' \
-   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-   -H 'Content-Type: application/json' \
-   -H 'Accept: application/json'
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
 ```
 
-When you [List All Backups](#list-all-backups) each backup entry has a `file_name` property. This is a URL Encoded version of the file name and is safe to use as it is in the DELETE call. You need to append the file name to the backup URL and then call with the DELETE verb.
+Each entity returned in the [List All Backups](#list-all-backups) payload each has a `file_name` property. This is a URL Encoded version of the file name and is safe to use as it is in the DELETE call. Append the file name to the backup URL and then call with the DELETE verb.
 
 DELETing a backup will not return any payload. It will however return a 200 OK upon success.
 
 
-# Wrap Up
-This page has described the actions available for the `/cloud-account` API endpoint.
 
