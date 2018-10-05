@@ -194,6 +194,7 @@ MIIGCDCCA/CgAwIBAgIQKy5u6tl1NmwUim7bo3yMBzANBgkqhkiG9w0BAQwFADCB
          ...Many more lines that look like that...
 lBlGGSW4gNfL1IYoakRwJiNiqZ+Gb7+6kHDSVneFeO/qJakXzlByjAA6quPbYzSf
 +AZxAeKCINT+b72x
+
 -----END CERTIFICATE-----"
 CRT="-----BEGIN CERTIFICATE-----
 MIIGbDCCBVSgAwIBAgIQfpsSGBm0aOWQUqAGPoxrizANBgkqhkiG9w0BAQsFADCB
@@ -201,6 +202,7 @@ MIIGbDCCBVSgAwIBAgIQfpsSGBm0aOWQUqAGPoxrizANBgkqhkiG9w0BAQsFADCB
 gInCCoyPSIRMKy1l84XmzgFV065g3kqxHCK8O0jpkFWgF2xbZBJCj0tWnNaWXPId
 df6VNFF4+x1ub1x92UZ6ag==
 -----END CERTIFICATE-----"
+
 KEY="-----BEGIN PRIVATE KEY-----
 MIIJQwIBADANBgkqhkiG9w0BAQEFAASCCS0wggkpAgEAAoICAQCliHpsXji5TOQZ
         ...Many MANY more lines that look like that...
@@ -208,13 +210,9 @@ mWvRtmCdwO45XMKPLkglubG/PS/GEgXOscvT0mjExPAE+zHmnEShgN3Ph8ex2O2U
 WS4xRl9VsWExMgBcPlqbUS/Uez+XTAw=
 -----END PRIVATE KEY-----"
 
-
 KEY=$(echo "$KEY" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
 CRT=$(echo "$CRT" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
 CHAIN=$(echo "$CHAIN" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
-
-
-
 
 curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
