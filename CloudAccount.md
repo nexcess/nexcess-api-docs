@@ -30,6 +30,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Create remote user password](#create-remote-user-password)
   - [Add pointer domain](#add-pointer-domain)
   - [Remove pointer domain](#remove-pointer-domain)
+  - [Use SSL Certificate](#use-ssl-certificate)
 
 - DELETE
   - [Delete a backup](#delete-a-backup)
@@ -808,6 +809,29 @@ __Payload 4__
 ```
 
 If a domain is specified that does not exist as a pointer on the given cloud account a **422 Invalid Domain** will be returned.
+
+### Use SSL Certificate
+
+This endpoint is used to attach an SSL certificate that was imported into the system using [Import Certificate](Ssl-cert.md/#import-certificate).
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `install-ssl-cert` | String | YES |
+| `cert_id` | The `cert_id` returned when the certificate was added to the system. | Integer | YES |
+
+__Example 18__
+```shell
+# Add Pointer Domain
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "install-ssl-cert", "cert_id": XXX}'
+```
+
+The payload returned is identical to [Payload 7](#payload7). The difference is that `ssl_cert_id` will be populated with the passed in `cert_id`.
 
 # DELETE
 
