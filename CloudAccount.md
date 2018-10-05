@@ -831,7 +831,7 @@ curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
   --data-binary '{"_action": "install-ssl-cert", "cert_id": XXX}'
 ```
 
-The payload returned is identical to [Payload 7](#payload7). The difference is that `ssl_cert_id` will be populated with the passed in `cert_id`.
+Upon success, this endpoint will return a 200 OK. The payload returned is identical to [Payload 7](#payload7). The difference is that `ssl_cert_id` will be populated with the passed in `cert_id`.
 
 # DELETE
 
