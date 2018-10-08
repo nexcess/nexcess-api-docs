@@ -877,11 +877,11 @@ KEY=$(echo "$KEY" | php -r 'echo json_encode(file_get_contents("php://stdin"));'
 CRT=$(echo "$CRT" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
 CHAIN=$(echo "$CHAIN" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
 
-curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
+curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUT_ID' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json' \
-     --data-binary '{"_action":"_install-ssl", chain_cert": '"$CHAIN"', "crt": '"$CRT"', "key": '"$KEY"'}'
+     --data-binary '{"_action":"install-ssl", chain_cert": '"$CHAIN"', "crt": '"$CRT"', "key": '"$KEY"'}'
 ```
 Upon success, this endpoint will return a 200 OK. The payload returned is identical to [Payload 7](#payload7). The difference is that `ssl_cert_id` will be populated with the passed in `cert_id`.
 
