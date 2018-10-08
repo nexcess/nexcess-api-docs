@@ -14,6 +14,7 @@ The `/ssl-cert` endpoint allows you to Install, retrieve and remove SSL certific
   - [Retrieve a Certificate](#retrieve-a-certificate)
 - POST
   - [Import Certificate](#import-certificate)
+  - [Create a Certificate](#create-a-certificate)
 - Delete
   - [Delete Certificate](#delete-certificate)
 
@@ -263,15 +264,107 @@ __Payload 3__
 
 ```
 
+### Create a Certificate
+
+There are two variations to creating a certificate. In the first one a signing Certificate Signing Request and Private Key are supplied, in the other they are not. In the second scenario, the system will collect the needed information and generate the CSR and Key for the user.
+
+In both scenarios, the type of certificate being purchased must be specified by giving the "package id" for the certificate type being purchased. For a complete list of values use the [Types of Certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) endpoint.
+
+#### Creating a Certificate from a CSR and Private Key
+
+This is very similar to importing an existing certificate. The difference is that when creating a Certificate, the Certificate itself is omitted and the CSR is provided. Additionally two other parameters are provided, `months` and `package_id`.
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`csr`| The certificate signing request | String | YES |
+|`key`| The private key | String | YES |
+|`months`| Number of months this certificate will be valid for. Must be a multiple of 12. | Integer | YES |
+|`package_id`| The SSSL package to be purchased. See [Types of Certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
+
+
+__Example 4__
+```shell
+#!/bin/bash
+
+CSR="-----BEGIN CERTIFICATE-----
+MIIGbDCCBVSgAwIBAgIQfpsSGBm0aOWQUqAGPoxrizANBgkqhkiG9w0BAQsFADCB
+         ...Many more lines that look like that...
+gInCCoyPSIRMKy1l84XmzgFV065g3kqxHCK8O0jpkFWgF2xbZBJCj0tWnNaWXPId
+df6VNFF4+x1ub1x92UZ6ag==
+-----END CERTIFICATE-----"
+
+KEY="-----BEGIN PRIVATE KEY-----
+MIIJQwIBADANBgkqhkiG9w0BAQEFAASCCS0wggkpAgEAAoICAQCliHpsXji5TOQZ
+        ...Many MANY more lines that look like that...
+mWvRtmCdwO45XMKPLkglubG/PS/GEgXOscvT0mjExPAE+zHmnEShgN3Ph8ex2O2U
+WS4xRl9VsWExMgBcPlqbUS/Uez+XTAw=
+-----END PRIVATE KEY-----"
+
+KEY=$(echo "$KEY" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
+CSR=$(echo "$CSR" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
+
+curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json' \
+     --data-binary '{"csr": '"$CSR"', "key": '"$KEY"', "months", 12,"package_id": 179}'
+```
+
+#### Creating a Certificate without a CSR and Private Key
+
+When creating a certificate without a Certificate Signing Request and private key, all of the information necessary to create the CSR must be passed into the request.
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`months`| Number of months this certificate will be valid for. Must be a multiple of 12. | Integer | YES |
+|`package_id`| The SSSL package to be purchased. See [Types of Certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
+|`domain`| The fully qualified domain name (FQDN) that the certificate is for. | String | YES |
+|`approver_email`| The key of the array must match `domain` above. The value **MUST** BE "admin", "administrator","hostmaster", "postmaster","webmaster" at the domain specified in the certificate. If the domain specified is a subdomain, "admin or "administrator" at the root domain can also be used. (e.g. "admin@blog.example.com" or "administrator@example.com")  | Array | NO |
+|`distinguished_name`| An array of the parts necessary to create the CSR. Contains the following seven items. | Array | YES |
+|`email`| An email address used to contact the organization.| String | YES |
+|`organization`| The legal name of the organization that owns the domain. Do not abbreviate and include any suffixes, such as Inc., Corp., or LLC. | String | YES |
+|`street`| The street address for the owner of the domain  | String | YES |
+|`locality`| The city where the organization is located. This shouldn’t be abbreviated.  | String | YES |
+|`state`| TThe state/region where the organization is located. This shouldn't be abbreviated.  | String | YES |
+|`country`| The two-letter code for the country where the organization is located.  | String | YES |
+|`organizational_unit`| The division of the organization handling the certificate.  | String | NO |
+
+```shell
+curl -v '__URL__/extranet/ssl-cert' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json' \
+     --data-binary '{ "months": "12", "package_id": "179", "domain": "example.com", "distinguished_name": { "email": "john@example.com", "street": "123 Main Street", "locality": "Anytown", "state": "MI", "country": "US", "organization": "Acme Examples", "organizational_unit": "marketing"}, "approver_email": {"example.com": "admin@example.com"}}'
+```
+
+
+The payload returned from both variations of the call are identical. Creating a Certificate is an out-of-bandwidth process. Therefore, these payloads do not contain the `ssl_cert_id`. The `service_id` can be used to query the  [status of a service](Service.md#get-the-staus-of-a-service). When the certificate is complete, the service will return a ssl-cert object as part of the payload. That will include the `ssl_cert_id` which can then be used on any of the `ssl-cert` endpoints.
+
+This payload has been truncated for brevity.
+
+__ Payload 4__
+
+```json
+{
+  "order_id": XXXXX,
+  "order_date": 1539004070,
+  "package_id": 179,
+  "client_id": XXXXX,
+  "service_id": XXXXX
+}
+```
+
 ## Delete
 
 ### Delete Certificate
 
 Accessing the endpoint using the DELETE verb and providing a certificate_id as returned in GET or POST will remove the certificate from the system.
 
-__Example 4__
+__Example 5__
 ```shell
-curl -v 'https://demo2.nocworx.com/extranet/ssl-cert/CERT_ID' \
+curl -v -X DELETE 'https://demo2.nocworx.com/extranet/ssl-cert/CERT_ID' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
