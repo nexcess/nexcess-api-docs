@@ -10,9 +10,12 @@ The `/service` endpoint allows you to query and modify some of the attributes of
 **Accepted Verbs**
 
 - GET
+  - [Get the status of a service](#get-the-staus-of-a-service)
 - POST
 
 ## GET
+
+### Get the status of a service
 
 Querying the `/service` endpoint with a service_id will return you the complete list of attributes for that service.
 ```shell
