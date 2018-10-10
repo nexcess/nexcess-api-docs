@@ -10,18 +10,18 @@ The `/ssl-cert` endpoint allows you to Install, retrieve and remove SSL certific
 **Accepted Verbs**
 
 - GET
-  - [List all Certificates](#list-all-certificates)
-  - [Retrieve a Certificate](#retrieve-a-certificate)
-  - [Retrieve a Certificate by `service_id`](#retrieve-a-certificate-by-service_id)
+  - [List all certificates](#list-all-certificates)
+  - [Retrieve a certificate](#retrieve-a-certificate)
+  - [Retrieve a certificate by `service_id`](#retrieve-a-certificate-by-service_id)
 - POST
-  - [Import Certificate](#import-certificate)
-  - [Create a Certificate](#create-a-certificate)
+  - [Import a certificate](#import-a-certificate)
+  - [Create a certificate](#create-a-certificate)
 - Delete
-  - [Delete Certificate](#delete-certificate)
+  - [Delete a certificate](#delete-a-certificate)
 
 ## GET
 
-### List all Certificates
+### List all certificates
 
 To retrieve all the information about all the certificates associated with an account, GET the `ssl-cert` endpoint without specifying a specific CERT_ID.
 
@@ -121,9 +121,9 @@ __Payload 1__
 
 The payload returned is a JSON encoded array of certificates.
 
-### Retrieve a Certificate
+### Retrieve a certificate
 
-The API can return the data for a single certificate as well as [List all Certificates](#list-all-certificates). To retrieve a single certificate, append the `cert_id` to the end of the URL.
+The API can return the data for a single certificate as well as [List all certificates](#list-all-certificates). To retrieve a single certificate, append the `cert_id` to the end of the URL.
 
 __Example 2__
 ```shell
@@ -168,9 +168,9 @@ __Payload 2__
 }
 ```
 
-### Retrieve a Certificate by `service_id`
+### Retrieve a certificate by `service_id`
 
-When a certificate is created the API endpoint returns a Service object, not a certificate object in the payload. This is because the process of creating a certificate is an out-of-bandwidth process. To check the status of the certificate, poll this endpoint. When the certificate is complete and ready for use, this endpoint's payload will contain a Certificate object.
+When a certificate is created the API endpoint returns a Service object, not a certificate object in the payload. This is because the process of creating a certificate is an out-of-bandwidth process. To check the status of the certificate, poll this endpoint. When the certificate is complete and ready for use, this endpoint's payload will contain a ssl-cert object.
 
 >In the example below square brackets are shown for clarity. For this curl command to work, those must be url encoded. They must be replaced with `%5B` and `%5D` respectively.
 
@@ -185,7 +185,7 @@ curl -v '__URL__/ssl-cert/?filter[service_id]=SERVICE_ID' \
 
 ## POST
 
-### Import Certificate
+### Import a certificate
 To import an existing cert/key combination, the following parameters have to be supplied.
 
 __Parameters__
@@ -280,15 +280,15 @@ __Payload 3__
 
 ```
 
-### Create a Certificate
+### Create a certificate
 
 There are two variations to creating a certificate. In the first one a signing Certificate Signing Request and Private Key are supplied, in the other they are not. In the second scenario, the system will collect the needed information and generate the CSR and Key for the user.
 
-In both scenarios, the type of certificate being purchased must be specified by giving the "package id" for the certificate type being purchased. For a complete list of values use the [Types of Certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) endpoint.
+In both scenarios, the type of certificate being purchased must be specified by giving the "package id" for the certificate type being purchased. For a complete list of values use the [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) endpoint.
 
-#### Creating a Certificate from a CSR and Private Key
+#### Creating a certificate from a CSR and Private Key
 
-This is very similar to importing an existing certificate. The difference is that when creating a Certificate, the Certificate itself is omitted and the CSR is provided. Additionally two other parameters are provided, `months` and `package_id`.
+This is very similar to importing an existing certificate. The difference is that when creating a certificate, the certificate itself is omitted and the CSR is provided. Additionally two other parameters are provided, `months` and `package_id`.
 
 __Parameters__
 
@@ -297,7 +297,7 @@ __Parameters__
 |`csr`| The certificate signing request | String | YES |
 |`key`| The private key | String | YES |
 |`months`| Number of months this certificate will be valid for. Must be a multiple of 12. | Integer | YES |
-|`package_id`| The SSSL package to be purchased. See [Types of Certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
+|`package_id`| The SSSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
 
 
 __Example 4__
@@ -330,7 +330,7 @@ curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
 
 #### Creating a certificate without a CSR and Private Key
 
-When creating a certificate without a Certificate Signing Request and private key, all of the information necessary to create the CSR must be passed into the request.
+When creating a certificate without a certificate Signing Request and private key, all of the information necessary to create the CSR must be passed into the request.
 
 | Name | Description | Type | Required |
 | :--- | :--- | :---: | :---: |
@@ -375,7 +375,7 @@ Creating a certificate is an out-of-bandwidth process. Therefore, these payloads
 
 ## Delete
 
-### Delete Certificate
+### Delete a certificate
 
 Accessing the endpoint using the DELETE verb and providing a certificate_id as returned in GET or POST will remove the certificate from the system.
 
