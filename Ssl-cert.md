@@ -27,7 +27,7 @@ To retrieve all the information about all the certificates associated with an ac
 
 __Example 1__
 ```shell
-curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
+curl -v '__URL__/ssl-cert' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -72,7 +72,7 @@ __Payload 1__
       },
       "type": "ssl",
       "status": "enabled",
-      "description": "SSL Certificate - RVRepair.Directory",
+      "description": "SSL Certificate - site1.example.com",
       "nickname": "",
       "next_bill_date": 1569297600,
       "package": {
@@ -127,7 +127,7 @@ The API can return the data for a single certificate as well as [List all Certif
 
 __Example 2__
 ```shell
-curl -v 'https://demo2.nocworx.com/extranet/ssl-cert/CERT_ID' \
+curl -v '__URL__/ssl-cert/CERT_ID' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -183,9 +183,6 @@ curl -v '__URL__/ssl-cert/?filter[service_id]=SERVICE_ID' \
 ```
 
 
-
-
-
 ## POST
 
 ### Import Certificate
@@ -239,14 +236,14 @@ KEY=$(echo "$KEY" | php -r 'echo json_encode(file_get_contents("php://stdin"));'
 CRT=$(echo "$CRT" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
 CHAIN=$(echo "$CHAIN" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
 
-curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
+curl -v '__URL__/ssl-cert' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json' \
      --data-binary '{"chain_cert": '"$CHAIN"', "crt": '"$CRT"', "key": '"$KEY"'}'
 ```
 
-When properly encoded valid data is transmitted to the endpoint, the return payload will contain the newly created SSL certificate record ready to be attached to a cloud account.
+When properly encoded valid data is transmitted to the endpoint, the return payload will contain the newly created certificate record ready to be attached to a cloud account.
 
 __Payload 3__
 ```json
@@ -331,16 +328,16 @@ curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
      --data-binary '{"csr": '"$CSR"', "key": '"$KEY"', "months", 12,"package_id": 179}'
 ```
 
-#### Creating a Certificate without a CSR and Private Key
+#### Creating a certificate without a CSR and Private Key
 
 When creating a certificate without a Certificate Signing Request and private key, all of the information necessary to create the CSR must be passed into the request.
 
 | Name | Description | Type | Required |
 | :--- | :--- | :---: | :---: |
 |`months`| Number of months this certificate will be valid for. Must be a multiple of 12. | Integer | YES |
-|`package_id`| The SSSL package to be purchased. See [Types of Certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
+|`package_id`| The SSSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
 |`domain`| The fully qualified domain name (FQDN) that the certificate is for. | String | YES |
-|`approver_email`| The key of the array must match `domain` above. The value **MUST** BE "admin", "administrator","hostmaster", "postmaster","webmaster" at the domain specified in the certificate. If the domain specified is a subdomain, "admin or "administrator" at the root domain can also be used. (e.g. "admin@blog.example.com" or "administrator@example.com")  | Array | NO |
+|`approver_email`| The key of the array must match `domain` above. The value **MUST** be "admin", "administrator","hostmaster", "postmaster","webmaster" at the domain specified in the certificate. If the domain specified is a subdomain, "admin or "administrator" at the root domain can also be used. (e.g. "admin@blog.example.com" or "administrator@example.com")  | Array | NO |
 |`distinguished_name`| An array of the parts necessary to create the CSR. Contains the following seven items. | Array | YES |
 |`email`| An email address used to contact the organization.| String | YES |
 |`organization`| The legal name of the organization that owns the domain. Do not abbreviate and include any suffixes, such as Inc., Corp., or LLC. | String | YES |
@@ -351,7 +348,7 @@ When creating a certificate without a Certificate Signing Request and private ke
 |`organizational_unit`| The division of the organization handling the certificate.  | String | NO |
 
 ```shell
-curl -v '__URL__/extranet/ssl-cert' \
+curl -v '__URL__/ssl-cert' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json' \
@@ -374,7 +371,7 @@ __ Payload 4__
 }
 ```
 
-Creating a Certificate is an out-of-bandwidth process. Therefore, these payloads do not contain the `ssl_cert_id`. The `service_id` can be used to query the  [Retrieve a Certificate by `service_id`](#retrieve-a-certificate-by-service_id) endpoint. When the certificate is complete, the service will return a ssl-cert object as part of the payload. That will include the `ssl_cert_id` which can then be used on any of the `ssl-cert` endpoints.
+Creating a certificate is an out-of-bandwidth process. Therefore, these payloads do not contain the `ssl_cert_id`. The `service_id` can be used to query the  [Retrieve a certificate by `service_id`](#retrieve-a-certificate-by-service_id) endpoint. When the certificate is complete, the service will return a ssl-cert object as part of the payload. That will include the `ssl_cert_id` which can then be used on any of the `ssl-cert` endpoints.
 
 ## Delete
 
@@ -384,7 +381,7 @@ Accessing the endpoint using the DELETE verb and providing a certificate_id as r
 
 __Example 5__
 ```shell
-curl -v -X DELETE 'https://demo2.nocworx.com/extranet/ssl-cert/CERT_ID' \
+curl -v -X DELETE '__URL__/ssl-cert/CERT_ID' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
