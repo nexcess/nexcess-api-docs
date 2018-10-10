@@ -110,7 +110,7 @@ In the POST section there is an endpoint that will allow for the changing of the
 
 __Example 4__
 ```shell
-curl '__URL/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
