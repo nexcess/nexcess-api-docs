@@ -110,7 +110,7 @@ In the POST section there is an endpoint that will allow for the changing of the
 
 __Example 4__
 ```shell
-curl '__URL/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -134,7 +134,7 @@ Each cloud account is assigned 'remote user name'. This is the user for ssh and 
 
 __Example 5__
 ```shell
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-remote-username' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID/get-remote-username' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -225,7 +225,7 @@ This endpoint is used to retrieve the storage and bandwidth metrics associated w
 
 __Example 6__
 ```shell
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-usage-metrics' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID/get-usage-metrics' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -251,7 +251,7 @@ This endpoint can be used to retrieve the storage and bandwidth metrics associat
 
 __Example 7__
 ```shell
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
@@ -498,7 +498,7 @@ __Parameters__
 
 __Example 9__
 ```shell
-curl '__URL__/extranet/cloud-account' \
+curl '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -593,7 +593,7 @@ __Parameters__
 
 __Example 12__
 ```shell
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -629,7 +629,7 @@ __Parameters__
 
 __Example 13__
 ```shell
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -653,7 +653,7 @@ __Parameters__
 
 __Example 14__
 ```shell
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -687,7 +687,7 @@ __Parameters__
 
 __Example 15__
 ```shell
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -724,7 +724,7 @@ __Parameters__
 
 __Example 16__
 ```shell
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -761,7 +761,7 @@ __Parameters__
 __Example 17__
 ```shell
 # Add Pointer Domain
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -791,7 +791,7 @@ __Parameters__
 __Example 18__
 ```shell
 # Add Pointer Domain
-curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
