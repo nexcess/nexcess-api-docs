@@ -321,7 +321,7 @@ WS4xRl9VsWExMgBcPlqbUS/Uez+XTAw=
 KEY=$(echo "$KEY" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
 CSR=$(echo "$CSR" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
 
-curl -v 'https://demo2.nocworx.com/extranet/ssl-cert' \
+curl -v '__URL__/ssl-cert' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json' \
