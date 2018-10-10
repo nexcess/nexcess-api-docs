@@ -12,6 +12,7 @@ The `/ssl-cert` endpoint allows you to Install, retrieve and remove SSL certific
 - GET
   - [List all Certificates](#list-all-certificates)
   - [Retrieve a Certificate](#retrieve-a-certificate)
+  - [Retrieve a Certificate by `service_id`](#retrieve-a-certificate-by-service_id)
 - POST
   - [Import Certificate](#import-certificate)
   - [Create a Certificate](#create-a-certificate)
@@ -166,6 +167,24 @@ __Payload 2__
   ]
 }
 ```
+
+### Retrieve a Certificate by `service_id`
+
+When a certificate is created the API endpoint returns a Service object, not a certificate object in the payload. This is because the process of creating a certificate is an out-of-bandwidth process. To check the status of the certificate, poll this endpoint. When the certificate is complete and ready for use, this endpoint's payload will contain a Certificate object.
+
+>In the example below square brackets are shown for clarity. For this curl command to work, those must be url encoded. They must be replaced with `%5B` and `%5D` respectively.
+
+__Example 3__
+```shell
+curl -v '__URL__/ssl-cert/?filter[service_id]=SERVICE_ID' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json'
+```
+
+
+
+
 
 ## POST
 
@@ -339,8 +358,7 @@ curl -v '__URL__/extranet/ssl-cert' \
      --data-binary '{ "months": "12", "package_id": "179", "domain": "example.com", "distinguished_name": { "email": "john@example.com", "street": "123 Main Street", "locality": "Anytown", "state": "MI", "country": "US", "organization": "Acme Examples", "organizational_unit": "marketing"}, "approver_email": {"example.com": "admin@example.com"}}'
 ```
 
-
-The payload returned from both variations of the call are identical. Creating a Certificate is an out-of-bandwidth process. Therefore, these payloads do not contain the `ssl_cert_id`. The `service_id` can be used to query the  [status of a service](Service.md#get-the-staus-of-a-service). When the certificate is complete, the service will return a ssl-cert object as part of the payload. That will include the `ssl_cert_id` which can then be used on any of the `ssl-cert` endpoints.
+The payload returned from both variations of the call are identical.
 
 This payload has been truncated for brevity.
 
@@ -355,6 +373,8 @@ __ Payload 4__
   "service_id": XXXXX
 }
 ```
+
+Creating a Certificate is an out-of-bandwidth process. Therefore, these payloads do not contain the `ssl_cert_id`. The `service_id` can be used to query the  [Retrieve a Certificate by `service_id`](#retrieve-a-certificate-by-service_id) endpoint. When the certificate is complete, the service will return a ssl-cert object as part of the payload. That will include the `ssl_cert_id` which can then be used on any of the `ssl-cert` endpoints.
 
 ## Delete
 
