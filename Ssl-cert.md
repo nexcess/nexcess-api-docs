@@ -172,14 +172,72 @@ __Payload 2__
 
 When a certificate is created the API endpoint returns a Service object, not a certificate object in the payload. This is because the process of creating a certificate is an out-of-bandwidth process. To check the status of the certificate, poll this endpoint. When the certificate is complete and ready for use, this endpoint's payload will contain a ssl-cert object.
 
->In the example below square brackets are shown for clarity. For this curl command to work, those must be url encoded. They must be replaced with `%5B` and `%5D` respectively.
+>All parameters passed into `curl` on the url **must** be URLEncoded. In the example below [ and ] are urlencoded to %5B and %5D respectively.
 
 __Example 3__
 ```shell
-curl -v '__URL__/ssl-cert/?filter[service_id]=SERVICE_ID' \
+curl -v '__URL__/ssl-cert/?filter%5Bservice_id%5D=SERVICE_ID \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
      -H 'Content-Type: application/json' \
      -H 'Accept: application/json'
+```
+
+The payload returned is a list of exactly one certificate object that matched the `service_id` passed in on the URL.
+
+__Payload 3__
+```json
+
+[
+  {
+    "cert_id": XXXXX,
+    "common_name": "example.com",
+    "client_id": XXXXX,
+    "broker_id": 1,
+    "valid_from_date": 0,
+    "valid_to_date": 0,
+    "chain_crts": "",
+    "approver_email": "admin@example.com",
+    "alt_domains": "",
+    "duns": "",
+    "incorporating_agency": "",
+    "id": XXXXX,
+    "identity": "example.com",
+    "is_real": true,
+    "meta": {
+      "scope": "ssl-cert"
+    },
+    "crt": "",
+    "domain_count": 1,
+    "is_multi_domain": false,
+    "is_wildcard": false,
+    "is_installable": false,
+    "is_expired": true,
+    "alt_names": [],
+    "service": {
+      "id": XXXXX,
+      "identity": "SSL Certificate - example.com",
+      "is_real": true,
+      "meta": {
+        "scope": "service"
+      },
+      "type": "ssl",
+      "status": "enabled",
+      "description": "SSL Certificate - example.com",
+      "nickname": "",
+      "next_bill_date": 1570507200,
+      "package": {
+        "id": 179,
+        "identity": "SSL Certificate",
+        "is_real": true,
+        "meta": {
+          "scope": "package"
+        },
+        "type": "ssl",
+        "status": "web-active"
+      }
+    }
+  }
+]
 ```
 
 
@@ -208,7 +266,7 @@ Below the definition of the variables is where they are individually JSON encode
 
 Finally, in the `--data-binary` section of the curl call, the three variables are assembled into the final JSON payload.
 
-__Example 3__
+__Example 4__
 ```shell
 #!/bin/bash
 CHAIN="-----BEGIN CERTIFICATE-----
@@ -245,7 +303,7 @@ curl -v '__URL__/ssl-cert' \
 
 When properly encoded valid data is transmitted to the endpoint, the return payload will contain the newly created certificate record ready to be attached to a cloud account.
 
-__Payload 3__
+__Payload 4__
 ```json
 
 {
@@ -300,7 +358,7 @@ __Parameters__
 |`package_id`| The SSSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
 
 
-__Example 4__
+__Example 5__
 ```shell
 #!/bin/bash
 
@@ -359,7 +417,7 @@ The payload returned from both variations of the call are identical.
 
 This payload has been truncated for brevity.
 
-__ Payload 4__
+__Payload 5__
 
 ```json
 {
@@ -379,7 +437,7 @@ Creating a certificate is an out-of-bandwidth process. Therefore, these payloads
 
 Accessing the endpoint using the DELETE verb and providing a certificate_id as returned in GET or POST will remove the certificate from the system.
 
-__Example 5__
+__Example 6__
 ```shell
 curl -v -X DELETE '__URL__/ssl-cert/CERT_ID' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
