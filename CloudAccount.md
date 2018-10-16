@@ -30,7 +30,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Create remote user password](#create-remote-user-password)
   - [Add pointer domain](#add-pointer-domain)
   - [Remove pointer domain](#remove-pointer-domain)
-
+  - [Attach SSL Certificate](#attach-ssl-certificate)
 - DELETE
   - [Delete a backup](#delete-a-backup)
 
@@ -809,13 +809,89 @@ __Payload 4__
 
 If a domain is specified that does not exist as a pointer on the given cloud account a **422 Invalid Domain** will be returned.
 
+### Attach SSL Certificate
+
+This endpoint can be used in two ways.
+
+1. Attach an SSL certificate that was imported into the system using [Import Certificate](Ssl-cert.md/#import-certificate) to the specified cloud account.
+1. Add a new certificate/key combo into the system and attach the resulting ssl-cert to the specified cloud account.
+
+#### Method #1
+
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `install-ssl` | String | YES |
+| `cert_id` | The `cert_id` returned when the certificate was added to the system. | Integer | YES |
+
+__Example 19__
+```shell
+# Add Pointer Domain
+curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  --data-binary '{"_action": "install-ssl", "cert_id": XXX}'
+```
+
+Upon success, this endpoint will return a 200 OK. The payload returned is identical to [Payload 7](#payload7). The difference is that `ssl_cert_id` will be populated with the passed in `cert_id`.
+
+#### Method #2
+__Parameters__
+
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+| `_action` | `install-ssl` | String | YES |
+|`crt`| The certificate | String | YES |
+|`key`| The private key | String | YES |
+|`chain_cert`| Additional chain certificate | String | NO |
+
+This method is functionally identical to [Import Certificate](Ssl-cert.md/#import-certificate) with the added action that it will also attach the certificate to the cloud account.
+
+__Example 20__
+```shell
+#!/bin/bash
+CHAIN="-----BEGIN CERTIFICATE-----
+MIIGCDCCA/CgAwIBAgIQKy5u6tl1NmwUim7bo3yMBzANBgkqhkiG9w0BAQwFADCB
+         ...Many more lines that look like that...
+lBlGGSW4gNfL1IYoakRwJiNiqZ+Gb7+6kHDSVneFeO/qJakXzlByjAA6quPbYzSf
++AZxAeKCINT+b72x
+-----END CERTIFICATE-----"
+
+CRT="-----BEGIN CERTIFICATE-----
+MIIGbDCCBVSgAwIBAgIQfpsSGBm0aOWQUqAGPoxrizANBgkqhkiG9w0BAQsFADCB
+         ...Many more lines that look like that...
+gInCCoyPSIRMKy1l84XmzgFV065g3kqxHCK8O0jpkFWgF2xbZBJCj0tWnNaWXPId
+df6VNFF4+x1ub1x92UZ6ag==
+-----END CERTIFICATE-----"
+
+KEY="-----BEGIN PRIVATE KEY-----
+MIIJQwIBADANBgkqhkiG9w0BAQEFAASCCS0wggkpAgEAAoICAQCliHpsXji5TOQZ
+        ...Many MANY more lines that look like that...
+mWvRtmCdwO45XMKPLkglubG/PS/GEgXOscvT0mjExPAE+zHmnEShgN3Ph8ex2O2U
+WS4xRl9VsWExMgBcPlqbUS/Uez+XTAw=
+-----END PRIVATE KEY-----"
+
+KEY=$(echo "$KEY" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
+CRT=$(echo "$CRT" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
+CHAIN=$(echo "$CHAIN" | php -r 'echo json_encode(file_get_contents("php://stdin"));' )
+
+curl -v '__URL__/extranet/cloud-account/CLOUD_ACCOUT_ID' \
+     -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json' \
+     --data-binary '{"_action":"install-ssl", chain_cert": '"$CHAIN"', "crt": '"$CRT"', "key": '"$KEY"'}'
+```
+Upon success, this endpoint will return a 200 OK. The payload returned is identical to [Payload 7](#payload7). The difference is that `ssl_cert_id` will be populated with the passed in `cert_id`.
+
 # DELETE
 
 ## Delete a Backup
 
 The `cloud-account` endpoint can be used to delete backups created either via the API or the UI.
 
-__Example 19__
+__Example 21__
 ```shell
 curl -X DELETE '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup/URL_ENCODED_BACKUP_FILENAME' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
