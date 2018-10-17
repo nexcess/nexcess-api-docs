@@ -544,7 +544,8 @@ The `cloud-account` endpoint can be used to create an account backup.
 
 __Example 11__
 ```shell
-curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
+curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup
+' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
