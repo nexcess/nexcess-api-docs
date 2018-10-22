@@ -113,7 +113,7 @@ Downloading a backup using the API and curl requires a few extra switches. When 
 - `-k` must be specified so that curl will not reject the certificate
 - `-b ''` must be specified so that curls "cookie engine" will be engaged and cookies will be stored and passed. Passing an empty string satisfied the `-b` need for a file name. This will keep it from trying to interpret other switches or filenames as the cookiejar.
 
-It is also a good idea to specific the `-o LOCAL FILE NAME` option to store the contents of the file locally unless the contents are being piped to another command for additional processing. It is important to enclose the URL in single quotes as it will contain special characters like `&` that the shell will attempt to interpret if not in single quotes.
+It is also a good idea to specify the `-o LOCAL FILE NAME` option to store the contents of the file locally unless the contents are being piped to another command for additional processing. It is important to enclose the URL in single quotes as it will contain special characters like `&` that the shell will attempt to interpret if not in single quotes.
 
 > When using wget, no additional parameters are needed other than the URL.
 
