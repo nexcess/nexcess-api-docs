@@ -890,7 +890,7 @@ Upon success, this endpoint will return a 200 OK. The payload returned is identi
 
 ## Delete a Backup
 
-The `cloud-account` endpoint can be used to delete backups created either via the API or the UI.
+The `cloud-account` endpoint can be used to delete backups created either via the API or the UI. Use the DELETE verb and on the url pass in the `cloud_id` along with the url encoded name of the backup file.
 
 __Example 21__
 ```shell
@@ -900,7 +900,7 @@ curl -X DELETE '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup/URL_ENCODED_BACKUP
   -H 'Accept: application/json'
 ```
 
-Each entity returned in the [List All Backups](#list-all-backups) payload each has a `file_name` property. This is a URL Encoded version of the file name and is safe to use as it is in the DELETE call. Append the file name to the backup URL and then call with the DELETE verb.
+Each entity returned in the [List All Backups](#list-all-backups) payload has a `file_name` property. This is a URL Encoded version of the file name and is safe to use as it is in the DELETE call.
 
 DELETing a backup will not return any payload. It will however return a 200 OK upon success.
 
