@@ -107,13 +107,15 @@ __Payload 1__
 
 ### Download a backup
 
-Downloading a backup using the API and curl requires a few extra switches. When a backup is complete (`complete` === `true`) download_url will be added to the payload returned from [List all backups](#list-all-backups). That url is the URL used to download the backup tarball. That URL however, will redirect at least once. Additionally, it will set cookies to let the redirected url know that authorization has been completed. Therefore, when using curl from the command line:
+Downloading a backup using the API and curl requires a few extra switches. When a backup is complete (`complete` === `true`), `download_url` will be added to the payload returned from [List all backups](#list-all-backups). That URL is the URL used to download the backup file. That URL however, will redirect at least once. Additionally, it will set cookies to let the redirected URL know that authorization has been completed. Therefore, when using curl from the command line:
 
 - `-L` must be specified so that curl will follow redirects
 - `-k` must be specified so that curl will not reject the certificate
 - `-b` must be specified so that curls "cookie engine" will be engaged and cookies will be stored and passed
 
 It is also a good idea to specific the `-o LOCAL FILE NAME` option to store the contents of the file locally unless the contents are being piped to another command for additional processing.
+
+> When using wget, no additional parameters are needed other than the URL.
 
 __Example 4__
 ```shell
