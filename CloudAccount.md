@@ -13,6 +13,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Retrieve a list of cloud accounts](#retrieve-list-of-cloud-accounts)
   - [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service)
   - [List all backups](#list-all-backups)
+  - [Download a backup](#download-a-backup)
   - [Get available versions of PHP](#get-the-list-of-php-versions)
   - [Get remote user name](#get-remote-user-name)
   - [Get usage metrics](#get-usage-metrics)
@@ -104,11 +105,32 @@ __Payload 1__
 ]
 ```
 
+### Download a backup
+
+Downloading a backup using the API and curl requires a few extra switches. When a backup is complete (`complete` === `true`), `download_url` will be added to the payload returned from [List all backups](#list-all-backups). That URL is the URL used to download the backup file. That URL however, will redirect at least once. Additionally, it will set cookies to let the redirected URL know that authorization has been completed. Therefore, when using curl from the command line:
+
+- `-L` must be specified so that curl will follow redirects
+- `-k` must be specified so that curl will not reject the certificate
+- `-b ''` must be specified so that curls "cookie engine" will be engaged and cookies will be stored and passed. Passing an empty string satisfied the `-b` need for a file name. This will keep it from trying to interpret other switches or filenames as the cookiejar.
+
+It is also a good idea to specify the `-o LOCAL FILE NAME` option to store the contents of the file locally unless the contents are being piped to another command for additional processing. It is important to enclose the URL in single quotes as it will contain special characters like `&` that the shell will attempt to interpret if not in single quotes.
+
+> When using wget, no additional parameters are needed other than the URL.
+
+__Example 4__
+```shell
+curl -L -k -b '' -o LOCAL_FILE_NAME 'DOWNLOAD_URL' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE'
+```
+
+The only payload returned is the binary contents of the file requested.
+
+
 ### Get the List of PHP Versions
 
 In the POST section there is an endpoint that will allow for the changing of the version of PHP installed on a given cloud account. Not all versions of PHP are supported. In most cases, the last four or five minor versions are available. The actual version installed will be the latest patch level released for the version chosen. (e.g. if 7.1 is chosen then 7.1.22 will be installed.)
 
-__Example 4__
+__Example 5__
 ```shell
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID/get-php-versions' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -132,7 +154,7 @@ __Payload 2__
 
 Each cloud account is assigned 'remote user name'. This is the user for ssh and sftp. This endpoint allows for the retrieval of that user name.
 
-__Example 5__
+__Example 6__
 ```shell
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID/get-remote-username' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -223,7 +245,7 @@ If the password has already been viewed but was not recorded, it cannot be retri
 
 This endpoint is used to retrieve the storage and bandwidth metrics associated with a given cloud account.
 
-__Example 6__
+__Example 7__
 ```shell
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID/get-usage-metrics' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -249,7 +271,7 @@ __Payload 5__
 
 This endpoint can be used to retrieve the storage and bandwidth metrics associated with a given cloud account.
 
-__Example 7__
+__Example 8__
 ```shell
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID/get-pointer-domains' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -309,7 +331,7 @@ __Parameters__
 | `install_app` | "ON" or "OFF" (TRUE or FALSE).<br >Tells the system whether or not to actually install the application requested or to only prepare the server environment.  | Boolean | NO |
 
 
-__Example 8__
+__Example 9__
 ```shell
 curl '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -496,7 +518,7 @@ __Parameters__
 | `scrub_account` | `purge-cache` | Boolean | YES |
 | `_action` | If set to true then data in the database will be anonymized. This is an optional parameter. | Boolean | NO |
 
-__Example 9__
+__Example 10__
 ```shell
 curl '__URL__/cloud-account' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -525,7 +547,7 @@ __Parameters__
 | :--- | :--- | :---: | :---: |
 | `_action` | `purge-cache` | String | YES |
 
-__Example 10__
+__Example 11__
 ```shell
 curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -542,7 +564,7 @@ The clearing of the cache is an out-of-bandwidth process. A 200 OK return indica
 
 The `cloud-account` endpoint can be used to create an account backup.
 
-__Example 11__
+__Example 12__
 ```shell
 curl -X POST '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup
 ' \
@@ -592,7 +614,7 @@ __Parameters__
 | `php_version` | One of the valid PHP versions listed by the [Get available versions of PHP](#get-the-list-of-php-versions) endpoint. | String | YES |
 
 
-__Example 12__
+__Example 13__
 ```shell
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -628,7 +650,7 @@ __Parameters__
 | `package_id` | the Nexcess id for the new server package to size the cloud account to. See '[Listing Packages](Packages.md)' to get a list of available `package_id` values. | Integer | YES |
 
 
-__Example 13__
+__Example 14__
 ```shell
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -652,7 +674,7 @@ __Parameters__
 | `autoscale` | `true` or `false` | Boolean | YES |
 
 
-__Example 14__
+__Example 15__
 ```shell
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -686,7 +708,7 @@ __Parameters__
 | `enabled` | `true` or `false` | Boolean | YES |
 
 
-__Example 15__
+__Example 16__
 ```shell
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -723,7 +745,7 @@ __Parameters__
 | `_action` | `set-set-remote-password` | String | YES |
 
 
-__Example 16__
+__Example 17__
 ```shell
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -759,7 +781,7 @@ __Parameters__
 | `domain` | Any valid domain name  | String | YES |
 
 
-__Example 17__
+__Example 18__
 ```shell
 # Add Pointer Domain
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
@@ -789,7 +811,7 @@ __Parameters__
 | `_action` | `remove-pointer-domain` | String | YES |
 | `domain` | The domain to be removed  | String | YES |
 
-__Example 18__
+__Example 19__
 ```shell
 # Add Pointer Domain
 curl '__URL__/cloud-account/CLOUD_ACCOUNT_ID' \
@@ -826,7 +848,7 @@ __Parameters__
 | `_action` | `install-ssl` | String | YES |
 | `cert_id` | The `cert_id` returned when the certificate was added to the system. | Integer | YES |
 
-__Example 19__
+__Example 20__
 ```shell
 # Add Pointer Domain
 curl '__URL__/extranet/cloud-account/CLOUD_ACCOUNT_ID' \
@@ -850,7 +872,7 @@ __Parameters__
 
 This method is functionally identical to [Import Certificate](Ssl-cert.md/#import-certificate) with the added action that it will also attach the certificate to the cloud account.
 
-__Example 20__
+__Example 21__
 ```shell
 #!/bin/bash
 CHAIN="-----BEGIN CERTIFICATE-----
@@ -890,9 +912,9 @@ Upon success, this endpoint will return a 200 OK. The payload returned is identi
 
 ## Delete a Backup
 
-The `cloud-account` endpoint can be used to delete backups created either via the API or the UI.
+The `cloud-account` endpoint can be used to delete backups created either via the API or the UI. Use the DELETE verb and on the url pass in the `cloud_id` along with the url encoded name of the backup file.
 
-__Example 21__
+__Example 22__
 ```shell
 curl -X DELETE '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup/URL_ENCODED_BACKUP_FILENAME' \
   -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -900,7 +922,7 @@ curl -X DELETE '__URL__/cloud-account/CLOUD_ACCOUNT_ID/backup/URL_ENCODED_BACKUP
   -H 'Accept: application/json'
 ```
 
-Each entity returned in the [List All Backups](#list-all-backups) payload each has a `file_name` property. This is a URL Encoded version of the file name and is safe to use as it is in the DELETE call. Append the file name to the backup URL and then call with the DELETE verb.
+Each entity returned in the [List All Backups](#list-all-backups) payload has a `file_name` property. This is a URL Encoded version of the file name and is safe to use as it is in the DELETE call.
 
 DELETing a backup will not return any payload. It will however return a 200 OK upon success.
 
