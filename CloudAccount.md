@@ -13,6 +13,7 @@ The cloud-account endpoint is use to both create and manage cloud accounts and m
   - [Retrieve a list of cloud accounts](#retrieve-list-of-cloud-accounts)
   - [Retrieve information on a specific cloud account](#retrieve-information-on-a-specific-cloud-account-and-related-service)
   - [List all backups](#list-all-backups)
+  - [Download a backup](#download-a-backup)
   - [Get available versions of PHP](#get-the-list-of-php-versions)
   - [Get remote user name](#get-remote-user-name)
   - [Get usage metrics](#get-usage-metrics)
@@ -103,6 +104,27 @@ __Payload 1__
   }
 ]
 ```
+
+### Download a backup
+
+Downloading a backup using the API and curl requires a few extra switches. When a backup is complete (`complete` === `true`) download_url will be added to the payload returned from [List all backups](#list-all-backups). That url is the URL used to download the backup tarball. That URL however, will redirect at least once. Additionally, it will set cookies to let the redirected url know that authorization has been completed. Therefore, when using curl from the command line:
+
+- `-L` must be specified so that curl will follow redirects
+- `-k` must be specified so that curl will not reject the certificate
+- `-b` must be specified so that curls "cookie engine" will be engaged and cookies will be stored and passed
+
+It is also a good idea to specific the `-o LOCAL FILE NAME` option to store the contents of the file locally unless the contents are being piped to another command for additional processing.
+
+__Example 3__
+```shell
+curl -L -k -b  -o LOCAL_FILE_NAME 'DOWNLOAD_URL' \
+  -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+```
+
+The only payload returned is the binary contents of the file requested.
+
 
 ### Get the List of PHP Versions
 
