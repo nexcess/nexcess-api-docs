@@ -340,6 +340,11 @@ curl -k '__URL__/ssl-cert/decode-csr' \
     --data-binary '{"csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICtzCCAZ8CAQAwcjELMAkGA1UEBhMCVVMxFDASBgNVBAMMC2V4YW1wbGUuY29t\n...Many more lines like this...\nOHRsapwAlYCXSwq2fRKfMjOu\/5ywRom7S6WMxYK\/pHC0sM5Z80OZal2JFiyNtTyM\nCX+0VBK6bbsR0uB\/Wd16Ea3\/WcP5rzrR72up\n-----END CERTIFICATE REQUEST-----\n\n", "domains": "example.com", "package_id": 179 }'
 ```
 
+#### Approvers
+The payload returned from the previous two endpoints includes an array, `approvers`. This array contains an element for each domain that the CSR covers, including `commonName`. Each element is an array of email addresses. These are the only valid email addresses that approval emails will be sent to for each domain. One of these email addresses must be selected and returned when requesting the certificate. At that point, an email will be sent to the address and the certificate will only be approved after the instructions in the email are followed. The email addresses in this array are the only email addresses that can be used for the approval process. The email address chosen will only be used once, during the approval process and will not be used again.
+
+
+
 ## POST
 
 ### Import a certificate
