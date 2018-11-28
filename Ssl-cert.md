@@ -13,6 +13,8 @@ The `/ssl-cert` endpoint allows you to Install, retrieve and remove SSL certific
   - [List all certificates](#list-all-certificates)
   - [Retrieve a certificate](#retrieve-a-certificate)
   - [Retrieve a certificate by `service_id`](#retrieve-a-certificate-by-service_id)
+  - [Get CSR Details](#get-csr-details)
+  - [Decode CSR](#decode-csr)
 - POST
   - [Import a certificate](#import-a-certificate)
   - [Create a certificate](#create-a-certificate)
@@ -240,6 +242,64 @@ __Payload 3__
 ]
 ```
 
+### Get CSR Details
+There are two ways to call this endpoint.
+
+1. Call the endpoint with a proper payload. This will generate a CSR and return the distinguished name, the list of possible authorized email addresses for each domain covered by the certificate.
+1. Call the endpoint with the ID of an existing certificate. In this scenario, the payload must contain the parameter `_action` and the value must be `get-csr-details`. In this case, the payload returned will contain the same information, however it will be for the CSR for the existing certification specified.
+
+#### Scenario 1
+This requires no certificate ID but it does require a properly populated payload. A new CSR is created during this process.
+
+__Parameters__
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`months`| Always 12 | Integer | YES |
+|`package_id`| The SSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
+|`domain`| The fully qualified domain name (FQDN) that the certificate is for. | String | YES |
+|`distinguished_name`| An array of the parts necessary to create the CSR. Contains the following seven items. (See array definition below) | Array | YES |
+
+##### Distinguished Name
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`email`| An email address used to contact the organization.| String | YES |
+|`organization`| The legal name of the organization that owns the domain. Do not abbreviate and include any suffixes, such as Inc., Corp., or LLC. | String | YES |
+|`street`| The street address for the owner of the domain  | String | YES |
+|`locality`| The city where the organization is located. This shouldn’t be abbreviated.  | String | YES |
+|`state`| TThe state/region where the organization is located. This shouldn't be abbreviated.  | String | YES |
+|`country`| The two-letter code for the country where the organization is located.  | String | YES |
+|`organizational_unit`| The division of the organization handling the certificate.  | String | NO |
+
+__Example 4__
+```shell
+curl -k '__URL__/ssl-cert/get-csr-details' \
+    -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    --data-binary '{"distinguished_name": { "email": "john@example.com", "street": "123 Main Street", "locality": "Anytown", "state": "MI", "country": "US", "organization": "Acme Examples", "organizational_unit": "marketing"},"domains": "example.com", "months": 12, "package_id": 179 }'
+```
+
+#### Scenario 2
+The existing `cert_id` is passed in as part of the URI. A new CSR is not created but the certificate's existing CSR is decoded and the results returned.
+
+__Parameters__
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`_action`| `get-csr-details` | String | YES |
+
+
+__Example 5__
+```shell
+curl -k '__URL__/ssl-cert/get-csr-details/CERT_ID' \
+    -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    --data-binary '{"_action": "get-csr-details"}'
+```
+
+
+### Decode CSR
+
 
 ## POST
 
@@ -355,7 +415,7 @@ __Parameters__
 |`csr`| The certificate signing request | String | YES |
 |`key`| The private key | String | YES |
 |`months`| Number of months this certificate will be valid for. Must be a multiple of 12. | Integer | YES |
-|`package_id`| The SSSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
+|`package_id`| The SSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
 
 
 __Example 5__
@@ -393,9 +453,8 @@ When creating a certificate without a certificate Signing Request and private ke
 | Name | Description | Type | Required |
 | :--- | :--- | :---: | :---: |
 |`months`| Number of months this certificate will be valid for. Must be a multiple of 12. | Integer | YES |
-|`package_id`| The SSSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
+|`package_id`| The SSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
 |`domain`| The fully qualified domain name (FQDN) that the certificate is for. | String | YES |
-|`approver_email`| The key of the array must match `domain` above. The value **MUST** be "admin", "administrator","hostmaster", "postmaster","webmaster" at the domain specified in the certificate. If the domain specified is a subdomain, "admin or "administrator" at the root domain can also be used. (e.g. "admin@blog.example.com" or "administrator@example.com")  | Array | NO |
 |`distinguished_name`| An array of the parts necessary to create the CSR. Contains the following seven items. | Array | YES |
 |`email`| An email address used to contact the organization.| String | YES |
 |`organization`| The legal name of the organization that owns the domain. Do not abbreviate and include any suffixes, such as Inc., Corp., or LLC. | String | YES |
@@ -404,6 +463,7 @@ When creating a certificate without a certificate Signing Request and private ke
 |`state`| TThe state/region where the organization is located. This shouldn't be abbreviated.  | String | YES |
 |`country`| The two-letter code for the country where the organization is located.  | String | YES |
 |`organizational_unit`| The division of the organization handling the certificate.  | String | NO |
+|`approver_email`| The key of the array must match `domain` above. The value **MUST** be "admin", "administrator","hostmaster", "postmaster","webmaster" at the domain specified in the certificate. If the domain specified is a subdomain, "admin or "administrator" at the root domain can also be used. (e.g. "admin@blog.example.com" or "administrator@example.com")  | Array | NO |
 
 ```shell
 curl -v '__URL__/ssl-cert' \
