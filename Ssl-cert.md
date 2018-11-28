@@ -303,7 +303,7 @@ Both scenarios return the same payload.
 - The `san` array is any additional domain names beyond the `commonName` that are included in the certificate request.
 - The `approvers` array is an array of email addresses. Each domain, `commonName`, and each additional domain, will have an array of email addresses in this array. These are the only valid email addresses that the approval emails can be sent to. For each domain, one of these addresses must be selected and sent with the request for the certificate. An ownership validation email will be sent to the addresses specified. The certificate cannot be issued until ownership of all domains has been verified.
 
-__Payload 4__
+<a name="payload4">__Payload 4__</a>
 ```json
 {
   "dn": {
@@ -329,7 +329,7 @@ __Payload 4__
 ```
 
 ### Decode CSR
-This endpoint is similar in nature to [Get CSR Details](#get-csr-details). However, unlike [Get CSR Details](#get-csr-details), there is only one way to call this endpoint. It's payload is a CSR and the `package_id` of the package the certificate is being pushed under. This endpoint will decode the passed in CSR and return This endpoint will validate whether the CSR is valid for the package type. (e.g. if the commonName specified is a wild card hostname, ensure that the package specified is for a wild card certificate.) It will return a payload identical in structure to Payload 4.
+This endpoint is similar in nature to [Get CSR Details](#get-csr-details). However, unlike [Get CSR Details](#get-csr-details), there is only one way to call this endpoint. It's payload is a CSR and the `package_id` of the package the certificate is being pushed under. This endpoint will decode the passed in CSR and return This endpoint will validate whether the CSR is valid for the package type. (e.g. if the commonName specified is a wild card hostname, ensure that the package specified is for a wild card certificate.) This endpoint will return a payload identical in structure to [Payload 4](#payload4).
 
 __Example 6__
 ```shell
@@ -365,7 +365,7 @@ Below the definition of the variables is where they are individually JSON encode
 
 Finally, in the `--data-binary` section of the curl call, the three variables are assembled into the final JSON payload.
 
-__Example 4__
+__Example 7__
 ```shell
 #!/bin/bash
 CHAIN="-----BEGIN CERTIFICATE-----
@@ -402,7 +402,7 @@ curl -v '__URL__/ssl-cert' \
 
 When properly encoded valid data is transmitted to the endpoint, the return payload will contain the newly created certificate record ready to be attached to a cloud account.
 
-__Payload 4__
+__Payload 5__
 ```json
 
 {
@@ -457,7 +457,7 @@ __Parameters__
 |`package_id`| The SSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
 
 
-__Example 5__
+__Example 8__
 ```shell
 #!/bin/bash
 
@@ -504,6 +504,7 @@ When creating a certificate without a certificate Signing Request and private ke
 |`organizational_unit`| The division of the organization handling the certificate.  | String | NO |
 |`approver_email`| The key of the array must match `domain` above. The value **MUST** be "admin", "administrator","hostmaster", "postmaster","webmaster" at the domain specified in the certificate. If the domain specified is a subdomain, "admin or "administrator" at the root domain can also be used. (e.g. "admin@blog.example.com" or "administrator@example.com")  | Array | NO |
 
+__Example 9__
 ```shell
 curl -v '__URL__/ssl-cert' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
@@ -516,7 +517,7 @@ The payload returned from both variations of the call are identical.
 
 This payload has been truncated for brevity.
 
-__Payload 5__
+__Payload 6__
 
 ```json
 {
@@ -536,7 +537,7 @@ Creating a certificate is an out-of-bandwidth process. Therefore, these payloads
 
 Accessing the endpoint using the DELETE verb and providing a certificate_id as returned in GET or POST will remove the certificate from the system.
 
-__Example 6__
+__Example 10__
 ```shell
 curl -v -X DELETE '__URL__/ssl-cert/CERT_ID' \
      -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
