@@ -453,7 +453,7 @@ __Parameters__
 | :--- | :--- | :---: | :---: |
 |`csr`| The certificate signing request | String | YES |
 |`key`| The private key | String | YES |
-|`months`| Number of months this certificate will be valid for. Must be a multiple of 12. | Integer | YES |
+|`months`| Always 12. | Integer | YES |
 |`package_id`| The SSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
 
 
@@ -491,10 +491,15 @@ When creating a certificate without a certificate Signing Request and private ke
 
 | Name | Description | Type | Required |
 | :--- | :--- | :---: | :---: |
-|`months`| Number of months this certificate will be valid for. Must be a multiple of 12. | Integer | YES |
+|`months`| Always 12. | Integer | YES |
 |`package_id`| The SSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
 |`domain`| The fully qualified domain name (FQDN) that the certificate is for. | String | YES |
-|`distinguished_name`| An array of the parts necessary to create the CSR. Contains the following seven items. | Array | YES |
+|`approver_email`| This array needs to have one key for each domain in the certificate including `commonName`. The value for each element is the email address to which the approver email is sent. **These email addresses must be one of the 'approved' approver email addresses.** To get a list of the 'approved' email addresses for a certificate, use the [Decode CSR](#decode-csr) endpoint.  | Array | YES |
+|`distinguished_name`| An array of the parts necessary to create the CSR. See structure of array below.| Array | YES |
+
+##### Distinguished Name
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
 |`email`| An email address used to contact the organization.| String | YES |
 |`organization`| The legal name of the organization that owns the domain. Do not abbreviate and include any suffixes, such as Inc., Corp., or LLC. | String | YES |
 |`street`| The street address for the owner of the domain  | String | YES |
@@ -502,7 +507,6 @@ When creating a certificate without a certificate Signing Request and private ke
 |`state`| TThe state/region where the organization is located. This shouldn't be abbreviated.  | String | YES |
 |`country`| The two-letter code for the country where the organization is located.  | String | YES |
 |`organizational_unit`| The division of the organization handling the certificate.  | String | NO |
-|`approver_email`| The key of the array must match `domain` above. The value **MUST** be "admin", "administrator","hostmaster", "postmaster","webmaster" at the domain specified in the certificate. If the domain specified is a subdomain, "admin or "administrator" at the root domain can also be used. (e.g. "admin@blog.example.com" or "administrator@example.com")  | Array | NO |
 
 __Example 9__
 ```shell
