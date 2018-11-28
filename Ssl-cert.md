@@ -301,7 +301,7 @@ Both scenarios return the same payload.
 
 - The `dn` array is the distinguished name array decoded from the CSR.
 - The `san` array is any additional domain names beyond the `commonName` that are included in the certificate request.
-- The `approvers` array is an array of email addresses. Each domain, `commonName`, and each additional domain, will have an array of email addresses in this array. These are the only valid email addresses that the approval emails can be sent to. For each domain, one of these addresses must be selected and sent with the request for the certificate. A ownership validation email will be sent to the addresses specified. The certificate cannot be issued until ownership of all domains has been verified.
+- The `approvers` array is an array of email addresses. Each domain, `commonName`, and each additional domain, will have an array of email addresses in this array. These are the only valid email addresses that the approval emails can be sent to. For each domain, one of these addresses must be selected and sent with the request for the certificate. An ownership validation email will be sent to the addresses specified. The certificate cannot be issued until ownership of all domains has been verified.
 
 __Payload 4__
 ```json
@@ -328,6 +328,18 @@ __Payload 4__
 }
 ```
 
+### Decode CSR
+This endpoint is similar in nature to [Get CSR Details](#get-csr-details). However, unlike [Get CSR Details](#get-csr-details), there is only one way to call this endpoint. It's payload is a CSR and the `package_id` of the package the certificate is being pushed under. This endpoint will decode the passed in CSR and return This endpoint will validate whether the CSR is valid for the package type. (e.g. if the commonName specified is a wild card hostname, ensure that the package specified is for a wild card certificate.) It will return a payload identical in structure to Payload 4.
+
+__Example 6__
+```shell
+curl -k '__URL__/ssl-cert/decode-csr' \
+    -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    --data-binary '{"csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICtzCCAZ8CAQAwcjELMAkGA1UEBhMCVVMxFDASBgNVBAMMC2V4YW1wbGUuY29t\n...Many more lines like this...\nOHRsapwAlYCXSwq2fRKfMjOu\/5ywRom7S6WMxYK\/pHC0sM5Z80OZal2JFiyNtTyM\nCX+0VBK6bbsR0uB\/Wd16Ea3\/WcP5rzrR72up\n-----END CERTIFICATE REQUEST-----\n\n", "domains": "example.com", "package_id": 179 }'
+```
+
 ## POST
 
 ### Import a certificate
@@ -343,7 +355,7 @@ __Parameters__
 
 Unlike other endpoints that take parameters, these three parameters are very large and specifically formatted. The key and the certificates have to be JSON encoded to be submitted.
 
-**The sample below is for experimental purposes only. Do not store keys or certificates in script files.**
+**The sample below is for demonstration purposes only. Never store keys or certificates in script files.**
 
 In this sample shell script, all three parameters are defined as variables. They have been edited for brevity. Substitute valid keys and certificates before attempting to run the script.
 
