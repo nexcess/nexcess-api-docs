@@ -297,9 +297,36 @@ curl -k '__URL__/ssl-cert/get-csr-details/CERT_ID' \
     --data-binary '{"_action": "get-csr-details"}'
 ```
 
+Both scenarios return the same payload.
 
-### Decode CSR
+- The `dn` array is the distinguished name array decoded from the CSR.
+- The `san` array is any additional domain names beyond the `commonName` that are included in the certificate request.
+- The `approvers` array is an array of email addresses. Each domain, `commonName`, and each additional domain, will have an array of email addresses in this array. These are the only valid email addresses that the approval emails can be sent to. For each domain, one of these addresses must be selected and sent with the request for the certificate. A ownership validation email will be sent to the addresses specified. The certificate cannot be issued until ownership of all domains has been verified.
 
+__Payload 4__
+```json
+{
+  "dn": {
+    "commonName": "example.com",
+    "countryName": "US",
+    "stateOrProvinceName": "MICHIGAN",
+    "localityName": "ANYTOWN",
+    "organizationName": "Acme Examples",
+    "organizationalUnitName": "marketing",
+    "emailAddress": "admin@example.com"
+  },
+  "san": [],
+  "approvers": {
+    "example.com": [
+      "admin@example.com",
+      "administrator@example.com",
+      "hostmaster@example.com",
+      "postmaster@example.com",
+      "webmaster@example.com"
+    ]
+  }
+}
+```
 
 ## POST
 
