@@ -14,10 +14,10 @@ The `/ssl-cert` endpoint allows you to Install, retrieve and remove SSL certific
   - [Retrieve a certificate](#retrieve-a-certificate)
   - [Retrieve a certificate by `service_id`](#retrieve-a-certificate-by-service_id)
   - [Get CSR Details](#get-csr-details)
-  - [Decode CSR](#decode-csr)
 - POST
   - [Import a certificate](#import-a-certificate)
   - [Create a certificate](#create-a-certificate)
+  - [Decode CSR](#decode-csr)
 - Delete
   - [Delete a certificate](#delete-a-certificate)
 
@@ -242,109 +242,6 @@ __Payload 3__
 ]
 ```
 
-### Get CSR Details
-There are two ways to call this endpoint.
-
-1. Call the endpoint with a proper payload. This will generate a CSR and return the distinguished name, the list of possible authorized email addresses for each domain covered by the certificate.
-1. Call the endpoint with the ID of an existing certificate. In this scenario, the payload must contain the parameter `_action` and the value must be `get-csr-details`. In this case, the payload returned will contain the same information, however it will be for the CSR for the existing certification specified.
-
-#### Scenario 1
-This requires no certificate ID but it does require a properly populated payload. A new CSR is created during this process.
-
-__Parameters__
-| Name | Description | Type | Required |
-| :--- | :--- | :---: | :---: |
-|`months`| Always 12 | Integer | YES |
-|`package_id`| The SSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
-|`domain`| The fully qualified domain name (FQDN) that the certificate is for. | String | YES |
-|`distinguished_name`| An array of the parts necessary to create the CSR. Contains the following seven items. (See array definition below) | Array | YES |
-
-##### Distinguished Name
-| Name | Description | Type | Required |
-| :--- | :--- | :---: | :---: |
-|`email`| An email address used to contact the organization.| String | YES |
-|`organization`| The legal name of the organization that owns the domain. Do not abbreviate and include any suffixes, such as Inc., Corp., or LLC. | String | YES |
-|`street`| The street address for the owner of the domain  | String | YES |
-|`locality`| The city where the organization is located. This shouldn’t be abbreviated.  | String | YES |
-|`state`| TThe state/region where the organization is located. This shouldn't be abbreviated.  | String | YES |
-|`country`| The two-letter code for the country where the organization is located.  | String | YES |
-|`organizational_unit`| The division of the organization handling the certificate.  | String | NO |
-
-__Example 4__
-```shell
-curl -k '__URL__/ssl-cert/get-csr-details' \
-    -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    --data-binary '{"distinguished_name": { "email": "john@example.com", "street": "123 Main Street", "locality": "Anytown", "state": "MI", "country": "US", "organization": "Acme Examples", "organizational_unit": "marketing"},"domains": "example.com", "months": 12, "package_id": 179 }'
-```
-
-#### Scenario 2
-The existing `cert_id` is passed in as part of the URI. A new CSR is not created but the certificate's existing CSR is decoded and the results returned.
-
-__Parameters__
-| Name | Description | Type | Required |
-| :--- | :--- | :---: | :---: |
-|`_action`| `get-csr-details` | String | YES |
-
-
-__Example 5__
-```shell
-curl -k '__URL__/ssl-cert/get-csr-details/CERT_ID' \
-    -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    --data-binary '{"_action": "get-csr-details"}'
-```
-
-Both scenarios return the same payload.
-
-- The `dn` array is the distinguished name array decoded from the CSR.
-- The `san` array is any additional domain names beyond the `commonName` that are included in the certificate request.
-- The `approvers` array is an array of email addresses. Each domain, `commonName`, and each additional domain, will have an array of email addresses in this array. These are the only valid email addresses that the approval emails can be sent to. For each domain, one of these addresses must be selected and sent with the request for the certificate. An ownership validation email will be sent to the addresses specified. The certificate cannot be issued until ownership of all domains has been verified.
-
-<a name="payload4">__Payload 4__</a>
-```json
-{
-  "dn": {
-    "commonName": "example.com",
-    "countryName": "US",
-    "stateOrProvinceName": "MICHIGAN",
-    "localityName": "ANYTOWN",
-    "organizationName": "Acme Examples",
-    "organizationalUnitName": "marketing",
-    "emailAddress": "admin@example.com"
-  },
-  "san": [],
-  "approvers": {
-    "example.com": [
-      "admin@example.com",
-      "administrator@example.com",
-      "hostmaster@example.com",
-      "postmaster@example.com",
-      "webmaster@example.com"
-    ]
-  }
-}
-```
-
-### Decode CSR
-This endpoint is similar in nature to [Get CSR Details](#get-csr-details). However, unlike [Get CSR Details](#get-csr-details), there is only one way to call this endpoint. It's payload is a CSR and the `package_id` of the package the certificate is being pushed under. This endpoint will decode the passed in CSR and return This endpoint will validate whether the CSR is valid for the package type. (e.g. if the commonName specified is a wild card hostname, ensure that the package specified is for a wild card certificate.) This endpoint will return a payload identical in structure to [Payload 4](#payload4).
-
-__Example 6__
-```shell
-curl -k '__URL__/ssl-cert/decode-csr' \
-    -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    --data-binary '{"csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICtzCCAZ8CAQAwcjELMAkGA1UEBhMCVVMxFDASBgNVBAMMC2V4YW1wbGUuY29t\n...Many more lines like this...\nOHRsapwAlYCXSwq2fRKfMjOu\/5ywRom7S6WMxYK\/pHC0sM5Z80OZal2JFiyNtTyM\nCX+0VBK6bbsR0uB\/Wd16Ea3\/WcP5rzrR72up\n-----END CERTIFICATE REQUEST-----\n\n", "domains": "example.com", "package_id": 179 }'
-```
-
-#### Approvers
-The payload returned from the previous two endpoints includes an array, `approvers`. This array contains an element for each domain that the CSR covers, including `commonName`. Each element is an array of email addresses. These are the only valid email addresses that approval emails will be sent to for each domain. One of these email addresses must be selected and returned when requesting the certificate. At that point, an email will be sent to the address and the certificate will only be approved after the instructions in the email are followed. The email addresses in this array are the only email addresses that can be used for the approval process. The email address chosen will only be used once, during the approval process and will not be used again.
-
-
-
 ## POST
 
 ### Import a certificate
@@ -539,6 +436,109 @@ __Payload 6__
 ```
 
 Creating a certificate is an out-of-bandwidth process. Therefore, these payloads do not contain the `ssl_cert_id`. The `service_id` can be used to query the  [Retrieve a certificate by `service_id`](#retrieve-a-certificate-by-service_id) endpoint. When the certificate is complete, the service will return a ssl-cert object as part of the payload. That will include the `ssl_cert_id` which can then be used on any of the `ssl-cert` endpoints.
+
+
+### Get CSR Details
+There are two ways to call this endpoint.
+
+1. Call the endpoint with a proper payload. This will generate a CSR and return the distinguished name, the list of possible authorized email addresses for each domain covered by the certificate.
+1. Call the endpoint with the ID of an existing certificate. In this scenario, the payload must contain the parameter `_action` and the value must be `get-csr-details`. In this case, the payload returned will contain the same information, however it will be for the CSR for the existing certification specified.
+
+#### Scenario 1
+This requires no certificate ID but it does require a properly populated payload. A new CSR is created during this process.
+
+__Parameters__
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`months`| Always 12 | Integer | YES |
+|`package_id`| The SSL package to be purchased. See [Types of certificates that can be purchased](Packages.md#types-of-certificates-that-can-be-purchased) for a complete list.| Integer | YES |
+|`domain`| The fully qualified domain name (FQDN) that the certificate is for. | String | YES |
+|`distinguished_name`| An array of the parts necessary to create the CSR. Contains the following seven items. (See array definition below) | Array | YES |
+
+##### Distinguished Name
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`email`| An email address used to contact the organization.| String | YES |
+|`organization`| The legal name of the organization that owns the domain. Do not abbreviate and include any suffixes, such as Inc., Corp., or LLC. | String | YES |
+|`street`| The street address for the owner of the domain  | String | YES |
+|`locality`| The city where the organization is located. This shouldn’t be abbreviated.  | String | YES |
+|`state`| TThe state/region where the organization is located. This shouldn't be abbreviated.  | String | YES |
+|`country`| The two-letter code for the country where the organization is located.  | String | YES |
+|`organizational_unit`| The division of the organization handling the certificate.  | String | NO |
+
+__Example 4__
+```shell
+curl -k '__URL__/ssl-cert/get-csr-details' \
+    -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    --data-binary '{"distinguished_name": { "email": "john@example.com", "street": "123 Main Street", "locality": "Anytown", "state": "MI", "country": "US", "organization": "Acme Examples", "organizational_unit": "marketing"},"domains": "example.com", "months": 12, "package_id": 179 }'
+```
+
+#### Scenario 2
+The existing `cert_id` is passed in as part of the URI. A new CSR is not created but the certificate's existing CSR is decoded and the results returned.
+
+__Parameters__
+| Name | Description | Type | Required |
+| :--- | :--- | :---: | :---: |
+|`_action`| `get-csr-details` | String | YES |
+
+
+__Example 5__
+```shell
+curl -k '__URL__/ssl-cert/get-csr-details/CERT_ID' \
+    -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    --data-binary '{"_action": "get-csr-details"}'
+```
+
+Both scenarios return the same payload.
+
+- The `dn` array is the distinguished name array decoded from the CSR.
+- The `san` array is any additional domain names beyond the `commonName` that are included in the certificate request.
+- The `approvers` array is an array of email addresses. Each domain, `commonName` and each additional domain specified, will have an array of email addresses in this master array. **The email addresses in these arrays are the only email addresses that the approval emails can be sent to.** For each domain, one of these addresses must be selected and sent with the request for the certificate. An ownership validation email will be sent to the addresses specified. The certificate cannot be issued until ownership of all domains has been verified.
+
+<a name="payload4">__Payload 4__</a>
+```json
+{
+  "dn": {
+    "commonName": "example.com",
+    "countryName": "US",
+    "stateOrProvinceName": "MICHIGAN",
+    "localityName": "ANYTOWN",
+    "organizationName": "Acme Examples",
+    "organizationalUnitName": "marketing",
+    "emailAddress": "admin@example.com"
+  },
+  "san": [],
+  "approvers": {
+    "example.com": [
+      "admin@example.com",
+      "administrator@example.com",
+      "hostmaster@example.com",
+      "postmaster@example.com",
+      "webmaster@example.com"
+    ]
+  }
+}
+```
+
+### Decode CSR
+This endpoint is similar in nature to [Get CSR Details](#get-csr-details). However, unlike [Get CSR Details](#get-csr-details), there is only one way to call this endpoint. It's payload is a CSR and the `package_id` of the package the certificate is being pushed under. This endpoint will decode the passed in CSR and return This endpoint will validate whether the CSR is valid for the package type. (e.g. if the commonName specified is a wild card hostname, ensure that the package specified is for a wild card certificate.) This endpoint will return a payload identical in structure to [Payload 4](#payload4).
+
+__Example 6__
+```shell
+curl -k '__URL__/ssl-cert/decode-csr' \
+    -H 'Authorization: Bearer YOUR_VERY_LONG_API_KEY_GOES_HERE' \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    --data-binary '{"csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICtzCCAZ8CAQAwcjELMAkGA1UEBhMCVVMxFDASBgNVBAMMC2V4YW1wbGUuY29t\n...Many more lines like this...\nOHRsapwAlYCXSwq2fRKfMjOu\/5ywRom7S6WMxYK\/pHC0sM5Z80OZal2JFiyNtTyM\nCX+0VBK6bbsR0uB\/Wd16Ea3\/WcP5rzrR72up\n-----END CERTIFICATE REQUEST-----\n\n", "domains": "example.com", "package_id": 179 }'
+```
+
+#### Approvers
+The payload returned from the previous two endpoints includes an array, `approvers`. This array contains an element for each domain that the CSR covers, including `commonName`. Each element is an array of email addresses. These are the only valid email addresses that approval emails will be sent to for each domain. One of these email addresses must be selected and returned when requesting the certificate. At that point, an email will be sent to the address and the certificate will only be approved after the instructions in the email are followed. The email addresses in this array are the only email addresses that can be used for the approval process. The email address chosen will only be used once, during the approval process and will not be used again.
+
 
 ## Delete
 
