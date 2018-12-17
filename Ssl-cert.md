@@ -5,7 +5,7 @@
 ```
 /ssl-cert
 ```
-The `/ssl-cert` endpoint allows you to Install, retrieve and remove SSL certificates attached to the account holding the API key.
+The `/ssl-cert` endpoint allows you to create, install, decode, and remove SSL certificates attached to the account holding the API key.
 
 **Accepted Verbs**
 
