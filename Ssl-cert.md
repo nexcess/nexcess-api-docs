@@ -17,6 +17,8 @@ The `/ssl-cert` endpoint allows you to Install, retrieve and remove SSL certific
 - POST
   - [Import a certificate](#import-a-certificate)
   - [Create a certificate](#create-a-certificate)
+    - [Creating a certificate from a CSR and Private Key](#creating-a-certificate-from-a-csr-and-private-key)
+    - [Creating a certificate without a CSR and Private Key](#creating-a-certificate-without-a-csr-and-private-key)
   - [Decode CSR](#decode-csr)
 - Delete
   - [Delete a certificate](#delete-a-certificate)
