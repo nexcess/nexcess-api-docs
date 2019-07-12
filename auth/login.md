@@ -1,10 +1,12 @@
-Authentication
---------------
+Portal: Authentication
+----------------------
+
+**since** 0.0.0
 
 auth:login
 ==========
 
-Client User authentication with a username and password.
+Client user authentication with a username and password.
 
 A successful response includes a time-limited Bearer token to be included in the `Authorization` header on subsequent requests.
 
@@ -12,9 +14,9 @@ This endpoint is mainly intended for use by web applications, which would store 
 
 Endpoint:  POST /v1/login
 
-Access: public
+**Access**: public
 
-Parameters:
+**Parameters**:
 - `username`: Required: email address of the user to log in as.
 - `password`: Required: user's password.
 - `code`: Optional: 2FA code where enabled/required by client settings.
@@ -22,7 +24,7 @@ Parameters:
   Users can belong to more than one client account.
   If not specified, logs in as the most recently logged-in client.
 
-Request:
+**Request**:
 ```
 curl -i -X POST "$PORTAL_API_URL/v1/login" \
   -H "Content-type: application/json" \
@@ -30,7 +32,7 @@ curl -i -X POST "$PORTAL_API_URL/v1/login" \
   -d '{ "username": "user@example.com", "password": "KlaatuBaradaNikto" }'
 ```
 
-Success Response:
+**Success Response**: 200 OK
 ```
 HTTP/1.1 200 OK
 Server: nginx
@@ -49,6 +51,6 @@ Served-By: nwdev-web01-int
 }
 ```
 
-Failure Response (wrong user/pass): 401 Unauthorized
+**Failure Response** (wrong user/pass): 401 Unauthorized
 
-Failure Response (user cannot log in as requested client): 403 Forbidden
+**Failure Response** (user cannot log in as requested client): 403 Forbidden

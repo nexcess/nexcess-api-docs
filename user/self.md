@@ -1,25 +1,27 @@
-User
-----
+Portal: Client User
+-------------------
+
+**since** 0.0.0
 
 user:self
 =========
 
 Shows information about the currently-authenticated client user.
 
-Endpoint:  GET /v1/user/self
+**Endpoint**:  GET /v1/user/self
 
-Access: Bearer token
+**Access**: logged-in users
 
-Parameters: none
+**Parameters**: none
 
-Request:
+**Request**:
 ```
 curl -i "$PORTAL_API_URL/v1/user/self" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
 
-Success Response:
+**Success Response**: 200 OK
 ```
 HTTP/1.1 200 OK
 Server: nginx
@@ -100,4 +102,6 @@ Served-By: nwdev-web01-int
 _note, some of the above items, particularly "settings" and "resources", may vary from user to user._
 _this payload may change before the api is released._
 
-Failure Response (unauthorized): 401 Unauthorized
+**Failure Response** (not logged in): 401 Unauthorized
+
+**Failure Response** (insufficient permissions): 403 Forbidden
