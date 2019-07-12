@@ -64,8 +64,6 @@ Served-By: nwdev-web01-int
 
 **Failure Response** (not logged in): 401 Unauthorized
 
-**Failure Response** (insufficient permissions): 403 Forbidden
-
 **Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable
 
 **Failure Response** (other bad input): 422 Unprocessable Entity

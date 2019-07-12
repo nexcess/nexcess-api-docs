@@ -24,7 +24,8 @@ curl -i -X DELETE "$PORTAL_API_URL/v1/api-token/$TOKEN_ID" \
 ```
 
 **Success Response**: 202 Accepted
-```HTTP/1.1 202 Accepted
+```
+HTTP/1.1 202 Accepted
 Server: nginx
 Date: Fri, 12 Jul 2019 19:35:31 GMT
 Content-Type: application/json;charset=utf-8
@@ -51,7 +52,5 @@ Served-By: nwdev-web01-int
 _some fields on this payload may change before the Api is released._
 
 **Failure Response** (not logged in): 401 Unauthorized
-
-**Failure Response** (insufficient permissions): 403 Forbidden
 
 **Failure Response** (token_id doesn't exist on your account (or at all)): 404 Not Found
