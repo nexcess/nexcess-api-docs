@@ -53,6 +53,4 @@ _some fields on this payload may change before the Api is released._
 
 **Failure Response** (not logged in): 401 Unauthorized
 
-**Failure Response** (insufficient permissions): 403 Forbidden
-
 **Failure Response** (token_id doesn't exist on your account (or at all)): 404 Not Found
