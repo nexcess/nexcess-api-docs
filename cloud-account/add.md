@@ -6,6 +6,10 @@ Portal: Cloud Accounts
 cloud-account:add
 =================
 
+Creates a new cloud account and orders an associated service.
+
+Add requests are queued, meaning they will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
+
 **Endpoint**: POST /v1/cloud-account
 
 **Access**: service edit permissions
@@ -26,7 +30,7 @@ curl -i -X POST "$PORTAL_API_URL/v1/cloud-account" \
   -d '{ "app_id": 123, "cloud_id": 45, "domain": "cloud-account.example.com", "install_app": true, "package_id": 678 }'
 ```
 
-**Success Response**:
+**Success Response**: 202 Accepted
 ```
 HTTP/1.1 202 Accepted
 Server: nginx
