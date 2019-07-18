@@ -3,10 +3,10 @@ Portal: App
 
 **since** 0.0.0
 
-api-token:list
-==============
+app:list
+========
 
-Lists api tokens that belong to the logged-in user.
+Lists apps available for cloud accounts.
 
 **Endpoint**:  GET /v1/app
 
