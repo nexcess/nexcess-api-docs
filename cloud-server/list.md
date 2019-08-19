@@ -41,20 +41,29 @@ Served-By: nwdev-web01-int
 
 [
   {
-    "id": 1077,
-    "identity": "cloud.example.com - 203.113.0.1",
-    "cloud": { "id": 12345, "identity": "us-midwest-1" },
-    "client": { "id": 23456, "identity": "Example, Inc." },
+    "id": 34076,
+    "identity": "jarvis01-stg-kvm03.us-midwest-1.nexcess.net - cloud-server-example",
+    "client": { "id": 24512, "identity": "Bosco-Bradtke" },
+    "cloud": { "id": 1, "identity": "us-midwest-1" },
     "has_console": true,
+    "has_stored_password": null,
+    "hostname": "cloud-server-example",
+    "is_rebootable": null,
     "network": {
       "public_ip": "203.113.0.1",
       "nat_ip": "10.100.0.1",
       "private_ip": "10.200.0.1"
     },
-    "os": { "id": 3456, "identity": "centos 7 (x86_64)" },
-    "package": { "id": 45678, "identity": "nx.small" },
+    "os": { "id": 30, "identity": "centos 7 (x86_64)" },
+    "package": { "id": 677, "identity": "nex1.small" },
     "power_status": "on",
-    "service": { "id": 73456, "identity": "cloud.example.com - 203.113.0.1" }
+    "server_details": {
+      "cpu": 2,
+      "ram": 2048,
+      "disk_space": 40,
+      "bandwidth": 2048
+    },
+    "service": { "id": 58248, "identity": "us-midwest-1 - cloud-server-example - 203.113.0.1" }
   },
 
   . . .

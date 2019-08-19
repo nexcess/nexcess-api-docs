@@ -19,8 +19,10 @@ This task is queued, meaning it will be completed out-of-band from the current r
 - string `hostname` (required): host name for the new cloud server
 - integer `package_id` (required): id of the virt-guest service package to order. @see package:list
 - integer `os_id` (required): id of the operating system install template to use. @see os:list
-- bool `use_password` (optional): whether to set a root password for ssh. Note, the password will be automatically generated and provided via secure datashare (@see datashare:open). Using passwords for ssh is **strongly discouraged**; ssh keys should be used instead.
+- bool `use_password` (optional): whether to set a root password for ssh login. Note, the password will be automatically generated and provided via secure datashare (@see datashare:open). Using passwords for ssh is **strongly discouraged**; ssh keys should be used instead.
 - integer[] `ssh_key_ids` (required if `use_password`=false): id of the ssh key(s) to install on the new cloud server. @see ssh-key:list
+- integer[] `addon_ids` (optional): ids of service add-on packages to order
+- string `discount_code` (optional): discount code to apply to the order
 
 **Request**:
 ```
@@ -28,7 +30,7 @@ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
-  -d '{ "cloud_id": 45, "hostname": "cloud-server-example", "package_id": 678, "os_id": 99, "ssh_key_ids": [987, 765] }'
+  -d '{ "cloud_id": 1, "hostname": "cloud-server-example", "package_id": 677, "os_id": 4, "ssh_key_ids": [138, 139] }'
 ```
 
 **Success Response**: 202 Accepted
