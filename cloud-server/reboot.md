@@ -14,7 +14,8 @@ This task is queued, meaning it will be completed out-of-band from the current r
 
 **Access**: service edit permissions
 
-**Parameters**: none
+**Parameters**:
+- boolean `force` (optional): whether to perform a "hard" reboot (analagous to external power cycling)
 
 **Request**:
 ```
