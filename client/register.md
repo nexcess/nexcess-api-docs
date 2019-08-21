@@ -23,6 +23,7 @@ Note minimum strength/complexity requirements apply to user passwords. Guideline
   - "easy" keyboard patterns (e.g., "abcdefg...", a single row of keys like "zxcvbnm,.?", or repeats like "asdfasdfasdf")
 
 After registering, an email will be sent to the provided email address, and the new client must verify that they own the address by providing the verification code (@see client:verify-email).
+
 Before using the Api, the client will need to authenticate using the emaill address and password they signed up with (@see auth:login) and create an Api token (@see api-token:add).
 
 **Endpoint**: POST /v1/register
