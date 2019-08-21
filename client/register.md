@@ -32,7 +32,7 @@ Before using the Api, the client will need to authenticate using the emaill addr
 **Parameters**:
 - string `email` (required): new user's email address (will recieve a verification email)
 - string `password` (required): new user's desired password. @see auth:password-strength
-- bool `agree_to_tos` (required): agreement to Terms of Service and Privacy Policies. @see terms:tos, terms:pp
+- bool `agree_to_terms` (required): agreement to Terms of Service and Privacy Policies. @see terms:tos, terms:pp
 
 **Request**:
 ```
