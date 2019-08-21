@@ -1,25 +1,24 @@
 Portal: Cloud Servers
 ---------------------
 
-**since** 0.0.0
+**work in progress**
 
-cloud-server:reboot
-===================
+cloud-server:start
+==================
 
-Reboots the cloud server.
+Starts (powers on) the cloud server.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/cloud-server/{id}/reboot
+**Endpoint**: POST /v1/cloud-server/{id}/start
 
 **Access**: service edit permissions
 
-**Parameters**:
-- boolean `force` (optional): whether to perform a "hard" reboot (analagous to external power cycling)
+**Parameters**: none
 
 **Request**:
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/reboot" \
+curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/start" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -36,7 +35,7 @@ Location: /v1/task/3b93d577-41ee-4077-913f-d36f91819bb9
 NocWorx-Api-Version: 0.0.0
 Served-By: nwdev-web01-int
 
-{ "id": 12, "identity": "cloud-server:reboot (pending)" }
+{ "id": 124, "identity": "cloud-server:start (pending)" }
 ```
 
 **Failure Response** (not logged in): 401 Unauthorized
