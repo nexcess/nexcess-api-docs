@@ -40,7 +40,7 @@ Served-By: nwdev-web01-int
   "client": { "id": 24512, "identity": "Bosco-Bradtke" },
   "creation_date": 1490204568,
   "fingerprint": "f4:e1:75:e9:cf:83:c4:0a:83:e8:26:6b:c5:61:22:8f  user@example.com (RSA)",
-  "key": "ssh-rsa AAAAB3NzaC1yc2EAAAADCQABAAABAQDDixNxEbVTnd7IWVu+amhOzRHXCihgcnWjbOhzX+5pCR30Gaq5z7hzbKmfMnU02UTsJFcVQ70+2SJ3g/M8TZ/ZkuB6BW19lWPrYoTNY5mG1B+DLX6rX6TKA/FeHvuHfkBVu63j8RC/+OxM6nq73fUWyFLWdUhnRDIvybbGNH3nd5U43BJuBNqmNkZ0VrobYutDQAT/hc8bIWEWFrCFmXDFLnixPJooOk2P9k0YAiAv+U86waQ1+9kDWWH5c5Q51NcHIy5rAxTo6z3jnv774/JJRkrqvGR1cf0ps9s/KvdzdoG5NTod5+oGGouyQtPpDyllB+D5HOPZnK58zS3Ezu73 user@example.com",
+  "key": "ssh-rsa AAAAB3NzaC1yc2EAAAADCQABAAABAQDDixNxEbVT . . . user@example.com",
   "key_size": 2048,
   "name": "stark.pub",
   "user": { "id": 27767, "identity": "Annabel Whyman - user@nocworx.com" }
