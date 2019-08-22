@@ -13,10 +13,10 @@ Lists a client's cloud servers.
 **Access**: service view permission
 
 **Parameters**:
-- string[] `filter[...]`: Optional: _available filters TBD._
+- mixed[] `filter[...]`: Optional: filter list by one of `id`|`hostname`|`cloud_id`|`os_id`|`package_id`|`power_status`|`service_id`.
 - integer `page`: Optional: 1-based result set count for paginated results.
 - integer `pageSize`: Optional: maximum number of results to include per "page" of a paginated list.
-- string `sortBy`: Optional: field to sort the list by; _sortable fields TBD._
+- string `sortBy`: Optional: field to sort the list by; one of `id`|`hostname`|`cloud_id`|`os_id`|`package_id`|`power_status`|`service_id`.
 - string `sortOrder`: Optional: sort direction; one of `ASC`|`DESC`.
 
 **Request**:
