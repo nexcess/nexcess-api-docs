@@ -13,11 +13,17 @@ Lists a client's cloud servers.
 **Access**: service view permission
 
 **Parameters**:
-- mixed[] `filter[...]`: Optional: filter list by one of `id`|`hostname`|`cloud_id`|`os_id`|`package_id`|`power_status`|`service_id`.
-- integer `page`: Optional: 1-based result set count for paginated results.
-- integer `pageSize`: Optional: maximum number of results to include per "page" of a paginated list.
-- string `sortBy`: Optional: field to sort the list by; one of `id`|`hostname`|`cloud_id`|`os_id`|`package_id`|`power_status`|`service_id`.
-- string `sortOrder`: Optional: sort direction; one of `ASC`|`DESC`.
+- integer `filter[id]` (optional): filter list by id
+- integer `filter[cloud_id]` (optional): filter list by cloud (location). @see cloud:list
+- integer `filter[os_id]` (optional): filter list by operating system. @see os:list
+- integer `filter[hostname]` (optional): filter list by hostname
+- integer `filter[package_id]` (optional): filter list by package. @see package:list
+- integer `filter[power_status]` (optional): filter list by power status; one of `on`|`off`
+- integer `filter[service_id]` (optional): filter list by service. @see service:list
+- integer `page` (optional): 1-based result set count for paginated results.
+- integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
+- string `sortBy` (optional): field to sort the list by; one of `id`|`hostname`|`cloud_id`|`os_id`|`package_id`|`power_status`|`service_id`.
+- string `sortOrder` (optional): sort direction; one of `ASC`|`DESC`.
 
 **Request**:
 ```
