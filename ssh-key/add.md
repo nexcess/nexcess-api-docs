@@ -23,7 +23,7 @@ curl -i -X POST "$PORTAL_API_URL/v1/ssh-key" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
-  -d '{ "name": "example-key", "key": "$SSH_KEY" }'
+  -d '{ "name": "example-key", "key": "'"$SSH_KEY"'" }'
 ```
 
 **Success Response**: 201 Created
