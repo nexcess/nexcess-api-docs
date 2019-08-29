@@ -24,7 +24,7 @@ curl -i -X POST "$PORTAL_API_URL/v1/cloud-account/$CLOUDACCOUNT_ID/app/core-upda
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
-  -d '{ "enabled": true, "minor_updates_only": false }'
+  -d '{ "enable": true, "minor_updates_only": false }'
 ```
 
 **Success Response**: 202 Accepted
