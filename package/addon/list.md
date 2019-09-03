@@ -39,6 +39,28 @@ curl -i "$PORTAL_API_URL/v1/package/$PACKAGE_ID/addon" \
 
 **Success Response**: 200 OK
 ```
+HTTP/1.1 200 OK
+Server: nginx
+Date: Tue, 03 Sep 2019 12:54:58 GMT
+Content-Type: application/json
+Content-Length: 449
+Keep-Alive: timeout=5
+X-Powered-By: PHP/7.2.21
+Content-Range: items 1-4/4
+NocWorx-Api-Version: 0.0.0
+Served-By: nwdev-web01-int
+
+[
+  { 
+    "id": 514,
+    "identity": "Standard EV SSL",
+    "monthly_fee": "0.00",
+    "name": "Standard EV SSL",
+    "type": "ssl"
+  },
+  
+  . . .
+]
 ```
 
 **Failure Response** (not logged in): 401 Unauthorized
