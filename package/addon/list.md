@@ -6,10 +6,6 @@ Portal: Package Addon
 package-addon:list
 ==================
 
-**package-addon:list-by-package**
-
-**package-addon:list-by-type**
-
 Lists package addons (typically, belonging to a particular package). 
 Only addons that can be purchased by the client making the request will be returned.
 
