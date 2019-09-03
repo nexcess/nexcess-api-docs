@@ -14,6 +14,10 @@ Lists package addons (typically, belonging to a particular package).
 
 This alternate endpoint is sugar for `GET /v1/package/addon?filter[package_id]={id}` and will serve identical responses.
 
+**Alternate Endpoint**:  GET /v1/package/addon/{type}
+
+This alternate endpoint is sugar for `GET /v1/package/addon?filter[type]={type}` and will serve identical responses.
+
 **Access**: order view permission
 
 **Parameters**:
