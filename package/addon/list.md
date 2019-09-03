@@ -6,6 +6,10 @@ Portal: Package Addon
 package-addon:list
 ==================
 
+**package-addon:list-by-package**
+
+**package-addon:list-by-type**
+
 Lists package addons (typically, belonging to a particular package).
 
 **Endpoint**:  GET /v1/package/addon
