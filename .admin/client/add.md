@@ -17,7 +17,7 @@ This documentation describes usage for a "company-use-only" Company (e.g., bearc
 **Parameters**:
 - integer `company_id` (required): Serial id of the Company to add the new Client under
 - boolean `company_use` (required): Is the client for company use? Must be set to `true`
-- string `external_id` (required): Arbitrary client identifier (e.g., beyondhosting customer id)
+- string `external_key` (required): Arbitrary client identifier (e.g., beyondhosting customer id)
 - string `name` (required): A name for the Client account
 
 **Request**:
