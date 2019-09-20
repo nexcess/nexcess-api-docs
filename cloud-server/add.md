@@ -25,8 +25,7 @@ This task is queued, meaning it will be completed out-of-band from the current r
 - string `discount_code` (optional): discount code to apply to the order
 
 **Additional Parameters**:
-- string `designated_ip` (optional): public IP address to assign to the new cloudserver. The IP must be available to OpenStack and not already be in use.
-  this functionality is exposed only to company-use companies, and only via the admin `launch:as-client` endpoint.
+- string `designated_ip` (optional): public IP address to assign to the new cloudserver. The IP must be available to OpenStack and not already be in use. NOTE, this functionality is exposed only to company-use companies, and only via the admin `launch:as-client` endpoint.
 
 **Request**:
 ```
