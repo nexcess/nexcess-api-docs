@@ -75,7 +75,7 @@ Served-By: nwdev-web01-int
     "services": [
       {
         "id": 25761,
-        "identity": "DS-410 - 192.240.168.223 - cmsw.mit.edu",
+        "identity": "DS-410 - 203.0.113.1 - asdf.example.com",
         "uri": null
       }
     ]
