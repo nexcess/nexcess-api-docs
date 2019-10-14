@@ -10,12 +10,13 @@ Creates a new ssh key.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**:  POST /v1/api-token
+**Endpoint**:  POST /v1/ssh-key
 
 **Access**: logged-in users
 
 **Parameters**:
-- `name`: Required: an identifier for the new token.
+- `name`: Required: an identifier for the key
+- `key`: Required: the public key
 
 **Request**:
 ```
