@@ -1,7 +1,7 @@
 Portal: Cloud Servers
 ---------------------
 
-**work in progress**
+since **0.2.0**
 
 cloud-server:resize
 ===================
