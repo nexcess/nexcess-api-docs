@@ -14,6 +14,16 @@ Lists available packages (typically, of a particular type).
 
 This alternate endpoint is sugar for `GET /v1/package?filter[type]={type}` and will serve identical responses.
 
+For convenience, aliases are defined for several commonly used filters:
+
+- `cloud-account`: alias for type:virt-guest-cloud
+- `cloud-account-plan`: alias for type:virt-guest-cloud & environment_type:production & plan_type:false
+- `dev-cloud-account`: alias for type:virt-guest-cloud & environment_type:development & plan_type:false
+- `dev-cloud-account-plan`: alias for type:virt-guest-cloud & environment_type:development & plan_type:true
+- `staging-cloud-account`: alias for type:virt-guest-cloud & environment_type:staging & plan_type:false
+- `staging-cloud-account-plan`: alias for type:virt-guest-cloud & environment_type:staging & plan_type:true
+- `cloud-server`: alias for type:virt-guest
+
 **Access**: order view permission
 
 **Parameters**:
