@@ -24,7 +24,6 @@ For convenience, the following type aliases are defined:
 **Access**: service view permission
 
 **Parameters**:
-- string `filter[client_id]` (optional): filters results by client id.
 - string `filter[parent_id]` (optional): filters results by parent service id.
 - string `filter[status]` (optional): filters results by service status (one of `enabled`|`disabled`|`suspended`).
 - string `filter[state]` (optional): filters results by service state (one of `creating`|`destroying`|`failure`|`stable`|`resizing`|`installing`|`renaming`).
@@ -33,7 +32,7 @@ For convenience, the following type aliases are defined:
 - string `filter[external_key]` (optional): filters results by client-provided key.
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
-- string `sortBy` (optional): field to sort the list by; one of `id`|`client_id`|`parent_id`|`start_date`|`status`|`state`|`type`|`nickname`|`external_key`|`last_bill_date`|`next_bill_date`.
+- string `sortBy` (optional): field to sort the list by; one of `id`|`parent_id`|`start_date`|`status`|`state`|`type`|`nickname`|`external_key`|`last_bill_date`|`next_bill_date`.
 - string `sortOrder` (optional): sort direction; one of `ASC`|`DESC`.
 
 **Request**:
@@ -45,10 +44,6 @@ curl -i "$PORTAL_API_URL/v1/service" \
 
 **Success Response**: 200 OK
 ```
-curl -i "$PORTAL_API_URL/v1/service" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Accept: application/json"
-
 HTTP/1.1 200 OK
 Server: nginx
 Date: Thu, 16 Jan 2020 02:59:56 GMT
@@ -103,12 +98,15 @@ Served-By: nwdev-web01-int
 ]
 ```
 
-**Success Response** (with specified service type): 200 OK
+**Request** (with specified service type):
 ```
 curl -i "$PORTAL_API_URL/v1/service/$SERVICE_TYPE" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
+```
 
+**Success Response**: 200 OK
+```
 HTTP/1.1 200 OK
 Server: nginx
 Date: Thu, 16 Jan 2020 03:02:24 GMT
