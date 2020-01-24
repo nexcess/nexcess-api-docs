@@ -35,7 +35,6 @@ curl -i "$PORTAL_API_URL/v1/service/$SERVICE_ID" \
 
 **Success Response**: 200 OK
 ```
-curl -i "$PORTAL_API_URL/v1/service/58419"   -H "Authorization: Bearer $PORTAL_API_KEY"   -H "Accept: application/json"
 HTTP/1.1 200 OK
 Server: nginx
 Date: Fri, 24 Jan 2020 04:23:45 GMT
@@ -106,12 +105,15 @@ Served-By: nwdev-web01-int
 }
 ```
 
-**Success Response** (with specified service type): 200 OK
+**Request** (with specified service type):
 ```
 curl -i "$PORTAL_API_URL/v1/service/$SERVICE_TYPE/$SERVICE_ID" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Accept: application/json"
+  -H "Authorization: Bearer $PORTAL_API_KEY" \
+  -H "Accept: application/json"
+```
 
+**Success Response**: 200 OK
+```
 HTTP/1.1 200 OK
 Server: nginx
 Date: Fri, 24 Jan 2020 04:28:44 GMT
