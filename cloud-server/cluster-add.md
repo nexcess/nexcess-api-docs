@@ -18,7 +18,7 @@ This task is queued, meaning it will be completed out-of-band from the current r
 - integer `cloud_id` (required): id of the cloud (location) to install the cloud server. @see cloud:list
 - integer `package_id` (required): id of the virt-guest service package to order. @see package:list
 - string `fiat` (required): contents of a yaml file describing the server(s) and configuration for the cluster.
-- bool `use_password` (optional): whether to set a root password for ssh login. Note, the password will be automatically generated and provided via secure datashare (@see datashare:open). Using passwords for ssh is **strongly discouraged**; ssh keys should be used instead.
+- bool `use_password` (optional): whether to set a root password for ssh login. Note, the password will be automatically generated and provided via secure datashare (@see datashare:open). Note a unique password will be generated for each server. Using passwords for ssh is **strongly discouraged**; ssh keys should be used instead.
 - integer[] `ssh_key_ids` (required if `use_password`=false): id of the ssh key(s) to install on the new cloud server. @see ssh-key:list
 - integer[] `addon_ids` (optional): ids of service add-on packages to order
 - string `discount_code` (optional): discount code to apply to the order
