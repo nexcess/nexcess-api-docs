@@ -63,5 +63,7 @@ Served-By: nwdev-web01-int
 ```
 
 **Failure Response** (not logged in): 401 Unauthorized
+
 **Failure Response** (insufficient permissions): 403 Forbidden
+
 **Failure Response** (invalid inputs): 422 Unprocessable Entity
