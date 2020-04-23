@@ -16,7 +16,7 @@ This task is queued, meaning it will be completed out-of-band from the current r
 
 _…for "company use" companies_
 
-New clients for "Company Use" Companies will be assigned that company's "blockhole" user automatically. No user information should be provided (it will be ignored). Note that `company_use` _must_ be provided, and must be `true`, for any client created for a company-use company.
+New clients for "Company Use" Companies will be assigned that company's "blackhole" user automatically. No user information should be provided (it will be ignored). Note that `company_use` _must_ be provided, and must be `true`, for any client created for a company-use company.
 
 New "company use" clients may be created for non-company-use companies as well; the above note does not apply to this case.
 
