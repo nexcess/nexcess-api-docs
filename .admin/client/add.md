@@ -28,7 +28,7 @@ _…for all cases_
 - int `account_manager_id` (optional): Id of the agent (staff user) that will manage this account
 
 _…when assigning an existing client user as account owner_
-- int `user_id` (optional): Id of an existing user to assign as the owner of this account
+- int `user_id` (required): Id of an existing user to assign as the owner of this account
 
 No other user information should be provided (it will be ignored).
 
