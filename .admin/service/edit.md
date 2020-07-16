@@ -1,10 +1,10 @@
-Admin: Creditcard
------------------
+Admin: Service
+--------------
 
 **since** 0.5.0
 
-creditcard:import
-=================
+service:edit
+============
 
 Edits details of a client service.
 
