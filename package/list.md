@@ -16,17 +16,14 @@ This alternate endpoint is sugar for `GET /v1/package?filter[type]={type}` and w
 
 For convenience, aliases are defined for several commonly used filters:
 
-| since | **alias**                      | type             | environment_type | plan_type  |
-|-------|--------------------------------|------------------|------------------|------------|
-| 0.0.0 | **cloud-account**              | virt-guest-cloud | production       | false      |
-| 0.0.0 | **cloud-account-plan**         | virt-guest-cloud | production       | true       |
-| 0.5.0 | **cloud-account-free-trial**   | virt-guest-cloud | production-trial |            |
-| 0.0.0 | **dev-cloud-account**          | virt-guest-cloud | development      | false      |
-| 0.0.0 | **dev-cloud-account-plan**     | virt-guest-cloud | development      | true       |
-| 0.0.0 | **staging-cloud-account**      | virt-guest-cloud | staging          | false      |
-| 0.0.0 | **staging-cloud-account-plan** | virt-guest-cloud | staging          | true       |
-| 0.5.0 | **staging-account-free-trial** | virt-guest-cloud | staging-trial    |            |
-| 0.0.0 | **cloud-server**               | virt-guest       |                  |            |
+| since | **alias**                      | type             | environment_type |
+|-------|--------------------------------|------------------|------------------|
+| 0.0.0 | **cloud-account**              | virt-guest-cloud | production       |
+| 0.5.0 | **cloud-account-free-trial**   | virt-guest-cloud | production-trial |
+| 0.0.0 | **dev-cloud-account**          | virt-guest-cloud | development      |
+| 0.0.0 | **staging-cloud-account**      | virt-guest-cloud | staging          |
+| 0.5.0 | **staging-account-free-trial** | virt-guest-cloud | staging-trial    |
+| 0.0.0 | **cloud-server**               | virt-guest       |                  |
 
 **Access**: order view permission
 
