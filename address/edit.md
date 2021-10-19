@@ -9,7 +9,7 @@ This task is queued, meaning it will be completed out-of-band from the current r
 logged-in users
 
 #### Input
-- string `id` (required): id; must be integer
+- integer `id` (required): id; must be integer
 - string `address1` (optional): address1; must contain a single line of text
 - string `address2` (optional): address2; must contain a single line of text
 - string `city` (optional): city; must contain a single line of text
@@ -52,10 +52,10 @@ HTTP/1.1 202 Accepted
 Date: Mon, 19 Oct 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-Location: /v1/address/73399
+Location: /v1/address/1234
 NocWorx-Api-Version: 0.0.0
 
-{ "id": 12345, "identity": "address:edit (pending)" }"
+{ "id": 1234, "identity": "address:edit (pending)" }"
 ```
 
 **Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
