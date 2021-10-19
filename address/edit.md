@@ -32,7 +32,7 @@ $ curl -i -X POST "$PORTAL_API_URL/v1/address/{id}" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{
-    "id":"1234"
+    "id":"1234",
     "address1":"21700 Melrose Ave",
     "country":"US",
     "state":"MI",
