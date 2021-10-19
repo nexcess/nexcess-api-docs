@@ -9,7 +9,7 @@ This task is queued, meaning it will be completed out-of-band from the current r
 logged-in users
 
 #### Input
-- string `number` (required): phone number; must contain digit
+- string `number` (required): phone number; must contain E_164 format
 
 #### Request
 ```
@@ -18,7 +18,7 @@ $ curl -i -X GET "$PORTAL_API_URL/v1/address/phone/{number}" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{
-    "number":"234234"
+    "number":"+18666392377"
   }'
 ```
 
@@ -29,10 +29,10 @@ HTTP/1.1 200 OK
 Date: Mon, 19 Oct 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-Location: /v1/address/phone/234234
+Location: /v1/address/phone/+18666392377
 NocWorx-Api-Version: 0.0.0
 
-{ "number": 234234, "identity": "address:phone (pending)" }"
+{ "number": +18666392377, "identity": "address:phone (pending)" }"
 ```
 
 **Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
