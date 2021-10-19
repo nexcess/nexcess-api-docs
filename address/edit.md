@@ -62,4 +62,4 @@ NocWorx-Api-Version: 0.0.0
 
 **Failure Response** (insufficient permissions): 403 Forbidden
 
-**Failure Response** (invalid inputs): 422 Unprocessable Entity
+**Failure Response** (id doesn't exist on your account (or at all)): 404 Not Found
