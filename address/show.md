@@ -3,10 +3,8 @@
 ## address:show
 Show Address details.
 
-This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
-
 #### Access
-logged-in users
+address view
 
 #### Request
 ```
@@ -14,22 +12,41 @@ $ curl -i -X GET "$PORTAL_API_URL/v1/address/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
-  -d '{
-    "id":"1234"
-  }'
 ```
 
 #### Responses
-**Success Response** (request was accepted for processing): 200 OK
+**Success Response** (request was accepted for processing): success
 ```
-HTTP/1.1 200 OK
+HTTP/1.1 success
 Date: Mon, 19 Oct 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
 Location: /v1/address/1234
 NocWorx-Api-Version: 0.0.0
 
-{ "id": 1234, "identity": "Nexcess Staff" }"
+{
+  "id": 73402,
+  "identity": "first name last name",
+  "address1": "21700 Melrose Ave",
+  "address2": "21700 Melrose Ave",
+  "cell": "",
+  "city": "Southfield",
+  "company": "",
+  "country": "US",
+  "email": "test@gmail.com",
+  "fax": "",
+  "first_name": "first name",
+  "is_residence": 1,
+  "last_name": "last name",
+  "metadata": {
+    "scope": "address",
+    "uri": "/v1/address/73402"
+  },
+  "phone": "234234",
+  "state": "MI",
+  "type": "billing",
+  "zip": "48075"
+}"
 ```
 
 **Failure Response** (not logged in, expired token, etc.): 401 Unauthorized

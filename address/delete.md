@@ -6,10 +6,10 @@ Deletes an Address.
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
 #### Access
-logged-in users
+address delete
 
 #### Input
-- int `id` (required): id; must be integer
+- int `id` (required): System ID of the Address to delete
 
 #### Request
 ```
@@ -17,9 +17,6 @@ $ curl -i -X DELETE "$PORTAL_API_URL/v1/address/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
-  -d '{
-    "id":"1234"
-  }'
 ```
 
 #### Responses
