@@ -7,10 +7,12 @@ List Addresses.
 address view
 
 #### Input
-- string `filter[id]` (optional): filter list by id
+- integer `filter[id]` (optional): filter list by system ID
+- integer `match` (optional): match against id value
+- integer `range` (optional): find id values within .. range
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
-- string `sortBy` (optional): field to sort the list by id.
+- string `sortBy` (optional): sort list by id.
 - string `sortOrder` (optional): sort direction; one of `ASC`|`DESC`.
 
 #### Request
@@ -22,9 +24,9 @@ $ curl -i -X GET "$PORTAL_API_URL/v1/address" \
 ```
 
 #### Responses
-**Success Response** (request was accepted for processing): success
+**Success Response** (success): 200 OK
 ```
-HTTP/1.1 success
+HTTP/1.1 200 OK
 Date: Mon, 19 Oct 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
