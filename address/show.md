@@ -26,25 +26,25 @@ NocWorx-Api-Version: 0.0.0
 
 {
   "id": 73402,
-  "identity": "first name last name",
+  "identity": "Nexcess Support",
   "address1": "21700 Melrose Ave",
-  "address2": "21700 Melrose Ave",
+  "address2": "",
   "cell": "",
   "city": "Southfield",
   "company": "",
   "country": "US",
-  "email": "test@gmail.com",
+  "email": "support@nexcess.net",
   "fax": "",
-  "first_name": "first name",
-  "is_residence": 1,
-  "last_name": "last name",
+  "first_name": "Nexcess",
+  "is_residence": false,
+  "last_name": "support",
   "metadata": {
     "scope": "address",
     "uri": "/v1/address/73402"
   },
-  "phone": "234234",
+  "phone": "866-639-2377",
   "state": "MI",
-  "type": "billing",
+  "type": "default",
   "zip": "48075"
 }"
 ```
