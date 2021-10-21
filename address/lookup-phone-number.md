@@ -31,10 +31,7 @@ NocWorx-Api-Version: 0.0.0
   "callerName": null,
   "countryCode": "US",
   "phoneNumber": "+18666392377",
-  "nationalFormat": "(866) 639-2377",
-  "carrier": null,
-  "addOns": null,
-  "url": "https://lookups.twilio.com/v1/PhoneNumbers/+18666392377"
+  "nationalFormat": "(866) 639-2377"
 }
 ```
 
