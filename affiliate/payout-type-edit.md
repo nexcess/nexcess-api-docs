@@ -10,7 +10,7 @@ affiliate payout type edit
 
 #### Input
 - integer `id` (required): System ID of the Affiliate to edit
-- string `payout_type` (optional): payout type; one of `cash`|`check`|`credit`|`paypal`|`wire`|`other`
+- string `payout_type` (required): payout type; one of `cash`|`check`|`credit`|`paypal`|`wire`|`other`
 
 #### Request
 ```
