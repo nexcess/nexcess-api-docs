@@ -1,7 +1,7 @@
 # Portal: Affiliate
 
-## affiliate:list
-Lists Credits.
+## affiliate:list-credits
+Lists Affiliate Credits.
 
 #### Access
 affiliate view
@@ -33,9 +33,23 @@ Content-Length: 44
 Location: /v1/affiliate/credit
 NocWorx-Api-Version: 0.0.0
 
-[]
+[
+  {
+    "name": "Example, Inc.",
+    "status": "active",
+    "level": { "id": 1234, "identity": "AH-Dedicated-UK-25" },
+    "payout_type": "credit",
+    "address": "21700 Melrose Ave",
+    "credit_amount": "99,628.76",
+    "is_suspended": false
+  },
+
+  . . .
+]
 ```
 
 **Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
 **Failure Response** (insufficient permissions): 403 Forbidden
+
+**Failure Response** (invalid inputs): 422 Unprocessable Entity

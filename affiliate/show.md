@@ -26,7 +26,7 @@ NocWorx-Api-Version: 0.0.0
 
 {
   "id": 38114,
-  "identity": "Neeru 1 Api Testing",
+  "identity": "Example, Inc.",
   "is_affiliate": false,
   "metadata": {
     "scope": "client",
