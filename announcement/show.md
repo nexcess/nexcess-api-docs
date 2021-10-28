@@ -15,9 +15,9 @@ $ curl -i -X GET "$PORTAL_API_URL/v1/announcement/{id}" \
 ```
 
 #### Responses
-**Success Response** (request was accepted for processing): success
+**Success Response** (success): 200 OK
 ```
-HTTP/1.1 success
+HTTP/1.1 200 OK
 Date: Mon, 19 Oct 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
