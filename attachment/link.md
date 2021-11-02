@@ -33,7 +33,7 @@ NocWorx-Api-Version: 0.0.0
       "uri": "/v1/attachment/54/download-link"
     }
   },
-  "download_link": "https://portal.test.nxswd.net/attachment/54.download?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXIiOiIyIiwiaWF0IjoxNjM1NDI3MDU2LCJqdGkiOiJmOTUyMzkxYi0yYTg0LTRmYTctOTc2My0xNGQ0YmZhMjQxN2QiLCJzdWIiOiJ7XCJleHRyYW5ldFwiOntcImNsaWVudFwiOjM4MTE0LFwidXNlclwiOjYxNDIwfX0iLCJleHAiOjE2MzU0MjczNTYsImFsdiI6MiwicnNyYyI6WyJHRVQgYXR0YWNobWVudFwvNTQuZG93bmxvYWQiXX0.ddNfJAipwewpEwEefbmwSOQ0RLqg-vmjDS-W-Yi_KmY"
+  "download_link": "https://portal.test.nxswd.net/attachment/54.download?token=eyJ0eXAiOiJKV1Qi...veryLongToken...vmjDS-W-Yi_KmY"
 }
 ```
 
