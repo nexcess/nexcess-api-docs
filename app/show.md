@@ -11,7 +11,7 @@ app view
 $ curl -i -X GET "$PORTAL_API_URL/v1/app/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
-  -H "Accept: application/json" \
+  -H "Accept: application/json"
 ```
 
 #### Responses
@@ -19,7 +19,6 @@ $ curl -i -X GET "$PORTAL_API_URL/v1/app/{id}" \
 ```
 HTTP/1.1 200 OK
 Date: Thu, 28 Oct 2021 12:51:27 GMT
-Content-Type: application/json;charset=utf-8
 Content-Length: 44
 Location: /v1/app/1234
 NocWorx-Api-Version: 0.0.0
@@ -51,4 +50,3 @@ NocWorx-Api-Version: 0.0.0
 **Failure Response** (id doesn't exist on your account (or at all)): 404 Not Found
 
 **Failure Response** (other bad input): 422 Unprocessable Entity
-
