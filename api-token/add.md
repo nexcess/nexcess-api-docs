@@ -1,66 +1,51 @@
-Portal: Api Tokens
-------------------
+# Portal: Api Token
 
-**since** 0.0.0
+## api-token:add
+Creates a new Api Token.
 
-api-token:add
-=============
+This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
-Creates a new api token.
+#### Access
+api-token edit
 
-The new api token is returned in the response payload. This is the only time it will be accessible to the user; it will never be displayed again.
+#### Input
+- string `name` (required): name; must contain a single line of text
 
-**Endpoint**:  POST /v1/api-token
-
-**Access**: logged-in users
-
-**Parameters**:
-- `name`: Required: an identifier for the new token.
-
-**Request**:
+#### Request
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/api-token" \
+$ curl -i -X POST "$PORTAL_API_URL/v1/api-token" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
-  -d '{ "name": "chuck" }'
+  -d '{
+    "name":"Example, Inc."
+  }'
 ```
 
-**Success Response**: 201 Created
+#### Responses
+**Success Response** (request was created for processing): 201 Created
 ```
 HTTP/1.1 201 Created
-Server: nginx
-Date: Fri, 12 Jul 2019 17:10:06 GMT
+Date: Tue, 02 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
-Content-Length: 281
-X-Powered-By: PHP/7.2.15
+Content-Length: 44
+Location: /v1/api-token
 NocWorx-Api-Version: 0.0.0
-Served-By: nwdev-web01-int
 
 {
-  "id": 16,
-  "identity": "chuck",
-  "name": "chuck",
-  "token": "eyJ0eXAiOiJKV1QiL . . . very long auth token"
-}
+  "id": 4,
+  "identity": "Example, Inc.",
+  "metadata": {
+    "scope": "client-user-api-token",
+    "uri": "/v1/api-token/4"
+  },
+  "name": "Example, Inc.",
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXIiOiIyIiwiaWF0IjoxNjM1ODUwMDA3LCJqdGkiOiIzYzAzNjE0NS1iYjE0LTRlZjAtOWIwNy1mN2JkNWU4NDEwYmQiLCJzdWIiOiJ7XCJleHRyYW5ldFwiOntcImNsaWVudFwiOjM4MTE0LFwidXNlclwiOjYxNDIwLFwidG9rZW5faWRcIjo0fX0iLCJhbHYiOjN9._nxUX7XYVX-LJYSuFEdRgpKZnaKcMMzRsIY5o4MazzI"
+}"
 ```
 
-**Failure Response** (not logged in): 401 Unauthorized
+**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
-**Failure Response** (missing/bad input): 422 Unprocessable Entity
-```
-HTTP/1.1 422 Unprocessable Entity
-Server: nginx
-Date: Fri, 12 Jul 2019 17:12:36 GMT
-Content-Type: application/json;charset=utf-8
-Content-Length: 101
-X-Powered-By: PHP/7.2.15
-Served-By: nwdev-web01-int
+**Failure Response** (insufficient permissions): 403 Forbidden
 
-{
-  "message": "Unprocessable Entity",
-  "errors": [
-    { "message": "This input is required", "reference": "name" }
-  ]
-}
-```
+**Failure Response** (invalid inputs): 422 Unprocessable Entity

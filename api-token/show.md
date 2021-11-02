@@ -1,44 +1,42 @@
-Portal: Api Tokens
-------------------
+# Portal: Api Token
 
-**since** 0.0.0
+## api-token:show
+Shows Api Token details.
 
-api-token:show
-==============
+#### Access
+api-token view
 
-Shows an api token.
-
-**Endpoint**:  GET /v1/api-token
-
-**Access**: logged-in users
-
-**Parameters**: none
-
-**Request**:
+#### Request
 ```
-curl -i "$PORTAL_API_URL/v1/api-token/$TOKEN_ID" \
+$ curl -i -X GET "$PORTAL_API_URL/v1/api-token/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Accept: application/json"
+  -H "Content-type: application/json" \
+  -H "Accept: application/json" \
 ```
 
-**Success Response**: 200 OK
+#### Responses
+**Success Response** (success): 200 OK
 ```
 HTTP/1.1 200 OK
-Server: nginx
-Date: Fri, 12 Jul 2019 19:24:32 GMT
+Date: Tue, 02 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
-Content-Length: 49
-X-Powered-By: PHP/7.2.15
+Content-Length: 44
+Location: /v1/api-token/2
 NocWorx-Api-Version: 0.0.0
-Served-By: nwdev-web01-int
 
 {
-  "id": 14,
-  "identity": "chuck",
-  "name": "chuck"
-}
+  "id": 2,
+    "identity": "Example, Inc.",
+    "metadata": {
+      "scope": "client-user-api-token",
+      "uri": "/v1/api-token/2"
+    },
+    "name": "Example, Inc".
+}"
 ```
 
-**Failure Response** (not logged in): 401 Unauthorized
+**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
-**Failure Response** (token_id doesn't exist on your account (or at all)): 404 Not Found
+**Failure Response** (insufficient permissions): 403 Forbidden
+
+**Failure Response** (id doesn't exist on your account (or at all)): 404 Not Found
