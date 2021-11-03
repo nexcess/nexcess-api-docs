@@ -9,7 +9,6 @@ This task is queued, meaning it will be completed out-of-band from the current r
 affiliate payout type edit
 
 #### Input
-- integer `id` (required): System ID of the Affiliate to edit
 - string `payout_type` (required): payout type; one of `cash`|`check`|`credit`|`paypal`|`wire`|`other`
 
 #### Request
@@ -18,10 +17,7 @@ $ curl -i -X POST "$PORTAL_API_URL/v1/affiliate/payout-type" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
-  -d '{
-    "id":"1234",
-    "payout_type":"credit"
-  }'
+  -d '{ "payout_type":"credit" }'
 ```
 
 #### Responses
