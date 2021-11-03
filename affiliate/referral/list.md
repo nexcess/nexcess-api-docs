@@ -1,0 +1,55 @@
+# Portal: Affiliate
+
+## affiliate:list-referrals
+Lists Affiliate Referrals.
+
+#### Access
+affiliate referral view
+
+#### Input
+- integer `filter[id]` (optional): filter list by system ID.
+- string `filter[name]` (optional): filter list by name.
+- string `filter[status]` (optional): filter list by status.
+- integer `match[id]` (optional): filter list by system ID.
+- string `match[name]` (optional): filter list by name.
+- string `match[status]` (optional): filter list by status.
+- string `range[id]` (optional): find system IDs within "{min}..{max}" range
+- integer `page` (optional): 1-based result set count for paginated results.
+- integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
+- string `sortBy` (optional): field to sort the list by; one of `id`|`status`|`credit_date`.
+- string `sortOrder` (optional): sort direction; one of `ASC`|`DESC`.
+
+#### Request
+```
+$ curl -i -X GET "$PORTAL_API_URL/v1/affiliate/referral" \
+  -H "Authorization: Bearer $PORTAL_API_KEY" \
+  -H "Content-type: application/json" \
+  -H "Accept: application/json"
+```
+
+#### Responses
+**Success Response** (success): 200 OK
+```
+HTTP/1.1 200 OK
+Date: Wed, 03 Nov 2021 12:51:27 GMT
+Content-Type: application/json;charset=utf-8
+Content-Length: 44
+NocWorx-Api-Version: 0.0.0
+
+[
+  {
+    "status": "active",
+    "referred_date": 1272254400
+  },
+
+  . . .
+]
+```
+
+**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
+
+**Failure Response** (insufficient permissions): 403 Forbidden
+
+**Failure Response** (invalid inputs): 422 Unprocessable Entity
+
+**Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable
