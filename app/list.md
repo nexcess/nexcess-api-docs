@@ -1,113 +1,67 @@
-Portal: App
------------
+# Portal: App
 
-**since** 0.0.0
+## app:list
+List Apps.
 
-app:list
-========
+#### Access
+app view
 
-Lists apps available for cloud accounts.
-
-**Endpoint**:  GET /v1/app
-
-**Access**: order view permission, or service edit permission
-
-**Parameters**:
-- string `filter[name]` (optional): filters results by app name.
-- string `filter[version]` (optional): filters results by app version.
+#### Input
+- integer `filter[id]` (optional): filter list by system ID
+- string `filter[name]` (optional): filter list by app name.
+- string `filter[version]` (optional): filter list by app version.
+- string `match[name]` (optional): match list by app name.
+- string `match[version]` (optional): match list by app version.
+- string `range[id]` (optional): find system IDs within "{min}..{max}" range.
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
 - string `sortBy` (optional): field to sort the list by; one of `type`|`id`|`name`|`version`.
 - string `sortOrder` (optional): sort direction; one of `ASC`|`DESC`.
 
-**Request**:
+#### Request
 ```
-curl -i "$PORTAL_API_URL/v1/app" \
+$ curl -i "$PORTAL_API_URL/v1/app" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
 
-**Success Response**: 200 OK
+#### Responses
+**Success Response** (success): 200 OK
 ```
 HTTP/1.1 200 OK
-Server: nginx
-Date: Wed, 17 Jul 2019 02:59:06 GMT
+Date: Thu, 28 Oct 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
-Content-Length: 705
-Vary: Accept-Encoding
-X-Powered-By: PHP/7.2.15
-Content-Range: items 1-10/10
+Content-Length: 44
 NocWorx-Api-Version: 0.0.0
-Served-By: nwdev-web01-int
 
 [
   {
     "id": 19,
     "identity": "BigCommerce for WordPress 1",
+    "status": "active",
+    "is_core_upgradable": true,
+    "is_developerable": false,
+    "is_installable": true,
+    "is_plugin_upgradable": true,
+    "is_wordpress_based": true,
+    "metadata": {
+      "scope": "app-app",
+      "uri": "/v1/app/19"
+    },
+    "minimum_php_version": "5.6.20",
     "name": "BigCommerce for WordPress",
+    "type": "bigcommerce",
     "version": "1"
   },
-  {
-    "id": 23,
-    "identity": "CraftCMS 3",
-    "name": "CraftCMS",
-    "version": "3"
-  },
-  {
-    "id": 21,
-    "identity": "Drupal 8",
-    "name": "Drupal",
-    "version": "8"
-  },
-  {
-    "id": 24,
-    "identity": "Expression Engine 5",
-    "name": "Expression Engine",
-    "version": "5"
-  },
-  {
-    "id": 14,
-    "identity": "Flexible ",
-    "name": "Flexible",
-    "version": ""
-  },
-  {
-    "id": 12,
-    "identity": "Magento 2",
-    "name": "Magento",
-    "version": "2"
-  },
-  {
-    "id": 16,
-    "identity": "OroCRM 1",
-    "name": "OroCRM",
-    "version": "1"
-  },
-  {
-    "id": 22,
-    "identity": "Sylius 1",
-    "name": "Sylius",
-    "version": "1"
-  },
-  {
-    "id": 18,
-    "identity": "WooCommerce 1",
-    "name": "WooCommerce",
-    "version": "1"
-  },
-  {
-    "id": 20,
-    "identity": "Wordpress 5",
-    "name": "Wordpress",
-    "version": "5"
-  }
+
+  . . .
 ]
 ```
 
-**Failure Response** (not logged in): 401 Unauthorized
+**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
 **Failure Response** (insufficient permissions): 403 Forbidden
 
-**Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable
-
 **Failure Response** (other bad input): 422 Unprocessable Entity
+
+**Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable
