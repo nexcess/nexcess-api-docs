@@ -7,10 +7,11 @@ Lists api tokens that belong to the logged-in user.
 api-token view
 
 #### Input
-- integer `filter[id]` (optional): filter list by system ID
-- string `filter[name]` (optional): filter list by name
-- integer `match` (optional): match against id value
-- integer `range` (optional): find id values within .. range
+- integer `filter[id]` (optional): filter list by system ID.
+- string `filter[name]` (optional): filter list by name.
+- integer `match[id]` (optional): match against id value.
+- string `match[name]` (optional): match against name value.
+- string `range[id]` (optional): find system IDs within "{min}..{max}" range.
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
 - string `sortBy` (optional): field to sort the list by; one of `id`|`name`.
@@ -18,7 +19,7 @@ api-token view
 
 #### Request
 ```
-$ curl -i -X GET "$PORTAL_API_URL/v1/api-token" \
+$ curl -i "$PORTAL_API_URL/v1/api-token" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json"
@@ -31,7 +32,6 @@ HTTP/1.1 200 OK
 Date: Tue, 02 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-Location: /v1/api-token
 NocWorx-Api-Version: 0.0.0
 
 [
@@ -54,3 +54,5 @@ NocWorx-Api-Version: 0.0.0
 **Failure Response** (insufficient permissions): 403 Forbidden
 
 **Failure Response** (invalid inputs): 422 Unprocessable Entity
+
+**Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable

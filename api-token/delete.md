@@ -16,7 +16,7 @@ api-token delete
 $ curl -i -X DELETE "$PORTAL_API_URL/v1/api-token/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
-  -H "Accept: application/json" \
+  -H "Accept: application/json"
 ```
 
 #### Responses

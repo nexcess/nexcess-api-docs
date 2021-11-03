@@ -10,8 +10,7 @@ api-token view
 ```
 $ curl -i -X GET "$PORTAL_API_URL/v1/api-token/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Content-type: application/json" \
-  -H "Accept: application/json" \
+  -H "Accept: application/json"
 ```
 
 #### Responses
@@ -40,3 +39,5 @@ NocWorx-Api-Version: 0.0.0
 **Failure Response** (insufficient permissions): 403 Forbidden
 
 **Failure Response** (id doesn't exist on your account (or at all)): 404 Not Found
+
+**Failure Response** (other bad input): 422 Unprocessable Entity
