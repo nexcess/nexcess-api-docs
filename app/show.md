@@ -10,7 +10,6 @@ app view
 ```
 $ curl -i -X GET "$PORTAL_API_URL/v1/app/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Content-type: application/json" \
   -H "Accept: application/json"
 ```
 
