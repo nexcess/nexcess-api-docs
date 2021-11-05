@@ -1,14 +1,14 @@
 # Portal: Affiliate
 
 ## affiliate:show
-Show Affiliate Referrals.
+Show Affiliate Link with list of Stats.
 
 #### Access
-affiliate referral view
+affiliate referral link view
 
 #### Request
 ```
-$ curl -i -X GET "$PORTAL_API_URL/v1/affiliate/referral/{id}" \
+$ curl -i -X GET "$PORTAL_API_URL/v1/affiliate-link/{id}/stats" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json"
@@ -18,16 +18,29 @@ $ curl -i -X GET "$PORTAL_API_URL/v1/affiliate/referral/{id}" \
 **Success Response** (request was accepted for processing): 200 OK
 ```
 HTTP/1.1 200 OK
-Date: Wed, 03 Nov 2021 12:51:27 GMT
+Date: Fri, 05 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-Location: /v1/affiliate/referral/1234
+Location: /v1/affiliate-link/1234/stats
 NocWorx-Api-Version: 0.0.0
 
-{
-  "status": "active",
-  "referred_date": 1272254400
-}"
+[
+  {
+    "name": "Magento Hosting",
+    "target_url": "http://www.nexcess.net/magento-hosting"
+    "status": "active",
+    "metadata": {
+      "creation_date": 1431725299,
+      "ip": "192.240.191.2",
+      "referrer": "http://businesssolutionsinthecloud.com/magento-hosting-uk",
+      "query_string": "item=MjAyNzV8MQ",
+      "order": 123,
+      "commission": 0.5
+    }
+  },
+
+  . . .
+]
 ```
 
 **Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
