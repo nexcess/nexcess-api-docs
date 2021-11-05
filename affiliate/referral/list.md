@@ -16,7 +16,7 @@ affiliate referral view
 - string `range[id]` (optional): find system IDs within "{min}..{max}" range
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
-- string `sortBy` (optional): field to sort the list by; one of `id`|`status`|`credit_date`.
+- string `sortBy` (optional): field to sort the list by; one of `id`|`name`|`status`.
 - string `sortOrder` (optional): sort direction; one of `ASC`|`DESC`.
 
 #### Request
