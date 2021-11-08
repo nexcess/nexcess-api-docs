@@ -13,7 +13,7 @@ none
 
 #### Request:
 ```
-$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/stop" \
+$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/{id}/stop" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```

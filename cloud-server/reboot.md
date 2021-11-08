@@ -13,7 +13,7 @@ service edit permissions
 
 #### Request:
 ```
-$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/reboot" \
+$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/{id}/reboot" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```

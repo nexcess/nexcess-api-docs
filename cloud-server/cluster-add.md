@@ -1,7 +1,7 @@
 # Portal: Cloud Servers
 
 ## cloud-server:add-cluster
-Creates a new cloud server cluter and orders an associated service.
+Creates a new cloud server cluster and orders an associated service.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
