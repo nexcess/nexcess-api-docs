@@ -1,18 +1,12 @@
-Portal: Cloud Servers
----------------------
+# Portal: Cloud Servers
 
-**since** 0.0.0
-
-cloud-server:list
-=================
-
+## cloud-server:list
 Lists a client's cloud servers.
 
-**Endpoint**:  GET /v1/cloud-server
+#### Access
+service view permission
 
-**Access**: service view permission
-
-**Parameters**:
+#### Input
 - integer `filter[id]` (optional): filter list by id
 - integer `filter[cloud_id]` (optional): filter list by cloud (location). @see cloud:list
 - integer `filter[os_id]` (optional): filter list by operating system. @see os:list
@@ -25,13 +19,14 @@ Lists a client's cloud servers.
 - string `sortBy` (optional): field to sort the list by; one of `id`|`hostname`|`cloud_id`|`os_id`|`package_id`|`power_status`|`service_id`.
 - string `sortOrder` (optional): sort direction; one of `ASC`|`DESC`.
 
-**Request**:
+#### Request:
 ```
-curl -i "$PORTAL_API_URL/v1/cloud-server" \
+$ curl -i "$PORTAL_API_URL/v1/cloud-server" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
 
+#### Responses
 **Success Response**: 200 OK
 ```
 HTTP/1.1 200 OK
@@ -82,3 +77,5 @@ Served-By: nwdev-web01-int
 **Failure Response** (insufficient permissions): 403 Forbidden
 
 **Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable
+
+**Failure Response** (other bad input): 422 Unprocessable Entity

@@ -1,30 +1,25 @@
-Portal: Cloud Servers
----------------------
+# Portal: Cloud Servers
 
-**since** 0.0.0
-
-cloud-server:reboot
-===================
-
+## cloud-server:reboot
 Reboots the cloud server.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/cloud-server/{id}/reboot
+#### Access
+service edit permissions
 
-**Access**: service edit permissions
-
-**Parameters**:
+#### Input
 - boolean `force` (optional): whether to perform a "hard" reboot (analagous to external power cycling)
 
-**Request**:
+#### Request:
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/reboot" \
+$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/reboot" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
 
-**Success Response**: 202 Accepted
+#### Responses
+**Success Response** (request was accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
 Server: nginx

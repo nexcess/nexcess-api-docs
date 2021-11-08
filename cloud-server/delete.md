@@ -1,29 +1,26 @@
-Portal: Cloud Servers
----------------------
+# Portal: Cloud Servers
 
-**since** 0.0.0
-
-cloud-server:delete
-===================
-
+## cloud-server:delete
 Deletes a cloud server and immediately cancels its associated service.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: DELETE /v1/cloud-server
+#### Access
+service delete permissions
 
-**Access**: service delete permissions
+#### Input
+none
 
-**Parameters**: none
+#### Request
 
-**Request**:
 ```
-curl -i -X DELETE "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID" \
+$ curl -i -X DELETE "$PORTAL_API_URL/v1/cloud-server/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
 
-**Success Response**: 202 Accepted
+#### Responses
+**Success Response** (request was accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
 Server: nginx

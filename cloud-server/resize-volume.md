@@ -1,31 +1,26 @@
-Portal: Cloud Servers
----------------------
+# Portal: Cloud Servers
 
-since **0.5.0**
-
-cloud-server:resize-volume
-==========================
-
+## cloud-server:resize-volume
 Resizes the boot volume of the specified cloud server. Note, at present, the volume may only be resized **up**.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/cloud-server/{id}/resize-volume
+#### Access
+service edit permissions
 
-**Access**: service edit permissions
-
-**Parameters**:
+#### Input
 - int `size` (required): the new volume size, in GB. Must be larger than the current volume size.
 
-**Request**:
+#### Request:
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/resize-volume" \
+$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/resize-volume" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json" \
   -H "Content-type: application/json" \
   -d '{ "size": 64 }'
 ```
 
+#### Responses
 **Success Response**: 202 Accepted
 ```
 HTTP/1.1 202 Accepted

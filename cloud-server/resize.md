@@ -1,32 +1,27 @@
-Portal: Cloud Servers
----------------------
+# Portal: Cloud Servers
 
-since **0.2.0**
-
-cloud-server:resize
-===================
-
+## cloud-server:resize
 Resizes the cloud server and associates it with a new service package. Note, at present, disk space is **not resized** along with other resources.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/cloud-server/{id}/resize
+#### Access
+service edit permissions
 
-**Access**: service edit permissions
-
-**Parameters**:
+#### Input
 - int `package_id` (required): the id of the service package to resize to. @see package:list
 
-**Request**:
+#### Request:
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/resize" \
+$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/resize" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json" \
   -H "Content-type: application/json" \
   -d '{ "package_id": 678 }'
 ```
 
-**Success Response**: 202 Accepted
+#### Responses
+**Success Response** (request was accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
 Server: nginx

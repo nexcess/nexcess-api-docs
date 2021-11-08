@@ -1,20 +1,14 @@
-Portal: Cloud Servers
----------------------
+# Portal: Cloud Servers
 
-**since** 0.4.0
-
-cloud-server:add-cluster
-========================
-
+## cloud-server:add-cluster
 Creates a new cloud server cluter and orders an associated service.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/cloud-server/cluster
+#### Access
+service edit permissions
 
-**Access**: service edit permissions
-
-**Parameters**:
+#### Input
 - integer `cloud_id` (required): id of the cloud (location) to install the cloud server. @see cloud:list
 - integer `package_id` (required): id of the virt-guest service package to order. @see package:list
 - string `fiat` (required): contents of a yaml file describing the server(s) and configuration for the cluster.
@@ -23,17 +17,17 @@ This task is queued, meaning it will be completed out-of-band from the current r
 - integer[] `addon_ids` (optional): ids of service add-on packages to order
 - string `discount_code` (optional): discount code to apply to the order
 
-**Request**:
+#### Request:
 ```
-FIAT="... json-encoded yaml blob ..."
-curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/cluster" \
+$ FIAT="... json-encoded yaml blob ..."
+$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/cluster" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{ "cloud_id": 1, "package_id": 769, "fiat": "'"$FIAT"'", "ssh_key_ids": [138] }'
 ```
 
-**Success Response**: 202 Accepted
+**Success Response** (request was accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
 Server: nginx
