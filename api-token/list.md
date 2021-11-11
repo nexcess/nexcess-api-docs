@@ -4,13 +4,13 @@
 Lists api tokens that belong to the logged-in user.
 
 #### Access
-api-token view
+logged-in users
 
 #### Input
 - integer `filter[id]` (optional): filter list by system ID.
 - string `filter[name]` (optional): filter list by name.
-- integer `match[id]` (optional): match against id value.
-- string `match[name]` (optional): match against name value.
+- integer `match[id]` (optional): match against system ID.
+- string `match[name]` (optional): match against token name.
 - string `range[id]` (optional): find system IDs within "{min}..{max}" range.
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
@@ -21,7 +21,6 @@ api-token view
 ```
 $ curl -i "$PORTAL_API_URL/v1/api-token" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Content-type: application/json" \
   -H "Accept: application/json"
 ```
 

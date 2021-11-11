@@ -4,11 +4,11 @@
 Shows Api Token details.
 
 #### Access
-api-token view
+logged-in users
 
 #### Request
 ```
-$ curl -i -X GET "$PORTAL_API_URL/v1/api-token/{id}" \
+$ curl -i "$PORTAL_API_URL/v1/api-token/$TOKEN_ID" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -20,17 +20,16 @@ HTTP/1.1 200 OK
 Date: Tue, 02 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-Location: /v1/api-token/2
 NocWorx-Api-Version: 0.0.0
 
 {
   "id": 2,
-    "identity": "Example, Inc.",
-    "metadata": {
-      "scope": "client-user-api-token",
-      "uri": "/v1/api-token/2"
-    },
-    "name": "Example, Inc".
+  "identity": "laptop",
+  "metadata": {
+    "scope": "client-user-api-token",
+    "uri": "/v1/api-token/2"
+  },
+  "name": "Example, Inc".
 }"
 ```
 
