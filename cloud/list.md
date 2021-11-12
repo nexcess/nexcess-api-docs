@@ -25,7 +25,6 @@ cloud view
 ```
 $ curl -i "$PORTAL_API_URL/v1/cloud" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Content-type: application/json" \
   -H "Accept: application/json"
 ```
 
