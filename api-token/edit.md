@@ -1,56 +1,78 @@
-Portal: Api Tokens
-------------------
+# Portal: Api Token
 
-**since** 0.0.0
+## api-token:edit
+Edits a stored Api Token.
 
-api-token:show
-==============
+This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
-Edits an api token.
+#### Access
+logged-in users
 
-Edit requests are queued, meaning they will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a `Location` header that can be polled to determine the status of the task. @see task:show.
+#### Input
+- integer `id` (required): System ID of the Api Token to edit
+- string `name` (required): name; must contain a single line of text
 
-**Endpoint**:  POST /v1/api-token/{token_id}
-
-**Access**: logged-in users
-
-**Parameters**:
-- `name`: Required: new name for the token.
-
-**Request**:
+#### Request
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/api-token/$TOKEN_ID" \
+$ curl -i -X POST "$PORTAL_API_URL/v1/api-token/$TOKEN_ID \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
+  -H "Content-type: application/json" \
   -H "Accept: application/json" \
-  -d '{ "name": "charles" }'
+  -d '{
+    "name":"workstation"
+  }'
 ```
 
-**Success Response**: 202 Accepted
+#### Responses
+**Success Response** (request was accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
-Server: nginx
-Date: Fri, 12 Jul 2019 19:28:17 GMT
+Date: Tue, 02 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
-Content-Length: 266
-X-Powered-By: PHP/7.2.15
-Location: /v1/task/34595a2b-40b8-4021-9f0d-6f3e96c8462a
+Content-Length: 44
+Location: /v1/api-token/5
 NocWorx-Api-Version: 0.0.0
-Served-By: nwdev-web01-int
 
 {
-  "id": 0,
-  "identity": "api-token:edit (pending)",
-  "uuid": "34595a2b-40b8-4021-9f0d-6f3e96c8462a",
+  "id": 472,
+  "identity": "api-token:edit (success)",
+  "status": "success",
   "action": "api-token:edit",
-  "status": "pending",
-  "request_date": 1562959696,
-  "resource_uri": "",
+  "api_version": "0.5.0",
+  "errors": {},
+  "input": {
+    "id": 8,
+    "name": "Neeraja API Token test"
+  },
+  "metadata": {
+    "scope": "api-task",
+    "uri": "/v1/task/add0d0f1-dbc4-4a3b-a6ee-f1f58742196e"
+  },
+  "request_date": 1636646271,
+  "resolved_date": 1636646273,
+  "resource": {
+    "id": 8,
+    "identity": "Example, Inc.",
+    "metadata": {
+      "scope": "client-user-api-token",
+      "uri": "/v1/api-token/8"
+    }
+  },
   "staff_user": null,
-  "user": { "id": 27767, "identity": "Annabel Whyman - user@nocworx.com" }
-}
+  "user": {
+    "id": 12345,
+    "identity": "Example, Inc - support@nexcess.net",
+    "metadata": {
+      "scope": "user",
+      "uri": "/v1/user/12345"
+    }
+  },
+  "uuid": "add0d0f1-dbc4-4a3b-a6ee-f1f58742196e"
+}"
 ```
-_some fields on this payload may change before the Api is released._
 
-**Failure Response** (not logged in): 401 Unauthorized
+**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
-**Failure Response** (token_id doesn't exist on your account (or at all)): 404 Not Found
+**Failure Response** (insufficient permissions): 403 Forbidden
+
+**Failure Response** (id doesn't exist on your account (or at all)): 404 Not Found
