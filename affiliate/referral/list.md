@@ -10,9 +10,9 @@ affiliate referral view
 - integer `filter[id]` (optional): filter list by system ID.
 - string `filter[name]` (optional): filter list by name.
 - string `filter[status]` (optional): filter list by status.
-- integer `match[id]` (optional): filter list by system ID.
-- string `match[name]` (optional): filter list by name.
-- string `match[status]` (optional): filter list by status.
+- integer `match[id]` (optional): match against system ID.
+- string `match[name]` (optional): match against referral name.
+- string `match[status]` (optional): match against referral status.
 - string `range[id]` (optional): find system IDs within "{min}..{max}" range
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
@@ -21,9 +21,8 @@ affiliate referral view
 
 #### Request
 ```
-$ curl -i -X GET "$PORTAL_API_URL/v1/affiliate/referral" \
+$ curl -i "$PORTAL_API_URL/v1/affiliate/referral" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Content-type: application/json" \
   -H "Accept: application/json"
 ```
 
