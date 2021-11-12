@@ -15,7 +15,7 @@ $ curl -i "$PORTAL_API_URL/v1/affiliate-link/{id}/stats" \
 ```
 
 #### Responses
-**Success Response** (request was accepted for processing): 200 OK
+**Success Response** (success): 200 OK
 ```
 HTTP/1.1 200 OK
 Date: Fri, 05 Nov 2021 12:51:27 GMT
@@ -47,5 +47,3 @@ NocWorx-Api-Version: 0.0.0
 **Failure Response** (insufficient permissions): 403 Forbidden
 
 **Failure Response** (id doesn't exist on your account (or at all)): 404 Not Found
-
-**Failure Response** (other bad input): 422 Unprocessable Entity
