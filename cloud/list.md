@@ -14,7 +14,6 @@ cloud view
 - integer `match[location]` (optional): match against location value.
 - integer `match[location_code]` (optional): match against location code value.
 - integer `match[country]` (optional): match against country value.
-- integer `match[package_id]` (optional): match against package id value.
 - string `range[id]` (optional): find system IDs within "{min}..{max}" range.
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
@@ -49,8 +48,7 @@ NocWorx-Api-Version: 0.0.0
       "scope": "virt-cloud",
       "uri": null
     },
-    "type": "openstack",
-    "websocket_host": "jarvis01-dev.us-midwest-2.lwinternal.com"
+    "type": "openstack"
   },
 
   . . .
