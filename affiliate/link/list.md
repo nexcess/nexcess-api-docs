@@ -11,9 +11,9 @@ affiliate links view
 - string `filter[name]` (optional): filter list by name.
 - string `filter[target_url]` (optional): filter list by target url.
 - string `filter[status]` (optional): filter list by status.
-- integer `match[id]` (optional): match against id value.
-- string `match[name]` (optional): match against name value.
-- string `match[target_url]` (optional): match against target_url value.
+- integer `match[id]` (optional): match against system ID.
+- string `match[name]` (optional): match against affiliate link name.
+- string `match[target_url]` (optional): match against target url.
 - string `match[status]` (optional): match against status value.
 - string `range[id]` (optional): find system IDs within "{min}..{max}" range
 - integer `page` (optional): 1-based result set count for paginated results.
@@ -23,9 +23,8 @@ affiliate links view
 
 #### Request
 ```
-$ curl -i -X GET "$PORTAL_API_URL/v1/affiliate/link" \
+$ curl -i "$PORTAL_API_URL/v1/affiliate/link" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Content-type: application/json" \
   -H "Accept: application/json"
 ```
 

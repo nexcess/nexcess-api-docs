@@ -8,7 +8,7 @@ affiliate referral link view
 
 #### Request
 ```
-$ curl -i -X GET "$PORTAL_API_URL/v1/affiliate-link/{id}/stats" \
+$ curl -i "$PORTAL_API_URL/v1/affiliate-link/{id}/stats" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json"
@@ -21,7 +21,6 @@ HTTP/1.1 200 OK
 Date: Fri, 05 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-Location: /v1/affiliate-link/1234/stats
 NocWorx-Api-Version: 0.0.0
 
 [
