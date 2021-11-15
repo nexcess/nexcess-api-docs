@@ -20,8 +20,8 @@ service edit permissions
 #### Request:
 ```
 $ FIAT="... json-encoded yaml blob ..."
-$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/cluster" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
+$ curl -X POST "$PORTAL_API/v1/cloud-server/cluster" \
+  -H "Authorization: Bearer $PORTAL_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{ "cloud_id": 1, "package_id": 769, "fiat": "'"$FIAT"'", "ssh_key_ids": [138] }'

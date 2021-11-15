@@ -13,8 +13,8 @@ service edit permissions
 
 #### Request:
 ```
-$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/{id}/resize" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
+$ curl -X POST "$PORTAL_API/v1/cloud-server/$CLOUDSERVER_ID/resize" \
+  -H "Authorization: Bearer $PORTAL_KEY" \
   -H "Accept: application/json" \
   -H "Content-type: application/json" \
   -d '{ "package_id": 678 }'

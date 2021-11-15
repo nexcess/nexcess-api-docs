@@ -17,12 +17,11 @@ service edit permissions
 - integer[] `ssh_key_ids` (required if `use_password`=false): id of the ssh key(s) to install on the new cloud server. @see ssh-key:list
 - integer[] `addon_ids` (optional): ids of service add-on packages to order
 - string `discount_code` (optional): discount code to apply to the order
-- string `designated_ip` (optional): public IP address to assign to the new cloudserver. The IP must be available to OpenStack and not already be in use. NOTE, this functionality is exposed only via the admin `launch:as-client` endpoint.
 
 #### Request
 ```
-$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-server" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
+$ curl -X POST "$PORTAL_API/v1/cloud-server" \
+  -H "Authorization: Bearer $PORTAL_API_" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{ "cloud_id": 1, "hostname": "cloud-server-example", "package_id": 677, "os_id": 4, "ssh_key_ids": [138, 139] }'

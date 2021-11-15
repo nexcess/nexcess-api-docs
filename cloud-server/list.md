@@ -14,6 +14,13 @@ service view permission
 - integer `filter[package_id]` (optional): filter list by package. @see package:list
 - integer `filter[power_status]` (optional): filter list by power status; one of `on`|`off`
 - integer `filter[service_id]` (optional): filter list by service. @see service:list
+- integer `match[id]` (optional): filter list by id
+- integer `match[cloud_id]` (optional): filter list by cloud (location). @see cloud:list
+- integer `match[os_id]` (optional): filter list by operating system. @see os:list
+- integer `match[hostname]` (optional): filter list by hostname
+- integer `match[package_id]` (optional): filter list by package. @see package:list
+- integer `match[power_status]` (optional): filter list by power status; one of `on`|`off`
+- integer `match[service_id]` (optional): filter list by service. @see service:list
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
 - string `sortBy` (optional): field to sort the list by; one of `id`|`hostname`|`cloud_id`|`os_id`|`package_id`|`power_status`|`service_id`.
@@ -21,8 +28,8 @@ service view permission
 
 #### Request:
 ```
-$ curl -i "$PORTAL_API_URL/v1/cloud-server" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
+$ curl -i "$PORTAL_API/v1/cloud-server" \
+  -H "Authorization: Bearer $PORTAL_KEY" \
   -H "Accept: application/json"
 ```
 
