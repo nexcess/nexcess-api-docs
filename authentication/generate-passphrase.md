@@ -1,19 +1,18 @@
 # Portal: Authentication
 
 ## authentication:generate-passphrase
-Shows generated passphrase/password.
+Generates a secure passphrase.
 
 #### Access
-authentication view
+anyone
 
 #### Input
 - integer `length` (optional): length of the password to generate; within "{min}..{max}" length.
-- integer `words` (optional): words of the password to generate.
+- integer `words` (optional): minimum number of words to use.
 
 #### Request
 ```
-$ curl -i -X GET "$PORTAL_API_URL/v1/passphrase" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
+$ curl GET "$PORTAL_API_URL/v1/passphrase" \
   -H "Accept: application/json"
 ```
 
@@ -41,10 +40,6 @@ NocWorx-Api-Version: 0.0.0
   }
 }
 ```
-
-**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
-
-**Failure Response** (insufficient permissions): 403 Forbidden
 
 **Failure Response** (other bad input): 422 Unprocessable Entity
 
