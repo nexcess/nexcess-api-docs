@@ -12,7 +12,6 @@ anyone
 #### Request
 ```
 $ curl -i "$PORTAL_API_URL/v1/assess-passphrase/$PASSWORD" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
 
