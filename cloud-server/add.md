@@ -21,7 +21,7 @@ service edit permissions
 #### Request
 ```
 $ curl -X POST "$PORTAL_API/v1/cloud-server" \
-  -H "Authorization: Bearer $PORTAL_API_" \
+  -H "Authorization: Bearer $PORTAL_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{ "cloud_id": 1, "hostname": "cloud-server-example", "package_id": 677, "os_id": 4, "ssh_key_ids": [138, 139] }'
