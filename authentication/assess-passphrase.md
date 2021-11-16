@@ -24,33 +24,6 @@ Content-Length: 44
 Location: /v1/assess-passphrase
 NocWorx-Api-Version: 0.0.0
 
-HTTP/1.1 200 OK
-Date: Wed, 10 Nov 2021 12:51:27 GMT
-Content-Type: application/json
-Content-Length: 301
-NocWorx-Api-Version: 0.0.0
-
-{
-  "feedback": {
-    "warning": "",
-    "suggestions": []
-  },
-  "passphrase": "theamazingpassphraseyouchose",
-  "score": 4,
-  "time_to_crack": {
-    "online_throttling_100_per_hour": "centuries",
-    "online_no_throttling_10_per_second": "centuries",
-    "offline_slow_hashing_1e4_per_second": "centuries",
-    "offline_fast_hashing_1e10_per_second": "7 days"
-  }
-
-
-HTTP/1.1 200 OK
-Date: Wed, 10 Nov 2021 12:51:27 GMT
-Content-Type: application/json
-Content-Length: 301
-NocWorx-Api-Version: 0.0.0
-
 {
   "feedback": {
     "warning": "",
