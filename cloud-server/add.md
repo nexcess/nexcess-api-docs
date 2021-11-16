@@ -28,7 +28,7 @@ $ curl -X POST "$PORTAL_API/v1/cloud-server" \
 ```
 
 #### Responses
-**Success Response** (request was created for processing): 202 Accepted
+**Success Response** (request was accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
 Server: nginx
