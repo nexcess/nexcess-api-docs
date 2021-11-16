@@ -1,26 +1,22 @@
-Portal: Cloud Servers
----------------------
+# Portal: Cloud Servers
 
-**since** 0.0.0
+## cloud-server:show
+Show details of a cloud server.
 
-cloud-server:show
-==================
+#### Access
+service view permission
 
-Shows details of a cloud server.
+#### Input
+none
 
-**Endpoint**:  GET /v1/cloud-server/{id}
-
-**Access**: service view permission
-
-**Parameters**: none
-
-**Request**:
+#### Request:
 ```
-curl -i "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
+$ curl -i "$PORTAL_API/v1/cloud-server/$CLOUDSERVER_ID" \
+  -H "Authorization: Bearer $PORTAL_KEY" \
   -H "Accept: application/json"
 ```
 
+#### Responses
 **Success Response**: 200 OK
 ```
 HTTP/1.1 200 OK

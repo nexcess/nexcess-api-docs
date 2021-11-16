@@ -1,34 +1,29 @@
-Portal: Cloud Servers
----------------------
+# Portal: Cloud Servers
 
-**work in progress**
-
-cloud-server:cancel
-===================
-
+## cloud-server:cancel
 Requests a Cloud Server and its associated service not be renewed at the conclusion of the current billing cycle.
 
 Cancellation survey questions can vary with time and depending on the type of service. Note the survey is optional: it is intended for use on the client website, where filling out forms interactively is easier. Responses are welcome on the Api, but not required.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/cloud-server/{id}/cancel
+#### Access
+service delete permissions
 
-**Access**: service delete permissions
-
-**Parameters**:
+#### Input
 - array `survey[]` (optional): question id:response pairs. @see cloud-server:cancel-survey
 
-**Request**:
+#### Request:
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/cloud-server/$CLOUDSERVER_ID/cancel" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
+$ curl -X POST "$PORTAL_API/v1/cloud-server/$CLOUDSERVER_ID/cancel" \
+  -H "Authorization: Bearer $PORTAL_KEY" \
   -H "Accept: application/json" \
   -H "Xontent-type: application/json"
   -d '{ 1: [4], 2: "New business", 3: 10, 4: 1, 5: 1 }'
 ```
 
-**Success Response**: 202 Accepted
+#### Responses
+**Success Response** (request was accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
 Server: nginx

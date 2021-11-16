@@ -1,20 +1,14 @@
-Portal: Cloud Servers
----------------------
+# Portal: Cloud Servers
 
-**since** 0.0.0
-
-cloud-server:add
-================
-
+## cloud-server:add
 Creates a new cloud server and orders an associated service.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/cloud-server
+#### Access
+service edit permissions
 
-**Access**: service edit permissions
-
-**Parameters**:
+#### Input
 - integer `cloud_id` (required): id of the cloud (location) to install the cloud server. @see cloud:list
 - string `hostname` (required): host name for the new cloud server
 - integer `package_id` (required): id of the virt-guest service package to order. @see package:list
@@ -24,19 +18,17 @@ This task is queued, meaning it will be completed out-of-band from the current r
 - integer[] `addon_ids` (optional): ids of service add-on packages to order
 - string `discount_code` (optional): discount code to apply to the order
 
-**Additional Parameters**:
-- string `designated_ip` (optional): public IP address to assign to the new cloudserver. The IP must be available to OpenStack and not already be in use. NOTE, this functionality is exposed only via the admin `launch:as-client` endpoint.
-
-**Request**:
+#### Request
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/cloud-server" \
-  -H "Authorization: Bearer $PORTAL_API_KEY" \
+$ curl -X POST "$PORTAL_API/v1/cloud-server" \
+  -H "Authorization: Bearer $PORTAL_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{ "cloud_id": 1, "hostname": "cloud-server-example", "package_id": 677, "os_id": 4, "ssh_key_ids": [138, 139] }'
 ```
 
-**Success Response**: 202 Accepted
+#### Responses
+**Success Response** (request was accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
 Server: nginx
