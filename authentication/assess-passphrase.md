@@ -7,7 +7,7 @@ Shows information about passphrase complexity and estimated time-to-crack.
 anyone
 
 #### Input
-- string `passphrase` (required): guess passphrase; within 12 - 72 bytes. length
+- string `passphrase` (required): passphrase to assess; within 12 - 72 bytes in length.
 
 #### Request
 ```
