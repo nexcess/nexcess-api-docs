@@ -8,7 +8,7 @@ client view
 
 #### Request
 ```
-$ curl -i -X GET "$PORTAL_API_URL/v1/client/tax-exempt/{number}/{country}" \
+$ curl "$PORTAL_API_URL/v1/client/tax-exempt/{number}/{country}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```

@@ -4,7 +4,7 @@
 SSO info for customer feedback.
 
 #### Access
-client view
+client edit
 
 #### Request
 ```
@@ -41,7 +41,3 @@ NocWorx-Api-Version: 0.0.0
 **Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
 **Failure Response** (insufficient permissions): 403 Forbidden
-
-**Failure Response** (other bad input): 422 Unprocessable Entity
-
-**Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable

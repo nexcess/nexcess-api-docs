@@ -4,7 +4,7 @@
 Lists Client accounts that the authenticated user belongs to.
 
 #### Access
-client view
+logged-in users
 
 #### Request
 ```

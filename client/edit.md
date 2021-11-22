@@ -12,7 +12,7 @@ client edit
 - string `name` (optional): name; must contain a single line of text.
 - string `self_classification` (optional): client self classification; one of `blogger`|`business-owner`|`designer`|`developer`|`enterprise-customer`|`freelancer`|`marketer`
 - string `purchase_order_number` (optional): Custom purchase order number; must contain a single line of text.
-- bool `agency_relation` (optional): Is this Client an Agency;
+- bool `agency_relation` (optional): Is this Client an Agency?
 
 #### Request
 ```

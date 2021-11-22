@@ -4,7 +4,7 @@
 Shows details about the currently authenticated Client.
 
 #### Access
-client view
+logged-in users
 
 #### Request
 ```
@@ -34,9 +34,6 @@ NocWorx-Api-Version: 0.0.0
       "uri": null
     }
   },
-  "affiliate_info": {
-    "is_affiliate": false
-  },
   "billing": {
     "address": {
       "id": 12345,
@@ -60,51 +57,30 @@ NocWorx-Api-Version: 0.0.0
     "overdue_halt": false,
     "payment_type": "cc",
     "requires_creditcard": true,
-    "tax_exempt": false
+    "tax_exempt": false,
+    "credit_amount": "998380.90"
   },
-  "billing_address": null,
-  "company": {
-    "id": 4,
-    "identity": "Nexcess",
-    "metadata": {
-      "scope": "company",
-      "uri": null
-    }
-  },
-  "cred it_amount": "998380.90",
   "discount": null,
   "external_key": "",
   "external_key_prefix": null,
   "has_cancel_pending": false,
   "has_rdns_records": null,
   "has_rdnsable_ips": false,
-  "is_tax_exempt": false,
   "metadata": {
     "scope": "client",
     "uri": null
   },
-  "name": "Neeru 1 Api Testing",
+  "name": "My Company, Inc.",
   "owner": {
     "id": 61420,
-    "identity": "Nexcess Staff - support@nexcess.net",
+    "identity": "Alice Bowman - alice@example.com",
     "metadata": {
       "scope": "user",
       "uri": "/v1/user/61420"
     }
   },
-  "payment_type": "cc",
   "pin": "676867",
-  "requires_creditcard": true,
   "self_classification": "",
-  "service_counts": {
-    "eadn": {
-      "production": 8
-    },
-    "cloud-account": {
-      "development": 2,
-      "production": 13
-    }
-  },
   "services": {
     "counts": {
       "eadn": {
@@ -115,9 +91,6 @@ NocWorx-Api-Version: 0.0.0
         "production": 13
       }
     },
-    "has_cancel_pending": false,
-    "has_rdns_records": false,
-    "has_rdnsable_ips": false
   },
   "start_date": 1543599098,
   "tax_exempt": {
@@ -129,7 +102,3 @@ NocWorx-Api-Version: 0.0.0
 **Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
 **Failure Response** (insufficient permissions): 403 Forbidden
-
-**Failure Response** (other bad input): 422 Unprocessable Entity
-
-**Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable
