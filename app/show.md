@@ -1,6 +1,6 @@
 # Portal: App
 
-## address:show
+## app:show
 Shows App details.
 
 #### Access
@@ -8,7 +8,7 @@ app view
 
 #### Request
 ```
-$ curl -i -X GET "$PORTAL_API_URL/v1/app/{id}" \
+$ curl "$PORTAL_API_URL/v1/app/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
