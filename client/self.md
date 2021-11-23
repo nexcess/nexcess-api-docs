@@ -53,12 +53,10 @@ NocWorx-Api-Version: 0.0.0
     "amount_due": "0.00",
     "amount_overdue": "0.00",
     "credit_amount": "998380.90",
-    "discount": null,
     "overdue_halt": false,
     "payment_type": "cc",
     "requires_creditcard": true,
     "tax_exempt": false,
-    "credit_amount": "998380.90"
   },
   "discount": null,
   "external_key": "",
