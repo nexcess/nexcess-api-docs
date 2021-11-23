@@ -63,7 +63,6 @@ NocWorx-Api-Version: 0.0.0
   "external_key_prefix": null,
   "has_cancel_pending": false,
   "has_rdns_records": null,
-  "has_rdnsable_ips": false,
   "metadata": {
     "scope": "client",
     "uri": null
