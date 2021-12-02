@@ -6,6 +6,9 @@ SSO info for customer feedback.
 #### Access
 client edit
 
+#### Input
+none
+
 #### Request
 ```
 $ curl -i "$PORTAL_API_URL/v1/client/feedback-sso" \

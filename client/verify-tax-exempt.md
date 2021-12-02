@@ -6,6 +6,10 @@ Shows verified tax exempt details
 #### Access
 client view
 
+#### Input
+- string `number` (required): number to verify the tax exempt.
+- string `country` (optional): country; must contain a single line of text.
+
 #### Request
 ```
 $ curl "$PORTAL_API_URL/v1/client/tax-exempt/{number}/{country}" \
@@ -33,5 +37,3 @@ NocWorx-Api-Version: 0.0.0
 **Failure Response** (insufficient permissions): 403 Forbidden
 
 **Failure Response** (other bad input): 422 Unprocessable Entity
-
-**Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable

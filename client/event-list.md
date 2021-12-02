@@ -1,6 +1,6 @@
 # Portal: Client
 
-## client:event-list
+## client:history
 Lists Events.
 
 #### Access
