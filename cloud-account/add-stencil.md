@@ -51,7 +51,7 @@ NocWorx-Api-Version: 0.0.0
   "staff_user": null,
   "user": {
     "id": 61420,
-    "identity": "Example, Inc - support@nexcess.net",
+    "identity": "Alice Bowman - alice@example.com",
     "metadata": {
       "scope": "user",
       "uri": "/v1/user/61420"

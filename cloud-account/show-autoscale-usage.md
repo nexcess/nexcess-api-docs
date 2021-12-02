@@ -26,7 +26,30 @@ Content-Length: 44
 Location: /v1/cloud-account/12345/eadn
 NocWorx-Api-Version: 0.0.0
 
-{}
+{
+  "billable_cost": 0,
+  "billable_used": 0,
+  "cloud_account": {
+    "id": 1204,
+    "identity": "4bd2e3b804.100.lwdns.dev",
+    "metadata": {
+      "scope": "virt-guest-cloudaccount",
+      "uri": "/v1/cloud-account/1204"
+    },
+    "status": "used",
+    "state": "stable",
+    "type": "account"
+  },
+  "minutes_grace": {
+    "start": 1440,
+    "end": 1440
+  },
+  "period": {
+    "start": 1637643600,
+    "end": 1640235599
+  },
+  "used": 0
+}
 ```
 
 **Failure Response** (not logged in, expired token, etc.): 401 Unauthorized

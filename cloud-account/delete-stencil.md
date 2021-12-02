@@ -25,10 +25,35 @@ HTTP/1.1 202 Accepted
 Date: Tue, 02 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-Location: /v1cloud-account/1002/stencil/1234
+Location: /v1/cloud-account/1002/stencil/1234
 NocWorx-Api-Version: 0.0.0
 
-{}"
+{
+  "id": 492,
+  "identity": "stencil:delete (pending)",
+  "metadata": {
+    "scope": "api-task",
+    "uri": "/v1/task/067bdf4c-eaa8-4c5f-80d6-47b4c423079d"
+  },
+  "status": "pending",
+  "action": "stencil:delete",
+  "api_version": "0.5.0",
+  "errors": {},
+  "input": {},
+  "request_date": 1637847575,
+  "resolved_date": null,
+  "resource": null,
+  "staff_user": null,
+  "user": {
+    "id": 61420,
+    "identity": "Alice Bowman - alice@example.com",
+    "metadata": {
+      "scope": "user",
+      "uri": "/v1/user/61420"
+    }
+  },
+  "uuid": "067bdf4c-eaa8-4c5f-80d6-47b4c423079d"
+}"
 ```
 
 **Failure Response** (not logged in, expired token, etc.): 401 Unauthorized

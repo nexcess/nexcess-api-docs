@@ -22,7 +22,6 @@ $ curl -i -X POST "$PORTAL_API_URL/v1/cloud-account/{id}/nickname" \
     "nickname":"7.2",
   }'
 ``` 
-```
 
 #### Responses
 **Success Response** (request was accepted for processing): 202 Accepted
