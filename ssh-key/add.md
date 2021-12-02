@@ -41,15 +41,30 @@ NocWorx-Api-Version: 0.0.0
 Served-By: nwdev-web01-int
 
 {
-  "id": 0,
+  "id": 519,
   "identity": "ssh-key:add (pending)",
+  "metadata": {
+    "scope": "api-task",
+    "uri": "/v1/task/bd369617-6f42-43cd-9edd-037bea67d6ad"
+  },
   "status": "pending",
   "action": "ssh-key:add",
-  "request_date": 1566327307,
-  "resource_uri": "",
+  "api_version": "0.5.0",
+  "errors": {},
+  "input": {},
+  "request_date": 1638435978,
+  "resolved_date": null,
+  "resource": null,
   "staff_user": null,
-  "user": { "id": 27767, "identity": "Annabel Whyman - user@nocworx.com" },
-  "uuid": "6bf71868-d4ea-486a-95b9-0576ad3ef984"
+  "user": {
+    "id": 61420,
+    "identity": "Nexcess Staff - nocworx-dev@nexcess.net",
+    "metadata": {
+      "scope": "user",
+      "uri": "/v1/user/61420"
+    }
+  },
+  "uuid": "bd369617-6f42-43cd-9edd-037bea67d6ad"
 }
 ```
 
