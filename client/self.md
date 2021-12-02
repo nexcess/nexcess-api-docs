@@ -6,6 +6,9 @@ Shows details about the currently authenticated Client.
 #### Access
 logged-in users
 
+#### Input
+none
+
 #### Request
 ```
 $ curl -i "$PORTAL_API_URL/v1/client/self" \

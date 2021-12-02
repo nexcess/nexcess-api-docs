@@ -6,6 +6,9 @@ Lists "Heads-Up Display" Notifications for the currently authenticated User.
 #### Access
 logged-in users
 
+#### Input
+none
+
 #### Request
 ```
 $ curl -i "$PORTAL_API_URL/v1/client/hud" \

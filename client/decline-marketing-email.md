@@ -8,6 +8,9 @@ This task is queued, meaning it will be completed out-of-band from the current r
 #### Access
 client edit
 
+#### Input
+none
+
 #### Request
 ```
 $ curl -i -X DELETE "$PORTAL_API_URL/v1/client/marketing" \

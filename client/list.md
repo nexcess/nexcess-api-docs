@@ -7,6 +7,9 @@ Lists Client accounts that the authenticated user belongs to.
 logged-in users
 
 #### Input
+none
+
+#### Input
 - integer `filter[id]` (optional): filter list by system ID
 - integer `match[id]` (optional): match against id value
 - string `range[id]` (optional): find system IDs within "{min}..{max}" range.
