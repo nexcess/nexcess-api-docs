@@ -13,7 +13,7 @@ none
 
 #### Request
 ```
-$ curl -i -X DELETE "$PORTAL_API_URL/v1/client/marketing" \
+$ curl -X DELETE "$PORTAL_API_URL/v1/client/marketing" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```

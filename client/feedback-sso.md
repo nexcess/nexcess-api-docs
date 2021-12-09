@@ -1,7 +1,7 @@
 # Portal: Client
 
 ## client:feedback-sso
-SSO info for customer feedback.
+Shared sign-on SSO info for customer feedback.
 
 #### Access
 client edit
@@ -11,7 +11,7 @@ none
 
 #### Request
 ```
-$ curl -i "$PORTAL_API_URL/v1/client/feedback-sso" \
+$ curl "$PORTAL_API_URL/v1/client/feedback-sso" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```

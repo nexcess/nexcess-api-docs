@@ -1,7 +1,7 @@
 # Portal: Client
 
 ## client:accept-marketing-email
-Marketing email for client.
+Opt-in to customer marketing emails.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
@@ -13,7 +13,7 @@ none
 
 #### Request
 ```
-$ curl -i -X POST "$PORTAL_API_URL/v1/client/marketing" \
+$ curl -X POST "$PORTAL_API_URL/v1/client/marketing" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```

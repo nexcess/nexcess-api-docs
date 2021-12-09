@@ -11,7 +11,7 @@ none
 
 #### Request
 ```
-$ curl -i "$PORTAL_API_URL/v1/client/hud" \
+$ curl "$PORTAL_API_URL/v1/client/hud" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```

@@ -13,7 +13,7 @@ none
 
 #### Request
 ```
-$ curl -i -X DELETE "$PORTAL_API_URL/v1/client/tax-exempt" \
+$ curl -X DELETE "$PORTAL_API_URL/v1/client/tax-exempt" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```

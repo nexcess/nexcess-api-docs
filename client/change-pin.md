@@ -13,7 +13,7 @@ client edit
 
 #### Request
 ```
-$ curl -i -X POST "$PORTAL_API_URL/v1/client/pin" \
+$ curl -X POST "$PORTAL_API_URL/v1/client/pin" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \

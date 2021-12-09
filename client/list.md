@@ -20,7 +20,7 @@ none
 
 #### Request
 ```
-$ curl -i "$PORTAL_API_URL/v1/client" \
+$ curl "$PORTAL_API_URL/v1/client" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```

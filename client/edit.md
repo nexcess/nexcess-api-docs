@@ -16,7 +16,7 @@ client edit
 
 #### Request
 ```
-$ curl -i -X POST "$PORTAL_API_URL/v1/client" \
+$ curl -X POST "$PORTAL_API_URL/v1/client" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \

@@ -1,7 +1,7 @@
 # Portal: Client
 
 ## client:history
-Lists Events.
+Shows a history of events on the Client account.
 
 #### Access
 client view
@@ -23,7 +23,7 @@ client view
 
 #### Request
 ```
-$ curl -i "$PORTAL_API_URL/v1/client/history" \
+$ curl "$PORTAL_API_URL/v1/client/history" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
