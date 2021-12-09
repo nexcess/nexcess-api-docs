@@ -6,7 +6,7 @@ Changes PHP versions installed on the cloud account, optionally first checking c
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
 #### Access
-cloud account edit
+service edit
 
 #### Input
 - integer `id` (required): System ID of the cloud account to edit

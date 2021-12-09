@@ -4,7 +4,7 @@
 List Cloud Accounts.
 
 #### Access
-cloud account view
+service view
 
 #### Request
 ```

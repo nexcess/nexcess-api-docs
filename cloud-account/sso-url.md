@@ -4,7 +4,7 @@
 Get Sso Url.
 
 #### Access
-cloud account view
+service view
 
 #### Input
 - integer `id` (required): System ID of the sso url.

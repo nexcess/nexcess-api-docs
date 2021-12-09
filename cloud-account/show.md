@@ -4,7 +4,7 @@
 Show Cloud Account details.
 
 #### Access
-cloud account view
+service view
 
 #### Request
 ```

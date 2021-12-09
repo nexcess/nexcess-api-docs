@@ -4,7 +4,7 @@
 Shows Container group info.
 
 #### Access
-container view
+service view
 
 #### Request
 ```

@@ -4,7 +4,7 @@
 Shows EADN Account details.
 
 #### Access
-eadn account view
+service view
 
 #### Input
 - string `cloud_account_id` (required): cloud account id; The system id of the cloud account that the eadn account belongs to.

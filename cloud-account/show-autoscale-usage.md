@@ -4,7 +4,7 @@
 Shows autoscale usage data.
 
 #### Access
-logged-in users
+service view
 
 #### Input
 - integer `id` (optional): System ID of the eadn account to edit

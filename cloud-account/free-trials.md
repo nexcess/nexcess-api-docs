@@ -4,7 +4,7 @@
 Checks free trial availability.
 
 #### Access
-logged-in users
+anyone
 
 #### Input
 - email `customer_email` (optional): Customer email address
@@ -36,9 +36,5 @@ NocWorx-Api-Version: 0.0.0
   "reasons": []
 }
 ```
-
-**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
-
-**Failure Response** (insufficient permissions): 403 Forbidden
 
 **Failure Response** (invalid inputs): 422 Unprocessable Entity

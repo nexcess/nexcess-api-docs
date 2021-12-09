@@ -6,7 +6,7 @@ Creates a new Stencil
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
 #### Access
-cloud account edit
+service edit
 
 #### Input
 - integer `account_id` (required): System ID of the cloud account to edit
@@ -19,7 +19,7 @@ $ curl -i -X POST "$PORTAL_API_URL/v1/cloud-account/{account_id}/stencil" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{
-    "name":"13b0305e17f.1700.lwdns.dev",
+    "name":"my example.com site template",
   }'
 ```
 

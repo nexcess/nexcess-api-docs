@@ -4,7 +4,7 @@
 Lists Stencils.
 
 #### Access
-stencil view
+service view
 
 #### Input
 - integer `account_id` (optional): System ID of the cloud account to view

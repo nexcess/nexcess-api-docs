@@ -4,7 +4,7 @@
 Shows Stencil details.
 
 #### Access
-stencil view
+service view
 
 #### Input
 - integer `account_id` (optional): System ID of the cloud account that the stencil belongs to.
