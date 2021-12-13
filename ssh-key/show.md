@@ -51,7 +51,7 @@ Served-By: nwdev-web01-int
     "status": "active"
   },
   "creation_date": 1638366250,
-  "fingerprint": "SHA256:3XTUdV3yYM/42K7a9ZP4V/XPUmeXO2/6PX1q8Ml3Mws chittaranjanbehera@it-HP-ProBook-440-G7 (RSA)",
+  "fingerprint": "SHA256:3XTUdV3yYM/... (RSA)",
   "key_size": 2048,
   "name": "nexcess-ssh-key",
   "user": {
