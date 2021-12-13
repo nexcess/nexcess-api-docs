@@ -57,11 +57,11 @@ Served-By: nwdev-web01-int
   "resource": null,
   "staff_user": null,
   "user": {
-    "id": 61420,
-    "identity": "Nexcess Staff - nocworx-dev@nexcess.net",
+    "id": 27767,
+    "identity": "Annabel Whyman - user@nocworx.com",
     "metadata": {
       "scope": "user",
-      "uri": "/v1/user/61420"
+      "uri": "/v1/user/27767"
     }
   },
   "uuid": "bd369617-6f42-43cd-9edd-037bea67d6ad"

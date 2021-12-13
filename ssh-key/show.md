@@ -36,7 +36,7 @@ Served-By: nwdev-web01-int
 
 {
   "id": 139,
-  "identity": "nexcess-ssh-key - SHA256:3XTUdV3yYM/42K7a9ZP4V/XPUmeXO2/6PX1q8Ml3Mws chittaranjanbehera@it-HP-ProBook-440-G7 (RSA)",
+  "identity": "nexcess-ssh-key - SHA256:3XTUdV3yYM/... (RSA)",
   "metadata": {
     "scope": "user-ssh-key",
     "uri": "/v1/ssh-key/139"
@@ -56,7 +56,7 @@ Served-By: nwdev-web01-int
   "name": "nexcess-ssh-key",
   "user": {
     "id": 61420,
-    "identity": "Nexcess Staff - nocworx-dev@nexcess.net",
+    "identity": "Annabel Whyman - user@example.com",
     "metadata": {
       "scope": "user",
       "uri": "/v1/user/61420"

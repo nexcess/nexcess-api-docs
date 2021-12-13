@@ -52,7 +52,7 @@ Served-By: nwdev-web01-int
   "resolved_date": null,
   "resource": {
     "id": 140,
-    "identity": "example-key - SHA256:3XTUdV3yYM/42K7a9ZP4V/XPUmeXO2/6PX1q8Ml3Mws chittaranjanbehera@it-HP-ProBook-440-G7 (RSA)",
+    "identity": "example-key - SHA256:3XTUdV3yYM/. . . (RSA)",
     "metadata": {
       "scope": "user-ssh-key",
       "uri": "/v1/ssh-key/140"
@@ -61,7 +61,7 @@ Served-By: nwdev-web01-int
   "staff_user": null,
   "user": {
     "id": 61420,
-    "identity": "Nexcess Staff - nocworx-dev@nexcess.net",
+    "identity": "Annabel Whyman - user@nocworx.com",
     "metadata": {
       "scope": "user",
       "uri": "/v1/user/61420"
