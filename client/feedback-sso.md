@@ -1,7 +1,7 @@
 # Portal: Client
 
 ## client:feedback-sso
-Shared sign-on SSO info for customer feedback.
+Shared sign-on info for customer feedback.
 
 #### Access
 client edit
