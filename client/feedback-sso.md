@@ -6,15 +6,15 @@ Shared sign-on info for customer feedback.
 #### Access
 client edit
 
-#### Input
-none
-
 #### Request
 ```
 $ curl "$PORTAL_API_URL/v1/client/feedback-sso" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
+
+#### Input
+none
 
 #### Responses
 **Success Response** (success): 200 OK
