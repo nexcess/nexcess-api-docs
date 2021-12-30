@@ -12,7 +12,7 @@ payment view
 - string `range[id]` (optional): find system IDs within "{min}..{max}" range.
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
-- string `sortBy` (optional): field to sort the list by; one of `id`|`invoice_id`|`amount`|`original_amount`|`payment_date`|`type`|`reference`|`credit_id`|`date`|`invoice.
+- string `sortBy` (optional): field to sort the list by; one of `id`|`invoice_id`|`amount`|`original_amount`|`payment_date`|`type`|`reference`|`credit_id`|`date`|`invoice`.
 - string `sortOrder` (optional): sort direction; one of `ASC`|`DESC`.status
 
 #### Request
