@@ -1,71 +1,61 @@
-Portal: Webhook
----------------
+# Portal: Webhook
 
-**since** 0.5.0
+## webhook:show
+Shows Webhook details.
 
-webhook:show
-============
+#### Access
+webhook users
 
-Shows a stored webhook.
-
-**Endpoint**:  GET /v1/task/webhook/{webhook_id}
-
-**Access**: account view permission
-
-**Parameters**: none
-
-**Request**:
+#### Request
 ```
-curl -i "$PORTAL_API_URL/v1/task/webhook/$WEBHOOK_ID" \
+$ curl -i "$PORTAL_API_URL/v1/task/webhook/{WEBHOOK_ID}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
 
-**Success Response**: 200 OK
+#### Responses
+**Success Response** (success): 200 OK
 ```
 HTTP/1.1 200 OK
-Server: nginx
-Date: Wed, 17 Jul 2019 01:50:28 GMT
+Date: Wed, 05 Jan 2022 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
-Content-Length: 1656
-Vary: Accept-Encoding
-X-Powered-By: PHP/7.4.2
-NocWorx-Api-Version: 0.5.0
-Served-By: nwdev-web01-int
+Content-Length: 44
+NocWorx-Api-Version: 0.0.0
 
 {
-  "id": 14,
-  "identity": "#14 example-webhook",
-  "auth": {
-    "type": "basic",
-    "username": "foo",
-    "password": "****"
-  },
-  "client": {
-    "id": 12345,
-    "identity": "Example, Inc.",
+    "id": 1,
+    "identity": "#1 My First Webhook",
+    "auth": {
+        "type": null
+    },
+    "client": {
+        "id": 38114,
+        "identity": "Alice Bowman",
+        "status": "active",
+        "metadata": {
+            "scope": "client",
+            "uri": null
+        }
+    },
+    "listen_to": {
+        "resource": "webhook",
+        "action": "laptop"
+    },
     "metadata": {
-      "scope": "client",
-      "uri": null
-    }
-  },
-  "listen_to": {
-    "resource": "cloud-server",
-    "action": "reboot"
-  },
-  "metadata": {
-    "scope": "api-webhook",
-    "uri": "/v1/task/webhook/14/"
-  },
-  "name": "example-webhook",
-  "type": "json",
-  "url": "https://example.com/webhook",
-  "user_data": { "whatever": "you like" }
-}
+        "scope": "api-webhook",
+        "uri": "/v1/task/webhook/1/"
+    },
+    "name": "My First Webhook",
+    "type": "json",
+    "url": "https://example.com/webhook",
+    "user_data": [
+        "laptop"
+    ]
+}"
 ```
 
-**Failure Response** (not logged in): 401 Unauthorized
+**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
 **Failure Response** (insufficient permissions): 403 Forbidden
 
-**Failure Response** (doesn't exist on client account): 404 Not Found
+**Failure Response** (id doesn't exist on your account (or at all)): 404 Not Found

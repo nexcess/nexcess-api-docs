@@ -1,68 +1,74 @@
-Portal: Webhooks
-----------------
+# Portal: Webhook
 
-**since** 0.5.0
+## webhook:add
+Creates a new Webhook.
 
-webhook:add
-===========
+This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
-Creates a new stored webhook.
+#### Access
+logged-in users
 
-This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
+#### Input
+- string `name` (required): name for the new Webhook; must contain a single line of text
+- string `action` (required): the action the new Webhook will listen for
+- string `resource` (required): the resource the new Webhook will listen for
+- string `url` (required): the fully qualified URL the new Webhook will POST to; only https is currently supported
+- array `auth` (optional): authentication method and credentials for the Webhook
+- string `type` (optional): a name for the new Webhook; one of `json`|`form_params`|`multipart`
+- array `user_data` (optional): arbitrary user-provided data to be sent with the Webhook
 
-**Endpoint**: POST /v1/task/webhook
-
-**Access**: account edit permissions
-
-**Parameters**:
-- string `name` (required): name for the webhook
-- string `url` (required): fully qualified target URL for the webhook (only https is currently supported)
-- string `type` (optional): one of `json`(application/json (default))|`form`(application/x-www-urlencoded)|`multipart`(multipart/form-data)
-- string `resource` (optional): the api resource the webhook should listen for. `*` means "any resource"; `-` means "none" (disable)
-- string `action` (optional): the api action the webhook should listen for. `*` means "any action"; `-` means "none" (disable)
-- array `auth` (optional):
-  - string `auth[type]` (required): one of `basic`|`digest`|`bearer`
-  - string `auth[username]` (required if type=basic|digest): username
-  - string `auth[password]` (required if type=basic|digest): password
-  - string `auth[token]` (required if type=bearer): bearer token
-- array `user_data` (optional): arbitrary user-defined data to be included with the webhook
-
-**Request**:
+#### Request
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/task/webhook" \
+$ curl -i POST "$PORTAL_API_URL/v1/task/webhook" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{
-    "name": "example-webhook",
-    "url": "https://example.com/webhook",
-    "resource": "cloud-server",
-    "action": "reboot",
-    "auth": {
-      "type": "basic",
-      "username": "foo",
-      "password": "passw0rd!"
-    },
-    "user_data": { "whatever": "you like" }
+    "name":"My First Webhook",
+    "action":"laptop",
+    "resource":"webhook",
+    "url":"https://example.com/webhook",
+    "auth":["bearer"],
+    "type":"json",
+    "user_data":"laptop"
   }'
 ```
 
-**Success Response**: 202 Accepted
+#### Responses
+**Success Response** (request was accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
-Server: nginx
-Date: Tue, 16 Jul 2019 12:51:27 GMT
+Date: Tue, 02 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-X-Powered-By: PHP/7.4.2
-Location: /v1/task/3b93d577-41ee-4077-913f-d36f91819bb9
-NocWorx-Api-Version: 0.5.0
-Served-By: nwdev-web01-int
+Location: /v1/task/webhook
+NocWorx-Api-Version: 0.0.0
 
-{ "id": 12, "identity": "webhook:add (pending)" }
+{
+  "id": 499,
+  "identity": "webhook:add (pending)",
+  "status": "pending",
+  "action": "webhook:add",
+  "metadata": {
+    "scope": "api-task",
+    "uri": "/v1/task/b88b39cb-a8a5-4a29-bb63-d4be0ff88528/"
+  },
+  "request_date": 1641380033,
+  "resource": null,
+  "staff_user": null,
+  "user": {
+    "id": 61420,
+    "identity": "Alice Bowman - alice@example.com",
+    "metadata": {
+      "scope": "user",
+      "uri": "/v1/user/61420/"
+    }
+  },
+  "uuid": "b88b39cb-a8a5-4a29-bb63-d4be0ff88528"
+}
 ```
 
-**Failure Response** (not logged in): 401 Unauthorized
+**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
 **Failure Response** (insufficient permissions): 403 Forbidden
 

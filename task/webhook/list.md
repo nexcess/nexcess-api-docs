@@ -1,78 +1,77 @@
-Portal: Webhook
----------------
+# Portal: Webhook
 
-**since** 0.5.0
+## webhook:list
+Lists registered webhooks.
 
-webhook:list
-============
+#### Access
+webhook users
 
-Lists a client's stored webhooks.
-
-**Endpoint**:  GET /v1/task/webhook
-
-**Access**: account view permission
-
-**Parameters**:
-- integer `filter[name]` (optional): filter list by name
-- integer `filter[resource]` (optional): filter list by the resource it listens to
-- integer `filter[action]` (optional): filter list by the action it listens to
-- integer `filter[url]` (optional): filter list by url
+#### Input
+- integer `filter[id]` (optional): filter list by system ID.
+- integer `filter[name]` (optional): filter list by name.
+- string `filter[resource]` (optional): filter list by the resource it listens to.
+- string `filter[action]` (optional): filter list by the action it listens to.
+- string `filter[url]` (optional): filter list by url.
+- integer `match[id]` (optional): match against system ID.
+- integer `match[name]` (optional): match against name.
+- string `match[resource]` (optional): match against resource it listens to.
+- string `match[action]` (optional): match against action it listens to.
+- string `match[url]` (optional): match against url.
+- string `range[id]` (optional): find system IDs within "{min}..{max}" range.
 - integer `page` (optional): 1-based result set count for paginated results.
 - integer `pageSize` (optional): maximum number of results to include per "page" of a paginated list.
-- string `sortBy` (optional): field to sort the list by; one of `name`|`listen_to`|`url`
+- string `sortBy` (optional): field to sort the list by; one of `id`|`name`|`listen_to`|`url`.
 - string `sortOrder` (optional): sort direction; one of `ASC`|`DESC`.
 
-**Request**:
+#### Request
 ```
-curl -i "$PORTAL_API_URL/v1/task/webhook" \
+$ curl -i "$PORTAL_API_URL/v1/task/webhook" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
 
-**Success Response**: 200 OK
+#### Responses
+**Success Response** (success): 200 OK
 ```
 HTTP/1.1 200 OK
-Server: nginx
-Date: Wed, 17 Jul 2019 01:50:28 GMT
+Date: Wed, 05 Jan 2022 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
-Content-Length: 1656
-Vary: Accept-Encoding
-X-Powered-By: PHP/7.4.2
-Content-Range: items 1-5/5
-NocWorx-Api-Version: 0.5.0
-Served-By: nwdev-web01-int
+Content-Length: 44
+NocWorx-Api-Version: 0.0.0
 
 [
   {
-    "id": 14,
-    "identity": "#14 example-webhook",
+    "id": 1,
+    "identity": "#1 My First Webhook",
     "client": {
-      "id": 12345,
-      "identity": "Example, Inc.",
+      "id": 38114,
+      "identity": "Alice Bowman",
+      "status": "active",
       "metadata": {
         "scope": "client",
         "uri": null
       }
     },
     "listen_to": {
-      "resource": "cloud-server",
-      "action": "reboot"
+      "resource": "webhook",
+      "action": "laptop"
     },
     "metadata": {
       "scope": "api-webhook",
-      "uri": "/v1/task/webhook/14/"
+      "uri": "/v1/task/webhook/1/"
     },
-    "name": "example-webhook",
+    "name": "My First Webhook",
     "url": "https://example.com/webhook"
-  }
+  },
 
   . . .
-
 ]
 ```
 
-**Failure Response** (not logged in): 401 Unauthorized
+**Failure Response** (not logged in, expired token, etc.): 401 Unauthorized
 
 **Failure Response** (insufficient permissions): 403 Forbidden
+
+**Failure Response** (invalid inputs): 422 Unprocessable Entity
 
 **Failure Response** (bad range/page number/page size): 416 Requested Range Not Satisfiable
