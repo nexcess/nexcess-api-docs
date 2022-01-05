@@ -34,27 +34,36 @@ NocWorx-Api-Version: 0.3.0
 Served-By: nwdev-web01-int
 
 {
-  "id": 138,
+  "id": 210,
   "identity": "",
-  "expiration_date": 1578932676,
-  "linked_to": null,
-  "max_uses": 10,
   "metadata": {
     "scope": "datashare",
-    "uri": null
+    "uri": "/v1/datashare/268bdfa5-043a-41ea-b865-6087a1206fb6"
   },
-  "owner": {
-    "id": 58401,
-    "identity": "us-midwest-1 - example.com - 203.113.0.1",
+  "expiration_date": 1641725936,
+  "linked": {
+    "id": 28,
+    "identity": "Test Ticket Correct update7 (open)",
     "metadata": {
-      "scope": "service",
-      "uri": null
-    }
+      "scope": "sf-ticket",
+      "uri": "/v1/ticket/07770483"
+    },
+    "status": "open"
   },
-  "share_date": 1578587076,
-  "type": "ssh-password",
+  "max_uses": 10,
+  "owner": {
+    "id": 38116,
+    "identity": "Howell Inc",
+    "metadata": {
+      "scope": "client",
+      "uri": null
+    },
+    "status": "active"
+  },
+  "share_date": 1641380336,
+  "type": "client-secret",
   "uses": 0,
-  "uuid": "123e4567-e89b-12d3-a456-556642440000"
+  "uuid": "268bdfa5-043a-41ea-b865-6087a1206fb6"
 }
 ```
 

@@ -43,7 +43,8 @@ Served-By: nwdev-web01-int
     "metadata": {
       "scope": "datashare",
       "uri": "/v1/datashare/123e4567-e89b-12d3-a456-556642440000/"
-    }
+    },
+    "type": "client-secret"
   }
 }
 ```

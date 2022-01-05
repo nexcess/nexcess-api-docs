@@ -12,6 +12,8 @@ Lists datahsares that belong to the logged-in user, optionally filtering by the 
 
 **Alternate Endpoint**: GET /v1/datashare/{owner}/{owner_id}
 
+**Alternate Endpoint**: GET /v1/datashare/{ticket}/{casenumber}
+
 This alternate endpoint is sugar for GET /v1/datashare?filter[owner]={owner}&filter[owner_id]={owner_id} and will serve identical responses.
 
 **Access**: logged-in users
@@ -47,26 +49,38 @@ Served-By: nwdev-web01-int
 
 [
   {
-    "id": 138,
+    "id": 210,
     "identity": "",
-    "max_uses": 10,
     "metadata": {
       "scope": "datashare",
-      "uri": "/v1/datashare/123e4567-e89b-12d3-a456-556642440000/"
+      "uri": "/v1/datashare/268bdfa5-043a-41ea-b865-6087a1206fb6"
     },
-    "owner": {
-      "id": 58401,
-      "identity": "us-midwest-1 - example.com - 203.113.0.1",
+    "expiration_date": 1641725936,
+    "linked": {
+      "id": 28,
+      "identity": "Test Ticket Correct update7 (open)",
       "metadata": {
-        "scope": "service",
-        "uri": null
-      }
+        "scope": "sf-ticket",
+        "uri": "/v1/ticket/07770483"
+      },
+      "status": "open"
     },
-    "type": "ssh-password",
+    "max_uses": 10,
+    "owner": {
+      "id": 38116,
+      "identity": "Howell Inc",
+      "metadata": {
+        "scope": "client",
+        "uri": null
+      },
+      "status": "active"
+    },
+    "share_date": 1641380336,
+    "type": "client-secret",
     "uses": 0,
-    "uuid": "123e4567-e89b-12d3-a456-556642440000"
+    "uuid": "268bdfa5-043a-41ea-b865-6087a1206fb6"
   },
-
+  
   . . .
 ]
 ```
