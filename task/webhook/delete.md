@@ -13,7 +13,7 @@ webhook edit
 
 #### Request
 ```
-$ curl -i DELETE "$PORTAL_API_URL/v1/task/webhook/{webhook_id}" \
+$ curl -X DELETE "$PORTAL_API_URL/v1/task/webhook/{webhook_id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
