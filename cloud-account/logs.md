@@ -14,9 +14,9 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/{id}/log" \
 ```
 
 #### Responses
-**Success Response** (Error): 500 Internal Server Error
+**Success Response** (success): 200 OK
 ```
-HTTP/1.1 500 Internal Server Error
+HTTP/1.1 200 OK
 Date: Wed, 24 Nov 2021 12:51:27 GMT
 Content-Length: 44
 Location: /v1/cloud-account/12345/log
