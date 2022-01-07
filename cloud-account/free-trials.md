@@ -17,7 +17,7 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/free-trials" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{
-    "customer_email" : "new-user@example.com",
+    "customer_email" : "alice@example.com",
     "package_id": 789
   }'
 ```

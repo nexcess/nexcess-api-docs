@@ -24,28 +24,9 @@ NocWorx-Api-Version: 0.0.0
 
 [
   {
-    "type": "GuzzleHttp\\Exception\\ConnectException",
-    "code": 0,
-    "message": "cURL error 7: Failed connect to 192.190.222.73:2443; Connection timed out (see https://curl.haxx.se/libcurl/c/libcurl-errors.html)",
-    "file": "/home/nocworx/core/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php",
-    "line": 200,
-    "trace": [
-      "#0 /home/nocworx/core/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(155): GuzzleHttp\\Handler\\CurlFactory::createRejection()",
-      "#1 /home/nocworx/core/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(105): GuzzleHttp\\Handler\\CurlFactory::finishError()",
-      "#2 /home/nocworx/core/vendor/guzzlehttp/guzzle/src/Handler/CurlHandler.php(43): GuzzleHttp\\Handler\\CurlFactory::finish()",
-      "#3 /home/nocworx/core/vendor/guzzlehttp/guzzle/src/RetryMiddleware.php(70): GuzzleHttp\\Handler\\CurlHandler->__invoke()",
-      "#4 /home/nocworx/core/vendor/guzzlehttp/guzzle/src/RetryMiddleware.php(126): GuzzleHttp\\RetryMiddleware->__invoke()",
-      "#5 /home/nocworx/core/vendor/guzzlehttp/guzzle/src/RetryMiddleware.php(115): GuzzleHttp\\RetryMiddleware->doRetry()",
-      "#6 /home/nocworx/core/vendor/guzzlehttp/promises/src/RejectedPromise.php(42): GuzzleHttp\\RetryMiddleware->GuzzleHttp\\{closure}()",
-      "#7 /home/nocworx/core/vendor/guzzlehttp/promises/src/TaskQueue.php(48): GuzzleHttp\\Promise\\RejectedPromise::GuzzleHttp\\Promise\\{closure}()",
-      "#8 /home/nocworx/core/vendor/guzzlehttp/promises/src/Promise.php(248): GuzzleHttp\\Promise\\TaskQueue->run()",
-      "#9 /home/nocworx/core/vendor/guzzlehttp/promises/src/Promise.php(224): GuzzleHttp\\Promise\\Promise->invokeWaitFn()",
-      "#10 /home/nocworx/core/vendor/guzzlehttp/promises/src/Promise.php(269): GuzzleHttp\\Promise\\Promise->waitIfPending()",
-      "#11 /home/nocworx/core/vendor/guzzlehttp/promises/src/Promise.php(226): GuzzleHttp\\Promise\\Promise->invokeWaitList()",
-      "#12 /home/nocworx/core/vendor/guzzlehttp/promises/src/Promise.php(62): GuzzleHttp\\Promise\\Promise->waitIfPending()",
-      "#13 /home/nocworx/core/vendor/php-http/guzzle6-adapter/src/Promise.php(95): GuzzleHttp\\Promise\\Promise->wait()",
-      "#14 /home/nocworx/core/vendor/php-http/guzzle6-adapter/src/Client.php . . .
-    ]
+    "log_file": "/chroot/home/a9c1c849/var/e8fbc88859.400.lwdns.dev/logs/error-2022-01-07.log",
+    "date": 1641549132,
+    "download_url": "https://192.190.222.114:2443/siteworx/index?action=sso&sid=1l13r7m2p3q7cdms48jhb0si6q&uri=L3NpdGV3b3J4L2Rvd25sb2FkP2FjdGlvbj1sb2cmZmlsZT0lMkZjaHJvb3QlMkZob21lJTJGYTljMWM4NDklMkZ2YXIlMkZlOGZiYzg4ODU5LjQwMC5sd2Rucy5kZXYlMkZsb2dzJTJGZXJyb3ItMjAyMi0wMS0wNy5sb2cmZG9tYWluPWU4ZmJjODg4NTkuNDAwLmx3ZG5zLmRldg%3D%3D"
   },
   
   . . .

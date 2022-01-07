@@ -14,7 +14,7 @@ service edit
 
 #### Request
 ```
-$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-account/{account_id}/stencil" \
+$ curl -X POST "$PORTAL_API_URL/v1/cloud-account/{account_id}/stencil" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \

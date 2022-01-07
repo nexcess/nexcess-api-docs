@@ -14,7 +14,7 @@ service edit
 
 #### Request
 ```
-$ curl -i -X POST "$PORTAL_API_URL/v1/cloud-account/{id}/nickname" \
+$ curl -X POST "$PORTAL_API_URL/v1/cloud-account/{id}/nickname" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
@@ -61,7 +61,7 @@ NocWorx-Api-Version: 0.0.0
   "staff_user": null,
   "user": {
     "id": 61420,
-    "identity": "Example, Inc - support@nexcess.net",
+    "identity": "Example, Inc - alice@example.com",
     "metadata": {
         "scope": "user",
         "uri": "/v1/user/61420"

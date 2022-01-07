@@ -8,7 +8,7 @@ service view
 
 #### Request
 ```
-$ curl -i "$PORTAL_API_URL/v1/cloud-account/{CLOUDACCOUNT_ID}" \
+$ curl "$PORTAL_API_URL/v1/cloud-account/{CLOUDACCOUNT_ID}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
