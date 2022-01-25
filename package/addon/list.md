@@ -9,15 +9,13 @@ package-addon:list
 Lists package addons (typically, belonging to a particular package). 
 Only addons that can be purchased by the client making the request will be returned.
 
-**Endpoint**:  GET /v1/package/addon
+**Endpoint**:  GET /v1/package/addon/{id}
 
-**Alternate Endpoint**:  GET /v1/package/{id}/addon[/{type}]
-
-This alternate endpoint is sugar for `GET /v1/package/addon?filter[package_id]={id}&filter[type]={type}` and will serve identical responses. The `type` parameter is optional.
+This alternate endpoint is sugar for `GET /v1/package/addon/{id}?filter[package_id]={id}&filter[type]={type}` and will serve identical responses. The `type` parameter is optional.
 
 **Alternate Endpoint**:  GET /v1/package/addon/{type}
 
-This alternate endpoint is sugar for `GET /v1/package/addon?filter[type]={type}` and will serve identical responses.
+This alternate endpoint is sugar for `GET /v1/package/addon/{type}?filter[type]={type}` and will serve identical responses.
 
 **Access**: order view permission
 
@@ -51,12 +49,22 @@ NocWorx-Api-Version: 0.0.0
 Served-By: nwdev-web01-int
 
 [
-  { 
-    "id": 514,
-    "identity": "Standard EV SSL",
-    "monthly_fee": "0.00",
-    "name": "Standard EV SSL",
-    "type": "ssl"
+  {
+    "id": 2259,
+    "identity": "nc.elasticsearch-small",
+    "metadata": {
+      "scope": "package-addon",
+      "uri": "/v1/package/addon/2259"
+    },
+    "configuration": {
+      "service": "elasticsearch",
+      "cpu": 1,
+      "memory": "2g",
+    },
+    "description": "ElasticSearch Container Platform (small)",
+    "monthly_fee": "20.00",
+    "name": "nc.elasticsearch-small",
+    "type": "virt-guest-cloud"
   },
   
   . . .
