@@ -11,6 +11,7 @@ public
 $ curl "$PORTAL_API_URL/v1/domain/availability/{$DOMAIN_NAME_WITH_OR_WITHOUT_TLD}" \
   -H "Accept: application/json"
 ```
+_If the submitted domain name does not include a TLD, the response will include `alternatives` but the `domain` property will be `null`._
 
 #### Responses
 **Success Response** (success): 200 OK
