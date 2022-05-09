@@ -31,16 +31,34 @@ curl -i "$PORTAL_API_URL/v1/ssh-key" \
 ```
 [
   {
-    "id": 138,
-    "identity": "stark.pub - f4:e1:75:e9:cf:83:c4:0b:83:e8:36:6b:c5:61:22:8f  user@example.com (RSA)",
-    "client": { "id": 24512, "identity": "Bosco-Bradtke" },
-    "creation_date": 1490204568,
-    "fingerprint": "f4:e1:75:e9:cf:83:c4:0b:83:e8:36:6b:c5:61:22:8f  user@example.com (RSA)",
+    "id": 139,
+    "identity": "nexcess-ssh-key - SHA256:3XTUdV3yYM/... (RSA)",
+    "metadata": {
+      "scope": "user-ssh-key",
+      "uri": "/v1/ssh-key/139"
+    },
+    "client": {
+      "id": 38114,
+      "identity": "Howell Inc",
+      "metadata": {
+        "scope": "client",
+        "uri": null
+      },
+      "status": "active"
+    },
+    "creation_date": 1638366250,
+    "fingerprint": "SHA256:3XTUdV3yYM/... (RSA)",
     "key_size": 2048,
-    "name": "stark.pub",
-    "user": { "id": 27767, "identity": "Annabel Whyman - user@example.com" }
+    "name": "nexcess-ssh-key",
+    "user": {
+      "id": 61420,
+      "identity": "Annabel Whyman - user@example.com",
+      "metadata": {
+        "scope": "user",
+        "uri": "/v1/user/61420"
+      }
+    }
   },
-
   . . .
 ]
 ```
