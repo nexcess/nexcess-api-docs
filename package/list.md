@@ -58,32 +58,32 @@ Served-By: nwdev-web01-int
 
 [
   {
-    "id": 707,
-    "identity": "nc.xsmall",
-    "name": "nc.xsmall",
-    "monthly_fee": "29.00",
-    "type": "virt-guest-cloud"
-  },
-  {
-    "id": 708,
-    "identity": "nc.small",
-    "name": "nc.small",
-    "monthly_fee": "99.00",
-    "type": "virt-guest-cloud"
-  },
-  {
-    "id": 709,
-    "identity": "nc.medium",
-    "name": "nc.medium",
-    "monthly_fee": "179.00",
-    "type": "virt-guest-cloud"
-  },
-  {
-    "id": 710,
-    "identity": "nc.large",
-    "name": "nc.large",
-    "monthly_fee": "299.00",
-    "type": "virt-guest-cloud"
+    "id": 179,
+    "identity": "SSL Certificate",
+    "metadata": {
+      "scope": "package",
+      "uri": "/v1/package/179"
+    },
+    "addons": [],
+    "auto_renew": true,
+    "bandwidth": 0,
+    "billing_type": "pre-billed",
+    "environment_type": "production",
+    "is_wildcard": false,
+    "label": "SSL Certificate",
+    "name": "SSL Certificate",
+    "orderable_terms": {
+      "12": "##LG_ONE_YEAR##",
+      "24": "##LG_TWO_YEARS##",
+      "36": "##LG_THREE_YEARS##"
+    },
+    "term_fees": {
+      "12": "29.95",
+      "24": "49.96",
+      "36": "69.96"
+    },
+    "trial_period": 0,
+    "type": "ssl"
   },
 
   . . .

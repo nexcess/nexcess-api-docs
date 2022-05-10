@@ -33,26 +33,33 @@ NocWorx-Api-Version: 0.0.0
 Served-By: nwdev-web01-int
 
 {
-  "id": 707,
-  "identity": "nc.xsmall",
-  "name": "nc.xsmall",
-  "monthly_fee": "29.00",
-  "type": "virt-guest-cloud",
-  "configuration": {
-    "packagetemplate": "nc_xsmall",
-    "environment": {
-      "hardware": {
-        "servers": [
-          {
-            "role": "cloudhost",
-            "image": "centos-7-x86_64-latest",
-            "flavor": "n5s-sc-1.dev",
-            "public_ip": true
-          }
-        ]
-      }
-    }
-  }
+  "id": 179,
+  "identity": "SSL Certificate",
+  "metadata": {
+    "scope": "package",
+    "uri": "/v1/package/179"
+  },
+  "addons": [],
+  "auto_renew": true,
+  "bandwidth": 0,
+  "billing_type": "pre-billed",
+  "configuration": {},
+  "environment_type": "production",
+  "is_wildcard": false,
+  "label": "SSL Certificate",
+  "name": "SSL Certificate",
+  "orderable_terms": {
+    "12": "##LG_ONE_YEAR##",
+    "24": "##LG_TWO_YEARS##",
+    "36": "##LG_THREE_YEARS##"
+  },
+  "term_fees": {
+    "12": "29.95",
+    "24": "49.96",
+    "36": "69.96"
+  },
+  "trial_period": 0,
+  "type": "ssl"
 }
 ```
 
