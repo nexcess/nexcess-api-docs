@@ -12,7 +12,7 @@ Lists datahsares that belong to the logged-in user, optionally filtering by the 
 
 **Alternate Endpoint**: GET /v1/datashare/{owner}/{owner_id}
 
-**Alternate Endpoint**: GET /v1/datashare/{ticket}/{casenumber}
+**Alternate Endpoint**: GET /v1/datashare/ticket/{casenumber}
 
 This alternate endpoint is sugar for GET /v1/datashare?filter[owner]={owner}&filter[owner_id]={owner_id} and will serve identical responses.
 
