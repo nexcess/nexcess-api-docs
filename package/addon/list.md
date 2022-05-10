@@ -11,11 +11,11 @@ Only addons that can be purchased by the client making the request will be retur
 
 **Endpoint**:  GET /v1/package/addon/{id}
 
-This alternate endpoint is sugar for GET /v1/package/addon?filter[package_id]={id}&filter[type]={type} and will serve identical responses. The type parameter is optional.
+This alternate endpoint is sugar for `GET /v1/package/addon?filter[package_id]={id}&filter[type]={type}` and will serve identical responses. The type parameter is optional.
 
 **Alternate Endpoint**:  GET /v1/package/addon/{type}
 
-This alternate endpoint is sugar for GET /v1/package/addon?filter[type]={type} and will serve identical responses.
+This alternate endpoint is sugar for `GET /v1/package/addon?filter[type]={type}` and will serve identical responses.
 
 **Access**: order view permission
 
