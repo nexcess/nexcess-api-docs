@@ -45,7 +45,7 @@ $ curl -X POST "$PORTAL_API/v1/domain" \
 ```
 
 #### Responses
-**Success Response** (success): 200 OK
+**Success Response** (accepted for processing): 202 Accepted
 ```
 HTTP/1.1 202 Accepted
 Date: Thu, 25 Nov 2021 12:51:27 GMT
