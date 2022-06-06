@@ -6,9 +6,12 @@ Looks up registration availability for a given domain.
 #### Access
 public
 
+#### Input
+- string `domain` (required): Domain name to check availability on, with or without a TLD. If a TLD is not included, the response will include `alternatives` but the top-level `domain` property will be `null`.
+
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/domain/availability/{$DOMAIN_NAME_WITH_OR_WITHOUT_TLD}" \
+$ curl "$PORTAL_API_URL/v1/domain/availability/{domain}" \
   -H "Accept: application/json"
 ```
 _If the submitted domain name does not include a TLD, the response will still include `alternatives` but the top-level `domain` property will be `null`._
