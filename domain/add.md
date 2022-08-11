@@ -13,7 +13,7 @@ Order Edit permissions
 - string `nickname` (optional): A customer-chosen identifier for the Order.
 - string `discount_code` (optional: A Discount to apply to the Order.
 - int `package_id` (optional): If omitted, Package will be determined by the domain TLD.
-- int `term` (required): The purchase term (in months).
+- int `term` (required): The purchase term (in months). (For domains, the term must be in multiples of 12 months.)
 - array[] `addons` (optional): A list of Package Addons to order:
   - int `addon_id` (required): The system ID of the Addon.
   - int `quantity` (required): The quantity of Addons to add to the Order.
