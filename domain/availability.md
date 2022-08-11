@@ -7,7 +7,7 @@ Looks up registration availability for a given domain.
 public
 
 #### Input
-- string `domain` (required): Domain name to check availability on, with or without a TLD. If a TLD is not included, the response will include `alternatives` but the top-level `domain` property will be `null`.
+- string `domain` (required): Domain name to check availability on, with or without a TLD.
 
 #### Request
 ```
