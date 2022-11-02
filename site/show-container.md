@@ -1,6 +1,6 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:show-container-details
+## site:show-container-details
 Shows Container group info.
 
 #### Access
@@ -8,7 +8,7 @@ service view
 
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/cloud-account/{id}/container" \
+$ curl "$PORTAL_API_URL/v1/site/{id}/container" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -19,7 +19,7 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/{id}/container" \
 HTTP/1.1 200 OK
 Date: Wed, 24 Nov 2021 12:51:27 GMT
 Content-Length: 44
-Location: /v1/cloud-account/1089/container
+Location: /v1/site/1089/container
 NocWorx-Api-Version: 0.0.0
 
 [
@@ -41,12 +41,12 @@ NocWorx-Api-Version: 0.0.0
     "status": "web-active",
     "type": "virt-guest-cloud"
     },
-    "cloud_account": {
+    "site": {
       "id": 1089,
       "identity": "b7244b5168.1700.lwdns.dev",
       "metadata": {
         "scope": "virt-guest-cloudaccount",
-        "uri": "/v1/cloud-account/1089"
+        "uri": "/v1/site/1089"
       },
       "status": "used",
       "state": "stable",

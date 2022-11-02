@@ -1,6 +1,6 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:sso-url
+## site:sso-url
 Get Sso Url.
 
 #### Access
@@ -11,7 +11,7 @@ service view
 
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/cloud-account/{id}/sso-url" \
+$ curl "$PORTAL_API_URL/v1/site/{id}/sso-url" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -22,7 +22,7 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/{id}/sso-url" \
 HTTP/1.1 200 OK
 Date: Mon, 22 Nov 2021 12:51:27 GMT
 Content-Length: 44
-Location: /v1/cloud-account/1234/sso-url
+Location: /v1/site/1234/sso-url
 NocWorx-Api-Version: 0.0.0
 
 {

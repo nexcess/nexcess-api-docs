@@ -1,17 +1,17 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:show-eadn-account-details
+## site:show-eadn-account-details
 Shows EADN Account Usage details.
 
 #### Access
 service view
 
 #### Input
-- string `cloud_account_id` (required): cloud account id; The system id of the cloud account that the eadn account belongs to.
+- string `site_id` (required): Site id; The system id of the Site that the eadn account belongs to.
 
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/cloud-account/{cloud_account_id}/eadn/usage" \
+$ curl "$PORTAL_API_URL/v1/site/{site_id}/eadn/usage" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -22,16 +22,16 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/{cloud_account_id}/eadn/usage" \
 HTTP/1.1 200 OK
 Date: Mon, 23 Nov 2021 12:51:27 GMT
 Content-Length: 44
-Location: /v1/cloud-account/12345/eadn/usage
+Location: /v1/site/12345/eadn/usage
 NocWorx-Api-Version: 0.0.0
 
 {
-  "cloud_account": {
+  "site": {
     "id": 1204,
     "identity": "4bd2e3b804.100.lwdns.dev",
     "metadata": {
       "scope": "virt-guest-cloudaccount",
-      "uri": "/v1/cloud-account/1204"
+      "uri": "/v1/site/1204"
     },
     "status": "used",
     "state": "stable",

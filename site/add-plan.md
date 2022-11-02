@@ -1,33 +1,29 @@
-Portal: Cloud Accounts
+Portal: Sites
 ----------------------
 
 **work in progress**
 
-cloud-account:add
+service[site]:add
 =================
 
-Creates a new cloud account and orders an associated service.
+Orders a new Site Service and creates it first Site.
 
 Add requests are queued, meaning they will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/cloud-account
+**Endpoint**: POST /v1/site/plan
 
 **Access**: service edit permissions
 
 **Parameters**:
-- integer `app_id` (required): id of the app (wordpress, magento, etc.) to install on the cloud account. @see app:list
-- integer `cloud_id` (required): id of the cloud (location) to install the cloud account. @see cloud:list
-- string `domain` (required): domain name for the new cloud account
-- bool `install_app` (optional): install the app (not all apps are installable)?
-- integer `package_id` (required): id of the virt-guest-cloud service package to order. @see package:list
+@todo
 
 **Request**:
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/cloud-account" \
+curl -i -X POST "$PORTAL_API_URL/v1/site" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
-  -d '{ "app_id": 123, "cloud_id": 45, "domain": "cloud-account.example.com", "install_app": true, "package_id": 678 }'
+  -d '{ "app_id": 123, "cloud_id": 45, "domain": "site.example.com", "install_app": true, "package_id": 678 }'
 ```
 
 **Success Response**: 202 Accepted
@@ -42,7 +38,7 @@ Location: /v1/task/3b93d577-41ee-4077-913f-d36f91819bb9
 NocWorx-Api-Version: 0.0.0
 Served-By: nwdev-web01-int
 
-{ "id": 12, "identity": "cloud-account:add (pending)" }
+{ "id": 12, "identity": "service[site]:add (pending)" }
 ```
 
 **Failure Response** (not logged in): 401 Unauthorized

@@ -1,16 +1,16 @@
-Portal: Cloud Accounts
+Portal: Sites
 ----------------------
 
 **since** 0.0.0
 
-cloud-account:toggle-app-update-settings
+site:toggle-app-update-settings
 ========================================
 
-Toggles auto-update settings for a cloud account's installed app. Currently, applies only to WordPress apps.
+Toggles auto-update settings for a Site's installed app. Currently, applies only to WordPress apps.
 
 This request is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/cloud-account/{id}/app/core-updates
+**Endpoint**: POST /v1/site/{id}/app/core-updates
 
 **Access**: service edit permissions
 
@@ -20,7 +20,7 @@ This request is queued, meaning it will be completed out-of-band from the curren
 
 **Request**:
 ```
-curl -i -X POST "$PORTAL_API_URL/v1/cloud-account/$CLOUDACCOUNT_ID/app/core-updates" \
+curl -i -X POST "$PORTAL_API_URL/v1/site/$SITE_ID/app/core-updates" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
@@ -57,6 +57,6 @@ Served-By: nwdev-web01-int
 
 **Failure Response** (insufficient permissions): 403 Forbidden
 
-**Failure Response** (requested cloud account or app update settings do not exist on this client): 404 Not Found
+**Failure Response** (requested Site or app update settings do not exist on this client): 404 Not Found
 
 **Failure Response** (invalid inputs): 422 Unprocessable Entity
