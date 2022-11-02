@@ -1,14 +1,14 @@
-Portal: Cloud Accounts
+Portal: Sites
 ----------------------
 
 **since** 0.0.0
 
-cloud-account:show-app-update-settings
+site:show-app-update-settings
 ======================================
 
-Shows auto-update settings for a cloud account's installed app. Currently, applies only to WordPress apps.
+Shows auto-update settings for a Site's installed app. Currently, applies only to WordPress apps.
 
-**Endpoint**:  GET /v1/cloud-account/{id}/app/core-updates
+**Endpoint**:  GET /v1/site/{id}/app/core-updates
 
 **Access**: service view permission
 
@@ -16,7 +16,7 @@ Shows auto-update settings for a cloud account's installed app. Currently, appli
 
 **Request**:
 ```
-curl -i "$PORTAL_API_URL/v1/cloud-account/$CLOUDACCOUNT_ID/app/core-updates" \
+curl -i "$PORTAL_API_URL/v1/site/$SITE_ID/app/core-updates" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -34,7 +34,7 @@ NocWorx-Api-Version: 0.0.0
 Served-By: nwdev-web01-int
 
 {
-  "cloud_account": { "id": 981, "identity": "wp.example.com" },
+  "site": { "id": 981, "identity": "wp.example.com" },
   "disabled_date": null,
   "enabled": true,
   "last_updated_date": null,
@@ -46,4 +46,4 @@ Served-By: nwdev-web01-int
 
 **Failure Response** (insufficient permissions): 403 Forbidden
 
-**Failure Response** (requested cloud account or app update settings do not exist on this client): 404 Not Found
+**Failure Response** (requested Site or app update settings do not exist on this client): 404 Not Found

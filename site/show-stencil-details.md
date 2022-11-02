@@ -1,19 +1,19 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:show-stencil-details
+## site:show-stencil-details
 Shows Stencil details.
 
 #### Access
 service view
 
 #### Input
-- integer `account_id` (optional): System ID of the cloud account that the stencil belongs to.
+- integer `account_id` (optional): System ID of the Site that the stencil belongs to.
 
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/cloud-account/{account_id}/stencil/{id}" \
+$ curl "$PORTAL_API_URL/v1/site/{account_id}/stencil/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Accept: application/json" 
+  -H "Accept: application/json"
 ```
 
 #### Responses
@@ -22,7 +22,7 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/{account_id}/stencil/{id}" \
 HTTP/1.1 200 OK
 Date: Thu, 25 Nov 2021 12:51:27 GMT
 Content-Length: 44
-Location: /v1/cloud-account/1004/stencil/12345
+Location: /v1/site/1004/stencil/12345
 NocWorx-Api-Version: 0.0.0
 
 {
@@ -30,16 +30,16 @@ NocWorx-Api-Version: 0.0.0
   "identity": "wednesday",
   "metadata": {
     "scope": "virt-guest-cloudaccount-stencil",
-    "uri": "/v1/cloud-account/stencil/9"
+    "uri": "/v1/site/stencil/9"
   },
   "app_type": "wordpress",
   "app_version": "5.8.1",
-  "cloud_account": {
+  "site": {
     "id": 1206,
     "identity": "a84cb86096.100.lwdns.dev",
     "metadata": {
       "scope": "virt-guest-cloudaccount",
-      "uri": "/v1/cloud-account/1206"
+      "uri": "/v1/site/1206"
     },
     "status": "used",
     "state": "stable",

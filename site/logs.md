@@ -1,6 +1,6 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:logs
+## site:logs
 Shows list of log files.
 
 #### Access
@@ -8,9 +8,9 @@ service view
 
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/cloud-account/{id}/log" \
+$ curl "$PORTAL_API_URL/v1/site/{id}/log" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
-  -H "Accept: application/json" 
+  -H "Accept: application/json"
 ```
 
 #### Responses
@@ -19,7 +19,7 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/{id}/log" \
 HTTP/1.1 200 OK
 Date: Wed, 24 Nov 2021 12:51:27 GMT
 Content-Length: 44
-Location: /v1/cloud-account/12345/log
+Location: /v1/site/12345/log
 NocWorx-Api-Version: 0.0.0
 
 [
@@ -28,7 +28,7 @@ NocWorx-Api-Version: 0.0.0
     "date": 1641549132,
     "download_url": "https://192.190.222.114:2443/siteworx/index?action=sso&sid=1l13r7m2p3q7cdms48jhb0si6q&uri=L3NpdGV3b3J4L2Rvd25sb2FkP2FjdGlvbj1sb2cmZmlsZT0lMkZjaHJvb3QlMkZob21lJTJGYTljMWM4NDklMkZ2YXIlMkZlOGZiYzg4ODU5LjQwMC5sd2Rucy5kZXYlMkZsb2dzJTJGZXJyb3ItMjAyMi0wMS0wNy5sb2cmZG9tYWluPWU4ZmJjODg4NTkuNDAwLmx3ZG5zLmRldg%3D%3D"
   },
-  
+
   . . .
 ]
 ```

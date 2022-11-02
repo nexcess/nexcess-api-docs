@@ -1,7 +1,7 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:set-nickname
-Change the nickname of a cloud account
+## site:set-nickname
+Change the nickname of a Site
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
 
@@ -9,19 +9,19 @@ This task is queued, meaning it will be completed out-of-band from the current r
 service edit
 
 #### Input
-- integer `id` (required): System ID of the cloud account to edit
+- integer `id` (required): System ID of the Site to edit
 - string `nickname` (required): nickname; nickname of the cloudaccount.
 
 #### Request
 ```
-$ curl -X POST "$PORTAL_API_URL/v1/cloud-account/{id}/nickname" \
+$ curl -X POST "$PORTAL_API_URL/v1/site/{id}/nickname" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
   -d '{
     "nickname":"7.2",
   }'
-``` 
+```
 
 #### Responses
 **Success Response** (request was accepted for processing): 202 Accepted
@@ -30,18 +30,18 @@ HTTP/1.1 202 Accepted
 Date: Thu, 25 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-Location: /v1/cloud-account/1091/nickname
+Location: /v1/site/1091/nickname
 NocWorx-Api-Version: 0.0.0
 
 {
   "id": 487,
-  "identity": "cloud-account:set-nickname (pending)",
+  "identity": "site:set-nickname (pending)",
   "metadata": {
     "scope": "api-task",
     "uri": "/v1/task/8fbf4c8c-fd55-49e6-a2c7-54db51b27be7"
   },
   "status": "pending",
-  "action": "cloud-account:set-nickname",
+  "action": "site:set-nickname",
   "api_version": "0.5.0",
   "errors": {},
   "input": {},
@@ -52,7 +52,7 @@ NocWorx-Api-Version: 0.0.0
     "identity": "39869b24b8.1700.lwdns.dev",
     "metadata": {
       "scope": "virt-guest-cloudaccount",
-      "uri": "/v1/cloud-account/1091"
+      "uri": "/v1/site/1091"
     },
     "status": "used",
     "state": "stable",

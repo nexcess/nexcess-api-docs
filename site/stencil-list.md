@@ -1,16 +1,16 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:stencil-list
+## site:stencil-list
 Lists Stencils.
 
 #### Access
 service view
 
 #### Input
-- integer `account_id` (optional): System ID of the cloud account to view
-- string `filter[name]` (optional): filter list by cloud account name.
+- integer `account_id` (optional): System ID of the Site to view
+- string `filter[name]` (optional): filter list by Site name.
 - string `filter[service_id]` (optional): filter list by service id.
-- string `filter[state]` (optional): filter list by cloud account state.
+- string `filter[state]` (optional): filter list by Site state.
 - integer `filter[stencil_date]` (optional): filter list by stencil date.
 - integer `match[id]` (optional): match against system ID.
 - string `range[id]` (optional): find system IDs within "{min}..{max}" range
@@ -21,7 +21,7 @@ service view
 
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/cloud-account/{account_id}/stencil" \
+$ curl "$PORTAL_API_URL/v1/site/{account_id}/stencil" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -32,7 +32,7 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/{account_id}/stencil" \
 HTTP/1.1 200 OK
 Date: Mon, 22 Nov 2021 12:51:27 GMT
 Content-Length: 44
-Location: /v1/cloud-account/12345/stencil
+Location: /v1/site/12345/stencil
 NocWorx-Api-Version: 0.0.0
 
 [
@@ -41,16 +41,16 @@ NocWorx-Api-Version: 0.0.0
     "identity": "wednesday",
     "metadata": {
       "scope": "virt-guest-cloudaccount-stencil",
-      "uri": "/v1/cloud-account/stencil/9"
+      "uri": "/v1/site/stencil/9"
     },
     "app_type": "wordpress",
     "app_version": "5.8.1",
-    "cloud_account": {
+    "site": {
       "id": 1206,
       "identity": "a84cb86096.100.lwdns.dev",
       "metadata": {
         "scope": "virt-guest-cloudaccount",
-        "uri": "/v1/cloud-account/1206"
+        "uri": "/v1/site/1206"
       },
       "status": "used",
       "state": "stable",
@@ -63,7 +63,7 @@ NocWorx-Api-Version: 0.0.0
     "stencil_date": 1638367171,
     "url": "https://objects.liquidweb.services/SZGPEA/stencils/stencil-1206-9.tgz"
   },
-  
+
   . . .
 ]
 ```

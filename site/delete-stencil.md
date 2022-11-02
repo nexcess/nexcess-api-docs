@@ -1,6 +1,6 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:delete-stencil
+## site:delete-stencil
 Deletes a Stencil.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will describe the requested task, and will also include a Location header that can be polled to determine the status of the task. @see task:show.
@@ -9,11 +9,11 @@ This task is queued, meaning it will be completed out-of-band from the current r
 service edit
 
 #### Input
-- int `account_id` (optional): System ID of the cloud account that the stencil belongs to.
+- int `account_id` (optional): System ID of the Site that the stencil belongs to.
 
 #### Request
 ```
-$ curl -X DELETE "$PORTAL_API_URL/v1/cloud-account/{account_id}/stencil/{id}" \
+$ curl -X DELETE "$PORTAL_API_URL/v1/site/{account_id}/stencil/{id}" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -25,7 +25,7 @@ HTTP/1.1 202 Accepted
 Date: Tue, 02 Nov 2021 12:51:27 GMT
 Content-Type: application/json;charset=utf-8
 Content-Length: 44
-Location: /v1/cloud-account/1002/stencil/1234
+Location: /v1/site/1002/stencil/1234
 NocWorx-Api-Version: 0.0.0
 
 {

@@ -1,6 +1,6 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:logs
+## site:logs
 Checks free trial availability.
 
 #### Access
@@ -12,7 +12,7 @@ anyone
 
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/cloud-account/free-trials" \
+$ curl "$PORTAL_API_URL/v1/site/free-trials" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Content-type: application/json" \
   -H "Accept: application/json" \
@@ -28,7 +28,7 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/free-trials" \
 HTTP/1.1 200 OK
 Date: Wed, 24 Nov 2021 12:51:27 GMT
 Content-Length: 44
-Location: /v1/cloud-account/free-trials
+Location: /v1/site/free-trials
 NocWorx-Api-Version: 0.0.0
 
 {

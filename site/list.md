@@ -1,7 +1,7 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:list
-List Cloud Accounts.
+## site:list
+List Sites.
 
 #### Access
 service view
@@ -42,7 +42,7 @@ service view
 
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/cloud-account" \
+$ curl "$PORTAL_API_URL/v1/site" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -61,7 +61,7 @@ NocWorx-Api-Version: 0.0.0
     "identity": "39869b24b8.1700.lwdns.dev",
     "metadata": {
       "scope": "virt-guest-cloudaccount",
-      "uri": "/v1/cloud-account/1091"
+      "uri": "/v1/site/1091"
     },
     "app": {
       "id": 20,
@@ -119,7 +119,7 @@ NocWorx-Api-Version: 0.0.0
         "identity": "WordPress Spark Plan",
         "metadata": {
           "scope": "service",
-          "uri": "/v1/service/cloud-account/58378"
+          "uri": "/v1/service/site/58378"
         },
         "status": "enabled",
         "state": "stable",

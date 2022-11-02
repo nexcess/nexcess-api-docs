@@ -1,6 +1,6 @@
-# Portal: Cloud Account
+# Portal: Site
 
-## cloud-account:show-autoscale-usage-details
+## site:show-autoscale-usage-details
 Shows autoscale usage data.
 
 #### Access
@@ -8,11 +8,11 @@ service view
 
 #### Input
 - integer `id` (optional): System ID of the eadn account to edit
-- string `cloud_account_id` (optional): cloud account id; The system id of the cloud account that the eadn account belongs to.
+- string `site_id` (optional): Site id; The system id of the Site that the eadn account belongs to.
 
 #### Request
 ```
-$ curl "$PORTAL_API_URL/v1/cloud-account/{id}/autoscale-usage" \
+$ curl "$PORTAL_API_URL/v1/site/{id}/autoscale-usage" \
   -H "Authorization: Bearer $PORTAL_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -23,18 +23,18 @@ $ curl "$PORTAL_API_URL/v1/cloud-account/{id}/autoscale-usage" \
 HTTP/1.1 200 OK
 Date: Mon, 22 Nov 2021 12:51:27 GMT
 Content-Length: 44
-Location: /v1/cloud-account/12345/eadn
+Location: /v1/site/12345/eadn
 NocWorx-Api-Version: 0.0.0
 
 {
   "billable_cost": 0,
   "billable_used": 0,
-  "cloud_account": {
+  "site": {
     "id": 1204,
     "identity": "4bd2e3b804.100.lwdns.dev",
     "metadata": {
       "scope": "virt-guest-cloudaccount",
-      "uri": "/v1/cloud-account/1204"
+      "uri": "/v1/site/1204"
     },
     "status": "used",
     "state": "stable",
