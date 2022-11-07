@@ -5,7 +5,7 @@ Adds a new Node to an Enterprise Cloud Cluster.
 
 This task is queued, meaning it will be completed out-of-band from the current request. The response payload will include a Location header that can be polled to determine the status of the task. @see task:show.
 
-**Endpoint**: POST /v1/enterprise-cloud/{cluster_id}
+**Endpoint**: POST /v1/enterprise-cloud/{cluster_id}/node
 
 #### Access
 service edit permissions
@@ -15,7 +15,7 @@ none
 
 #### Request:
 ```
-$ curl -X POST "$PORTAL_API/v1/enterprise-cloud/$CLUSTER_ID" \
+$ curl -X POST "$PORTAL_API/v1/enterprise-cloud/$CLUSTER_ID/node" \
   -H "Authorization: Bearer $PORTAL_KEY" \
   -H "Accept: application/json" \
   -H "Content-type: application/json" \
